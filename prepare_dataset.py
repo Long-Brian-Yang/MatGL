@@ -86,7 +86,7 @@ def prepare_dataset():
         'test_loader': test_loader,
         'element_types': element_types
     }, 'data_loaders.pth')
-    clear
+    
     print("Dataset preparation complete and saved as 'data_loaders.pth'.")
 
 if __name__ == "__main__":
