@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; proton_diffusion  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Test cases" href="tests.html" />
+    <link rel="prev" title="proton_diffusion documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            proton_diffusion
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#proton-diffusion-in-solid-oxide">Proton diffusion in solid oxide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-the-training-data">1. Prepare the training data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-lmdb">2. Make LMDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fine-tuning">3. Fine-tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#proton-diffusion">4. Proton diffusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Test cases</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">proton_diffusion</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/markdown/intro.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p>This library is made to calculate the proton diffusion constant
+with ab-initio-based method.</p>
+<section id="proton-diffusion-in-solid-oxide">
+<h2>Proton diffusion in solid oxide<a class="headerlink" href="#proton-diffusion-in-solid-oxide" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>In this example, the proton diffusion problem is investigated with NNP.</p></li>
+<li><p>The NNP provided by fairchem (prevoiusly OpenCatalyst Project) was used.</p></li>
+<li><p>The steps are as follows:</p>
+<ol class="arabic simple">
+<li><p>Prepare the training data with DFT: VASP (not in this repository)</p></li>
+<li><p>Make LMDB file from DFT output: <code class="docutils literal notranslate"><span class="pre">make_lmdb_from_outcar.py</span></code></p></li>
+<li><p>Prepare the pre-trained NNP model and do fine-tuning: <code class="docutils literal notranslate"><span class="pre">finetuning.py</span></code></p></li>
+<li><p>Use fine-tuned NNP to the diffusion problem: <code class="docutils literal notranslate"><span class="pre">diffusion.py</span></code></p></li>
+</ol>
+</li>
+</ul>
+<section id="prepare-the-training-data">
+<h3>1. Prepare the training data<a class="headerlink" href="#prepare-the-training-data" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The pre-trained NNP model is fine-tuned with the DFT program.</p></li>
+<li><p>To make the DFT-data, we perform the molecular dynamics calculation with VASP.</p></li>
+<li><p>The details of VAPS is not covered here so refer to the other repository.</p></li>
+<li><p>The OUTCAR file from the VASP calculation is taken. Here, the OUTCAR for BaZrO3 (the initial file for VASP
+is BaZrO3.cif) is prepared in the directory.</p></li>
+</ul>
+</section>
+<section id="make-lmdb">
+<h3>2. Make LMDB<a class="headerlink" href="#make-lmdb" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>To do fine-tuning, we use LMDB database. This file is made by converting the OUTCAR file.</p></li>
+<li><p>The python file does the following:</p>
+<ol class="arabic simple">
+<li><p>Load the OUTCAR file.</p></li>
+<li><p>Define the atom-to-graph object.</p></li>
+<li><p>Convert each step of OUTCAR to LMDB format.</p></li>
+<li><p>Copy the LMDB file to the data directory.
+Here, we use the same LMDB file for training and validation (which is not good …)</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="fine-tuning">
+<h3>3. Fine-tuning<a class="headerlink" href="#fine-tuning" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>The python file does the following:</p>
+<ol class="arabic simple">
+<li><p>Download the pre-trained NNP from the web.</p></li>
+<li><p>Define the fine-tuning configuration, and save it to yaml file (“config.yaml” here).</p></li>
+<li><p>Execute fine-tuning with “main.py”.</p></li>
+<li><p>Save the result to checkpoint file (“checkpoint.pt”).</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="proton-diffusion">
+<h3>4. Proton diffusion<a class="headerlink" href="#proton-diffusion" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>After having fine-tuned NNP, the real problem i.e. the proton diffusion in the solid oxide is carried out.</p></li>
+<li><p>To calculate the diffusion coefficient of proton (or hydrogen), we calculate the mean-square displacnement.
+We use the fact that the MSD should be fitted to the line, and the slope of the line is the diffusion coefficient (D).</p></li>
+<li><p>We can compare D with experiment, as this can be measured with experiment.</p></li>
+<li><p>The reference for the script: https://github.com/matlantis-pfcc/matlantis-contrib/blob/main/matlantis_contrib_examples/MD_Li_diffusion_in_LGPS/viewer.en.ipynb</p></li>
+<li><p>The python file does the following:</p>
+<ol class="arabic simple">
+<li><p>Load the fine-tuned checkpoint file.</p></li>
+<li><p>Load the cif file and make the solid structure.</p></li>
+<li><p>Put the hydrogen atom (that we expect to diffuse).</p></li>
+<li><p>Perform the molecular dynamics calculation under constant volume and temperatue (NVT ensemble).</p></li>
+<li><p>Extract the position of hydrogen, and calculate the MSD.</p></li>
+<li><p>Fit the MSD to the line using <em>statmodels</em> library.</p></li>
+<li><p>Take slope of line and convert it to D.</p></li>
+</ol>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="proton_diffusion documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tests.html" class="btn btn-neutral float-right" title="Test cases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

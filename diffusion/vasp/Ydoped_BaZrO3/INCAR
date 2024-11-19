@@ -1,0 +1,38 @@
+ ENCUT  = 400.0000
+ ISMEAR = 0
+ SIGMA  = 0.10
+ EDIFF  = 1.00e-05
+ EDIFFG = -5.00e-02
+
+ PREC      =  normal
+ GGA       =  PE
+ LASPH     = .TRUE.
+
+ ISIF   = 2
+
+ IBRION =  0
+ POTIM  =  1.0
+ SMASS  = -1    # Nose-Hoover for > 0, Berendsen for -1.
+ NSW    =  1000
+ TEBEG  =  1500
+ TEEND  =  1500
+ IWAVPR = 11
+
+ NPAR   = 10
+ NSIM   = 10
+
+ NELM   = 40
+ NELMIN = 3
+ ALGO   = Fast
+ LCHARG = .FALSE.
+ LWAVE  = .FALSE.
+ LORBIT = 10
+
+ ISYM   = 0
+
+ ISTART = 0
+ ISPIN  = 1
+ ICHARG = 2
+ LREAL  = .FALSE.  # .TRUE. is not good for NNP
+ KGAMMA = .TRUE.
+
