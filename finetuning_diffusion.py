@@ -59,8 +59,8 @@ def train_base_model(train_loader, val_loader, test_loader, elem_list, log_dir="
     trainer.fit(lit_module, train_loader, val_loader)
     trainer.test(lit_module, test_loader)
     
-    model_path = os.path.join(log_dir, "checkpoints")
-    lit_module.model.save(model_path)
+    model_path = os.path.join(log_dir, "model.pt")
+    torch.save(lit_module.model.state_dict(), model_path)
     
     return lit_module, model_path
 
@@ -92,8 +92,8 @@ def fine_tune_model(pre_trained_path, train_loader, val_loader, elem_list, log_d
     )
     
     trainer.fit(lit_module, train_loader, val_loader)
-    model_path = os.path.join(log_dir, "checkpoints")
-    lit_module.model.save(model_path)
+    model_path = os.path.join(log_dir, "model.pt")
+    torch.save(lit_module.model.state_dict(), model_path)
     
     return lit_module, model_path
 
