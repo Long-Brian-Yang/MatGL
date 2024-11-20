@@ -1,3 +1,15 @@
+"""
+Training module for bandgap prediction using M3GNet model.
+Handles model training, evaluation, and visualization of results.
+
+Features:
+- Model configuration and training setup
+- Training with validation monitoring
+- Model evaluation and metrics logging
+- Training curve visualization
+- Checkpoint saving and loading
+"""
+
 from __future__ import annotations
 import json
 import warnings
@@ -16,11 +28,23 @@ from dataset_process import DataProcessor, get_project_paths
 warnings.simplefilter("ignore")
 
 class BandgapTrainer:
+    """
+    Trainer class for bandgap prediction model.
+    Handles model setup, training, evaluation and result visualization.
+    """
+    
     def __init__(
         self, 
         working_dir: str,
         config: Optional[Dict] = None
     ):
+        """
+        Initialize trainer with working directory and configuration.
+        
+        Args:
+            working_dir: Directory for saving model outputs
+            config: Optional configuration dictionary
+        """
         self.working_dir = Path(working_dir)
         self.working_dir.mkdir(parents=True, exist_ok=True)
         
@@ -38,11 +62,20 @@ class BandgapTrainer:
         self.save_config()
 
     def save_config(self):
+        """Save configuration to JSON file in working directory."""
+
         config_path = self.working_dir / 'config.json'
         with open(config_path, 'w') as f:
             json.dump(self.config, f, indent=4)
 
     def setup_model(self, element_types: list):
+        """
+        Initialize M3GNet model with given element types.
+        
+        Args:
+            element_types: List of chemical elements in dataset
+        """
+        
         self.model = M3GNet(
             element_types=element_types,
             is_intensive=True,
@@ -50,6 +83,15 @@ class BandgapTrainer:
         )
 
     def train(self, train_loader, val_loader, element_types: list):
+        """
+        Train the model using provided data loaders.
+        
+        Args:
+            train_loader: Training data loader
+            val_loader: Validation data loader
+            element_types: List of chemical elements
+        """
+
         if self.model is None:
             self.setup_model(element_types)
 
@@ -78,6 +120,13 @@ class BandgapTrainer:
         self.save_model(lit_module)
 
     def save_model(self, lit_module):
+        """
+        Save trained model weights to checkpoint directory.
+        
+        Args:
+            lit_module: Trained lightning module
+        """
+
         save_dir = self.working_dir / "checkpoints"
         save_dir.mkdir(exist_ok=True)
         model_path = save_dir / "model.pt"
@@ -85,6 +134,16 @@ class BandgapTrainer:
         print(f"Model saved to {model_path}")
 
     def evaluate(self, test_loader) -> Dict:
+        """
+        Evaluate model on test dataset.
+        
+        Args:
+            test_loader: Test data loader
+            
+        Returns:
+            Dictionary containing test metrics
+        """
+                
         if not self.trainer:
             raise ValueError("Model not trained. Call train() first.")
         
@@ -94,6 +153,7 @@ class BandgapTrainer:
         return results
         
     def plot_training_curves(self):
+        """Plot and save training/validation MAE curves."""
         
         version_dirs = [d for d in (self.working_dir / "M3GNet_training").iterdir() if d.is_dir() and d.name.startswith("version_")]
         latest_version = max(version_dirs, key=lambda d: int(d.name.split("_")[-1]))
@@ -124,6 +184,16 @@ class BandgapTrainer:
         print("\nTraining curve saved.")
 
 def process_data(config: Dict):
+    """
+    Process raw data into DataLoaders.
+    
+    Args:
+        config: Data processing configuration
+        
+    Returns:
+        Tuple of (processor, train_loader, val_loader, test_loader)
+    """
+
     processor = DataProcessor(config)
     processor.load_data()
     dataset = processor.create_dataset(normalize=True)
@@ -131,6 +201,16 @@ def process_data(config: Dict):
     return processor, train_loader, val_loader, test_loader
 
 def train_model(trainer: BandgapTrainer, train_loader, val_loader, processor):
+    """
+    Train model using processed data.
+    
+    Args:
+        trainer: Initialized BandgapTrainer
+        train_loader: Training data loader
+        val_loader: Validation data loader
+        processor: Data processor containing element information
+    """
+
     trainer.train(
         train_loader=train_loader,
         val_loader=val_loader,
@@ -138,10 +218,22 @@ def train_model(trainer: BandgapTrainer, train_loader, val_loader, processor):
     )
 
 def evaluate_model(trainer: BandgapTrainer, test_loader):
+    """
+    Evaluate trained model on test set.
+    
+    Args:
+        trainer: Trained BandgapTrainer
+        test_loader: Test data loader
+        
+    Returns:
+        Dictionary of test metrics
+    """
+
     results = trainer.evaluate(test_loader)
     return results
 
 def main():
+    """Main execution function for training pipeline."""
     paths = get_project_paths()
     
     data_config = {
