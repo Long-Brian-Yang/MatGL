@@ -4,7 +4,7 @@ import os
 import logging
 from pathlib import Path
 from datetime import datetime
-
+import json
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -18,6 +18,7 @@ from typing import List, Dict, Optional
 from dataset_process import DataProcessor, get_project_paths
 import matgl
 from matgl.ext.ase import PESCalculator
+from concurrent.futures import ProcessPoolExecutor
 
 class MDSimulator:
     """Run MD simulations using MatGL's M3GNet potential."""
@@ -61,7 +62,8 @@ class MDSimulator:
     ):
         # Read structure
         atoms = read(structure_file)
-        atoms.set_calculator(self.calculator)
+        atoms.calc = self.calculator
+        # atoms.set_calculator(self.calculator)
         
         # Initialize velocities
         MaxwellBoltzmannDistribution(atoms, temperature_K=temperature)
@@ -89,31 +91,37 @@ class MDSimulator:
         
         self.logger.info(f"MD simulation completed. Trajectory saved to {traj_file}")
 
+def load_config(config_path: str):
+    with open(config_path, 'r') as f:
+        return json.load(f)
+
 
 def main():
+    config = load_config('config.json')
     paths = get_project_paths()
     # Define paths
     working_dir = Path("md_output")
-    structure_file = Path(paths['structures_dir']) # Update with actual structure file path
+    structure_file = Path(paths['structures_dir'])
     structure_files = list(structure_file.glob('**/*.vasp'))
 
     # Initialize simulator
     simulator = MDSimulator(
         working_dir=working_dir,
-        model_name="M3GNet-MP-2021.2.8-PES",
-        time_step=1.0,
-        friction=0.02,
-        total_steps=10000,
-        output_interval=100
+        model_name=config['model_name'],
+        time_step=config['time_step'],
+        friction=config['friction'],
+        total_steps=config['total_steps'],
+        output_interval=config['output_interval']
     )
     
     # Define temperatures
-    temperatures = [300, 500, 700]  # K
+    temperatures = config['temperatures']
     
     # Run simulations
-    for temp in temperatures:
-        for structure_file in structure_files:
-            simulator.run_md(structure_file=str(structure_file), temperature=temp)
+    with ProcessPoolExecutor() as executor:
+        for temp in temperatures:
+            for structure_file in structure_files:
+                simulator.run_md(structure_file=str(structure_file), temperature=temp)
 
 if __name__ == "__main__":
     main()
