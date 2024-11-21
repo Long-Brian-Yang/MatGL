@@ -1,453 +1,333 @@
-"""
-Complete diffusion analysis module.
-Handles molecular dynamics simulation and diffusion coefficient calculation.
-
-Features:
-- Graph to structure conversion
-- MD simulation management
-- Diffusion coefficient calculation
-- Results visualization and analysis
-"""
-
 from __future__ import annotations
-import json
-import warnings
-from pathlib import Path
-from typing import Optional, Dict, List, Tuple
-
-import torch
 import numpy as np
-from tqdm import tqdm
+import pandas as pd
 import matplotlib.pyplot as plt
-from ase import Atoms, units
-from ase.io import read, write
-from ase.md.velocitydistribution import MaxwellBoltzmannDistribution, Stationary
-from ase.md.verlet import VelocityVerlet
-from ase.md.langevin import Langevin
-from ase.md.nvtberendsen import NVTBerendsen
-from matgl import load_model
+from scipy import stats
+from pathlib import Path
+from typing import List, Dict, Tuple, Optional
+import logging
+from ase.io import read
+from ase.units import J, mol
 
-from dataset_process import DataProcessor, get_project_paths
-from training import BandgapTrainer
-
-warnings.simplefilter("ignore")
-
-class DiffusionAnalyzer:
-    """
-    Analyzer class for diffusion coefficient calculation via MD simulation.
+class VolumeCalculator:
+    """POSCAR文件体积计算器"""
     
-    Handles:
-    - Structure preparation
-    - MD simulation
-    - Diffusion analysis
-    - Results visualization
-    """
-    
-    def __init__(
-        self, 
-        working_dir: str,
-        config: Optional[Dict] = None,
-        debug: bool = True
-    ):
+    @staticmethod
+    def read_vasp_volume(self, vasp_file: Path) -> float:
         """
-        Initialize diffusion analyzer.
+        读取单个VASP文件并计算体积
         
         Args:
-            working_dir: Directory for saving outputs
-            config: Optional configuration dictionary
-            debug: Enable debug output
-        """
-        self.working_dir = Path(working_dir)
-        self.working_dir.mkdir(parents=True, exist_ok=True)
-        self.debug = debug
-        
-        # Default MD configuration
-        self.config = {
-            'temperature_K': 300,
-            'timestep_fs': 1.0,
-            'maxtime_ps': 10.0,
-            'friction': 0.002,
-            'thermostat': 'langevin',
-            'equilibration_steps': 1000,
-            'production_steps': 10000,
-            'save_interval': 10,
-            'random_seed': 42
-        }
-        if config:
-            self.config.update(config)
-        
-        # Initialize directories
-        self._setup_directories()
-        
-        # Initialize loggers
-        self.energy_log = []
-        self.temperature_log = []
-        
-    def _setup_directories(self):
-        """Create necessary output directories."""
-        dirs = [
-            'trajectories',
-            'analysis',
-            'debug_logs',
-            'structures'
-        ]
-        for dir_name in dirs:
-            (self.working_dir / dir_name).mkdir(exist_ok=True)
-            
-    def setup_md_simulation(self, atoms: Atoms) -> None:
-        """
-        Setup molecular dynamics simulation.
-        
-        Args:
-            atoms: ASE Atoms object
-        """
-        # Set random seed
-        np.random.seed(self.config['random_seed'])
-        
-        # Initialize velocities
-        MaxwellBoltzmannDistribution(
-            atoms, 
-            temperature_K=self.config['temperature_K']
-        )
-        Stationary(atoms)  # Remove COM motion
-        
-        # Save initial structure
-        write(
-            self.working_dir / "structures" / "initial.traj",
-            atoms
-        )
-        
-    def run_md_simulation(self, atoms: Atoms) -> Dict:
-        """
-        Run molecular dynamics simulation.
-        
-        Args:
-            atoms: ASE Atoms object
+            vasp_file: .vasp文件路径
             
         Returns:
-            Dict containing trajectory data
+            体积(cm^3)
         """
-        # Setup simulation
-        self.setup_md_simulation(atoms)
-        
-        # Setup dynamics
-        timestep = self.config['timestep_fs'] * units.fs
-        
-        if self.config['thermostat'] == 'langevin':
-            dyn = Langevin(
-                atoms,
-                timestep=timestep,
-                temperature_K=self.config['temperature_K'],
-                friction=self.config['friction'],
-                logfile=str(self.working_dir / "trajectories" / "md.log")
-            )
-        else:
-            dyn = VelocityVerlet(
-                atoms,
-                timestep=timestep,
-                logfile=str(self.working_dir / "trajectories" / "md.log")
-            )
+        try:
+            with open(vasp_file, 'r') as f:
+                lines = f.readlines()
             
-        # Run equilibration
-        print("\nRunning equilibration...")
-        for step in tqdm(range(self.config['equilibration_steps']), desc="Equilibration"):
-            dyn.run(1)
-            if step % self.config['save_interval'] == 0:
-                self._log_properties(atoms)
+            scaling_factor = float(lines[1].strip())
+            
+            # 读取晶格向量
+            lattice_vectors = []
+            for i in range(2, 5):
+                vector = list(map(float, lines[i].split()))
+                lattice_vectors.append(vector)
+            
+            lattice_vectors = np.array(lattice_vectors) * scaling_factor
+            volume = np.abs(np.linalg.det(lattice_vectors))
+            
+            # 转换单位: Å^3 -> cm^3
+            volume_cm3 = volume * 1e-24
+            return volume_cm3
+            
+        except Exception as e:
+            self.logger.error(f"处理文件 {vasp_file.name} 时出错: {str(e)}")
+            return None
+
+class DiffusionAnalyzer:
+    """扩散系数和质子电导率分析器"""
+    
+    def __init__(self):
+        # 物理常数
+        self.e = 1.60217662e-19  # 基本电荷(C)
+        self.k_B = 1.38064852e-23  # 玻尔兹曼常数(J/K)
+        
+    def calculate_conductivity(
+        self,
+        n_protons: int,
+        diffusion_coef: float,
+        volume: float,
+        temperature: float
+    ) -> float:
+        """
+        计算质子电导率
+        
+        Args:
+            n_protons: 质子数量
+            diffusion_coef: 扩散系数(cm^2/s)
+            volume: 体积(cm^3)
+            temperature: 温度(K)
+            
+        Returns:
+            电导率(S/cm)
+        """
+        sigma = (n_protons * self.e**2 * diffusion_coef) / (volume * self.k_B * temperature)
+        return sigma
+        
+    def analyze_trajectory(
+        self,
+        traj_file: str,
+        temperature: float,
+        atom_type: str = 'H',
+        shift_t: int = 500,
+        window_size: int = 1000,
+        step: int = 1
+    ) -> Dict:
+        """
+        分析轨迹文件计算MSD和扩散系数
+        
+        Args:
+            traj_file: 轨迹文件路径
+            temperature: 温度
+            atom_type: 原子类型
+            shift_t: 时间位移
+            window_size: 时间窗口大小
+            step: 计算步长
+            
+        Returns:
+            分析结果字典
+        """
+        # 读取轨迹
+        traj_list = read(traj_file, index=":")
+        atom_index = [i for i, x in enumerate(traj_list[0].get_chemical_symbols()) 
+                     if x == atom_type]
+                     
+        # 计算体积
+        volume = [atoms.get_volume() for atoms in traj_list]
+        volume_cm3 = np.mean(volume) * 1e-24
+        
+        # 提取位置数据
+        positions_all = np.array([traj_list[i].get_positions() 
+                                for i in range(len(traj_list))])
+        positions = positions_all[:, atom_index]
+        
+        # 计算MSD和扩散系数
+        msd_list = []
+        D_list = []
+        
+        for i in range(0, int(len(positions)/shift_t)):
+            msd_t = np.mean(np.sum(
+                (positions[i*shift_t:i*shift_t + window_size] - 
+                 positions[i*shift_t])**2, axis=2), axis=1)
+                 
+            if len(msd_t) != window_size:
+                continue
                 
-        # Run production
-        print("\nRunning production...")
-        positions = []
-        times = []
-        current_time = 0.0
+            slope, intercept = np.polyfit(
+                range(0, window_size, step),
+                msd_t[::step],
+                1
+            )
+            
+            D = slope / 6
+            D_list.append(D)
+            msd_list.append(msd_t[::step])
+            
+        # 计算平均值
+        D_avg = np.mean(D_list)
+        msd_avg = np.mean(msd_list, axis=0)
         
-        for step in tqdm(range(self.config['production_steps']), desc="Production"):
-            positions.append(atoms.get_positions())
-            times.append(current_time)
-            
-            dyn.run(1)
-            current_time += self.config['timestep_fs']
-            
-            if step % self.config['save_interval'] == 0:
-                self._log_properties(atoms)
-                
-        # Save final structure
-        write(
-            self.working_dir / "structures" / "final.traj",
-            atoms
+        # 单位转换: Å^2/ps -> cm^2/s
+        D_cm2_s = D_avg * 1e-16 / 1e-12
+        
+        # 计算电导率
+        sigma = self.calculate_conductivity(
+            n_protons=len(atom_index),
+            diffusion_coef=D_cm2_s,
+            volume=volume_cm3,
+            temperature=temperature
         )
         
         return {
-            'positions': np.array(positions),
-            'times': np.array(times),
-            'energy_log': np.array(self.energy_log),
-            'temperature_log': np.array(self.temperature_log)
+            'T(K)': temperature,
+            '1000/T': 1000/temperature,
+            'D(cm^2/s)': D_cm2_s,
+            'log10_D': np.log10(D_cm2_s),
+            'sigma(S/cm)': sigma,
+            'log10_sigma': np.log10(sigma),
+            'msd': msd_avg,
+            'volume': volume_cm3
         }
-        
-    def _log_properties(self, atoms: Atoms) -> None:
-        """Log system properties during simulation."""
-        self.energy_log.append(atoms.get_total_energy())
-        self.temperature_log.append(atoms.get_temperature())
-        
-    def calculate_msd(self, positions: np.ndarray) -> np.ndarray:
-        """
-        Calculate Mean Square Displacement.
-        
-        Args:
-            positions: Array of positions [timesteps, atoms, 3]
-            
-        Returns:
-            Array of MSD values
-        """
-        reference_pos = positions[0]
-        msd = np.mean(np.sum((positions - reference_pos)**2, axis=2), axis=1)
-        return msd
-        
-    def calculate_diffusion_coefficient(
-        self,
-        times: np.ndarray,
-        msd: np.ndarray
-    ) -> float:
-        """
-        Calculate diffusion coefficient from MSD data.
-        
-        Args:
-            times: Time points in fs
-            msd: MSD values in Å²
-            
-        Returns:
-            Diffusion coefficient in cm²/s
-        """
-        # Convert times to ps for fitting
-        times_ps = times * 1e-3
-        
-        # Fit line to MSD vs time
-        slope, _ = np.polyfit(times_ps, msd, 1)
-        
-        # Convert to cm²/s (slope is in Å²/ps)
-        D = slope / 6.0 * 1e-4
-        return D
-        
-    def analyze_diffusion(self, atoms: Atoms) -> Tuple[float, Dict]:
-        """
-        Analyze diffusion for a given structure.
-        
-        Args:
-            atoms: ASE Atoms object
-            
-        Returns:
-            Tuple of (diffusion coefficient, analysis data)
-        """
-        # Run MD simulation
-        traj_data = self.run_md_simulation(atoms)
-        
-        # Calculate MSD
-        msd = self.calculate_msd(traj_data['positions'])
-        
-        # Calculate diffusion coefficient
-        D = self.calculate_diffusion_coefficient(
-            traj_data['times'],
-            msd
-        )
-        
-        # Save analysis data
-        analysis_data = {
-            'diffusion_coefficient': D,
-            'msd': msd.tolist(),
-            'times': traj_data['times'].tolist(),
-            'energy': traj_data['energy_log'].tolist(),
-            'temperature': traj_data['temperature_log'].tolist()
-        }
-        
-        return D, analysis_data
-        
-    def plot_analysis(self, analysis_data: Dict):
-        """
-        Generate analysis plots.
-        
-        Args:
-            analysis_data: Dictionary containing analysis results
-        """
-        # MSD plot
-        times_ps = np.array(analysis_data['times']) * 1e-3
-        msd = np.array(analysis_data['msd'])
-        D = analysis_data['diffusion_coefficient']
-        
-        plt.figure(figsize=(10, 6))
-        plt.plot(times_ps, msd, 'b-', label='MSD')
-        plt.plot(times_ps, 6*D*times_ps*1e4, 'r--', 
-                label=f'Fit (D = {D:.2e} cm²/s)')
-        plt.xlabel('Time (ps)')
-        plt.ylabel('MSD (Å²)')
-        plt.title('Mean Square Displacement')
-        plt.legend()
-        plt.savefig(
-            self.working_dir / "analysis" / "msd.png",
-            dpi=300,
-            bbox_inches='tight'
-        )
-        plt.close()
-        
-        # Energy plot
-        plt.figure(figsize=(10, 6))
-        plt.plot(analysis_data['energy'])
-        plt.xlabel('Step')
-        plt.ylabel('Energy (eV)')
-        plt.title('Energy Evolution')
-        plt.savefig(
-            self.working_dir / "analysis" / "energy.png",
-            dpi=300,
-            bbox_inches='tight'
-        )
-        plt.close()
-        
-        # Temperature plot
-        plt.figure(figsize=(10, 6))
-        plt.plot(analysis_data['temperature'])
-        plt.xlabel('Step')
-        plt.ylabel('Temperature (K)')
-        plt.title('Temperature Evolution')
-        plt.savefig(
-            self.working_dir / "analysis" / "temperature.png",
-            dpi=300,
-            bbox_inches='tight'
-        )
-        plt.close()
 
-def analyze_model_diffusion(
-    trainer: BandgapTrainer,
-    test_loader,
-    config: Optional[Dict] = None
-) -> Dict:
-    """
-    Analyze diffusion coefficients using trained model.
+class PlotManager:
+    """绘图管理器"""
     
-    Args:
-        trainer: Trained model trainer
-        test_loader: Test data loader
-        config: Optional MD configuration
+    def __init__(self, font_size: int = 26):
+        self.font_size = font_size
+        self._setup_style()
         
-    Returns:
-        Dictionary containing analysis results
-    """
-    analyzer = DiffusionAnalyzer(
-        working_dir="diffusion_analysis",
-        config=config
-    )
-    
-    results = {
-        'predictions': [],
-        'actual_values': [],
-        'structures': []
-    }
-    
-    successful_count = 0
-    error_count = 0
-    
-    for batch in test_loader:
-        for graph in batch:
-            try:
-                # Convert graph to atoms
-                atoms = trainer.graph_to_atoms(graph)
-                
-                # Calculate actual diffusion coefficient
-                D_actual, analysis_data = analyzer.analyze_diffusion(atoms)
-                
-                # Get model prediction
-                with torch.no_grad():
-                    D_pred = trainer.model(graph)
-                
-                results['predictions'].append(D_pred.item())
-                results['actual_values'].append(D_actual)
-                results['structures'].append(str(atoms))
-                
-                # Plot analysis for this structure
-                analyzer.plot_analysis(analysis_data)
-                
-                successful_count += 1
-                
-            except Exception as e:
-                print(f"Error analyzing structure: {str(e)}")
-                error_count += 1
-                continue
-    
-    print(f"\nAnalysis Summary:")
-    print(f"Successfully analyzed: {successful_count} structures")
-    print(f"Failed to analyze: {error_count} structures")
-    
-    if successful_count == 0:
-        raise RuntimeError("No structures were successfully analyzed")
-    
-    # Calculate metrics
-    predictions = np.array(results['predictions'])
-    actual_values = np.array(results['actual_values'])
-    
-    mae = np.mean(np.abs(predictions - actual_values))
-    rmse = np.sqrt(np.mean((predictions - actual_values)**2))
-    
-    results.update({
-        'mae': mae,
-        'rmse': rmse,
-        'successful_count': successful_count,
-        'error_count': error_count
-    })
-    
-    return results
+    def _setup_style(self):
+        """设置绘图风格"""
+        plt.rcParams.update({
+            'font.size': self.font_size,
+            'font.family': 'DejaVu Sans',
+            'legend.fontsize': self.font_size,
+            'xtick.labelsize': self.font_size,
+            'ytick.labelsize': self.font_size,
+            'axes.labelsize': self.font_size,
+            'axes.titlesize': self.font_size,
+            'figure.figsize': [14, 14]
+        })
+        
+    def plot_arrhenius(
+        self,
+        data: pd.DataFrame,
+        save_dir: str,
+        column_name: str = 'log10_D',
+        y_label: str = 'log[D(cm$^2$ sec$^{-1}$)]',
+        show_ea: bool = True
+    ):
+        """
+        绘制Arrhenius图
+        
+        Args:
+            data: 数据DataFrame
+            save_dir: 保存目录
+            column_name: 要绘制的列名
+            y_label: y轴标签
+            show_ea: 是否显示激活能
+        """
+        fig, ax1 = plt.subplots()
+        
+        # 主坐标轴: 1000/T
+        slope, intercept, r_value, _, _ = stats.linregress(
+            data["1000/T"],
+            data[column_name]
+        )
+        
+        ax1.set_xlabel('1000/T [K$^{-1}$]')
+        ax1.set_ylabel(y_label)
+        ax1.scatter(data["1000/T"], data[column_name], color='k', linewidth=4)
+        ax1.plot(
+            data["1000/T"],
+            data["1000/T"]*slope + intercept,
+            '--k',
+            linewidth=4
+        )
+        
+        # 次坐标轴: 温度
+        ax2 = ax1.twiny()
+        ax2.set_xlabel('Temperature (K)')
+        ax2.plot(data['T(K)'], data[column_name], 'k')
+        ax2.invert_xaxis()
+        ax2.lines[0].set_visible(False)
+        
+        if show_ea:
+            R = 8.31446261815324  # 气体常数
+            E_act = -slope * 1000 * np.log(10) * R * (J / mol)
+            ax1.text(
+                data["1000/T"].iloc[1],
+                data[column_name].iloc[-2],
+                f'Ea: {E_act:.2f} eV',
+                fontsize=self.font_size,
+                color='red'
+            )
+            
+        plt.tight_layout()
+        plt.savefig(
+            Path(save_dir) / f'arrhenius_{column_name}.png',
+            bbox_inches='tight',
+            pad_inches=0.3,
+            dpi=300
+        )
+        plt.close()
+        
+    def plot_diffusion_coefficient(
+        self,
+        data: pd.DataFrame,
+        save_dir: str,
+        show_ea: bool = True
+    ):
+        """
+        绘制扩散系数图
+        
+        Args:
+            data: 数据DataFrame
+            save_dir: 保存目录
+            show_ea: 是否显示激活能
+        """
+        fig, ax1 = plt.subplots()
+        
+        ax1.set_xlabel('1000/T [K$^{-1}$]')
+        ax1.set_ylabel('D(cm$^2$ sec$^{-1}$)')
+        ax1.plot(data['1000/T'], data['D(cm^2/s)'], 'k', linewidth=4)
+        
+        ax2 = ax1.twiny()
+        ax2.set_xlabel('Temperature (K)')
+        ax2.plot(data['T(K)'], data['D(cm^2/s)'], 'k')
+        ax2.invert_xaxis()
+        ax2.lines[0].set_visible(False)
+        
+        if show_ea:
+            slope, intercept, _, _, _ = stats.linregress(
+                data["1000/T"],
+                data["log10_D"]
+            )
+            R = 8.31446261815324
+            E_act = -slope * 1000 * np.log(10) * R * (J / mol)
+            ax1.text(
+                data["1000/T"].iloc[1],
+                data['D(cm^2/s)'].iloc[-2],
+                f'Ea: {E_act:.2f} eV',
+                fontsize=self.font_size,
+                color='red'
+            )
+            
+        plt.tight_layout()
+        plt.savefig(
+            Path(save_dir) / 'diffusion_coefficient.png',
+            bbox_inches='tight',
+            pad_inches=0.3,
+            dpi=300
+        )
+        plt.close()
 
 def main():
-    """Main execution function."""
-    try:
-        paths = get_project_paths()
-        
-        # Data configuration
-        data_config = {
-            'structures_dir': paths['structures_dir'],
-            'file_path': paths['file_path'],
-            'cutoff': 4.0,
-            'batch_size': 32
-        }
-        
-        # MD configuration
-        md_config = {
-            'temperature_K': 300,
-            'timestep_fs': 1.0,
-            'maxtime_ps': 10.0,
-            'friction': 0.002,
-            'thermostat': 'langevin',
-            'equilibration_steps': 1000,
-            'production_steps': 10000
-        }
-        
-        # Initialize data processor
-        processor = DataProcessor(data_config)
-        processor.load_data()
-        dataset = processor.create_dataset(normalize=True)
-        _, _, test_loader = processor.create_dataloaders()
-        
-        # Initialize trainer
-        trainer = BandgapTrainer(
-            working_dir=paths['output_dir'],
-            config={'batch_size': 32}
-        )
-        
-        # Run analysis
-        print("\nStarting diffusion analysis...")
-        results = analyze_model_diffusion(trainer, test_loader, md_config)
-        
-        # Save results
-        output_dir = Path(paths['output_dir']) / "diffusion_analysis"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        
-        with open(output_dir / 'diffusion_results.json', 'w') as f:
-            json.dump(results, f, indent=4)
+    """使用示例"""
+    # 初始化分析器
+    volume_calc = VolumeCalculator()
+    diffusion_analyzer = DiffusionAnalyzer()
+    plot_manager = PlotManager()
+    
+    # 分析目录和温度设置
+    working_dir = Path("md_analysis")
+    working_dir.mkdir(exist_ok=True)
+    
+    temperatures = [300, 400, 500, 600]
+    results = []
+    
+    # 分析每个温度的轨迹
+    for temp in temperatures:
+        traj_file = f"MD_{temp}.traj"
+        if not Path(traj_file).exists():
+            print(f"找不到轨迹文件: {traj_file}")
+            continue
             
-        print(f"\nResults saved to {output_dir / 'diffusion_results.json'}")
-        print(f"MAE: {results['mae']:.4f}")
-        print(f"RMSE: {results['rmse']:.4f}")
+        result = diffusion_analyzer.analyze_trajectory(
+            traj_file=traj_file,
+            temperature=temp
+        )
+        results.append(result)
         
-    except Exception as e:
-        print(f"\nError in main execution: {str(e)}")
-        raise
+    # 保存结果
+    df = pd.DataFrame(results)
+    df.to_csv(working_dir / 'diffusion_results.csv', index=False)
+    
+    # 绘制图形
+    plot_manager.plot_arrhenius(df, str(working_dir))
+    plot_manager.plot_diffusion_coefficient(df, str(working_dir))
 
 if __name__ == "__main__":
     main()

@@ -21,26 +21,18 @@ from dataset_process import DataProcessor, get_project_paths
 from training import BandgapTrainer
 
 class FineTuner:
-    """Enhanced fine-tuning manager with simplified configuration."""
-    
     def __init__(
         self,
         working_dir: str,
+        prev_training_dir: str,  # Fix type annotation
         debug: bool = False,
         **kwargs
     ):
-        """
-        Initialize fine-tuning manager.
-        
-        Args:
-            working_dir: Working directory path
-            debug: Enable debug logging
-            **kwargs: Optional training parameters
-        """
         self.working_dir = Path(working_dir)
+        self.prev_training_dir = Path(prev_training_dir)  # Fix Path initialization
         self.debug = debug
+        self.trainer = None
         
-        # Set training parameters with defaults
         self.training_params = {
             'num_epochs': kwargs.get('num_epochs', 2),
             'batch_size': kwargs.get('batch_size', 128),
@@ -113,12 +105,13 @@ class FineTuner:
         self.logger.info("Starting fine-tuning process...")
         
         try:
-            # Load pretrained model
-            model_name = "M3GNet-MP-2021.2.8-PES"
-            self.logger.info(f"Loading pretrained model: {model_name}")
-            pretrained_model = load_model(model_name).model
+            # 1. Load previous training weights
+            prev_model_path = self.prev_training_dir / "checkpoints" / "model.pt"
             
-            # Setup data configuration
+            self.logger.info(f"Loading previous training weights: {prev_model_path}")
+            prev_weights = torch.load(prev_model_path)
+            
+            # 2. Setup data
             data_config = {
                 'structures_dir': paths['structures_dir'],
                 'file_path': paths['file_path'],
@@ -126,13 +119,12 @@ class FineTuner:
                 'batch_size': self.training_params['batch_size']
             }
             
-            # Process data
             processor = DataProcessor(data_config)
             processor.load_data()
             dataset = processor.create_dataset(normalize=True)
             train_loader, val_loader, test_loader = processor.create_dataloaders()
             
-            # Setup trainer
+            # 3. Initialize trainer
             trainer_config = {
                 'batch_size': self.training_params['batch_size'],
                 'num_epochs': self.training_params['num_epochs'],
@@ -140,29 +132,29 @@ class FineTuner:
                 'accelerator': self.training_params['accelerator']
             }
             
-            # Initialize trainer with pretrained model
             trainer = BandgapTrainer(
-                working_dir=str(self.working_dir),
-                config=trainer_config
+            working_dir=str(self.working_dir),
+            config=trainer_config
             )
-            trainer.model = pretrained_model
+        
+            # 4. Initialize model with same architecture as training
+            trainer.setup_model(processor.element_list)
+            trainer.model.load_state_dict(prev_weights)
+            self.trainer = trainer
             
-            # Train model
+            # 5. Continue fine-tuning
             trainer.train(
                 train_loader=train_loader,
                 val_loader=val_loader,
                 element_types=processor.element_list
             )
             
-            # Evaluate model
-            results = trainer.evaluate(test_loader)
-            
             # Save results
+            results = trainer.evaluate(test_loader)
             results_file = self.working_dir / 'test_results.json'
             with open(results_file, 'w') as f:
                 json.dump(results, f, indent=4)
-                
-            # Plot training curves
+            
             trainer.plot_training_curves()
             
             duration = time.time() - start_time
@@ -175,25 +167,15 @@ class FineTuner:
             raise
 
 def main():
-    """Main execution function."""
-    # Get project paths
     paths = get_project_paths()
     
-    # Basic usage
-    finetuner = FineTuner(working_dir="output")
-    trainer = finetuner.run_finetuning(paths)
-    
-    # Advanced usage with custom parameters
-    """
+    # Initialize with previous training directory
     finetuner = FineTuner(
-        working_dir="output",
-        num_epochs=200,
-        batch_size=256,
-        learning_rate=1e-5,
-        debug=True
+        working_dir=os.path.join(paths['output_dir'], 'M3GNet_finetuning'),
+        prev_training_dir=paths['output_dir'] # Point to previous training results
     )
+    
     trainer = finetuner.run_finetuning(paths)
-    """
 
 if __name__ == "__main__":
     main()

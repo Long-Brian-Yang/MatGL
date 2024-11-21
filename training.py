@@ -51,7 +51,7 @@ class BandgapTrainer:
         self.config = {
             'batch_size': 128,
             'num_epochs': 2,
-            'learning_rate': 0.001,
+            'learning_rate': 1e-4,
             'accelerator': 'cpu'
         }
         if config:
@@ -244,6 +244,10 @@ def main():
     }
     processor, train_loader, val_loader, test_loader = process_data(data_config)
     
+    element_types = processor.element_list
+    with open('element_types.json', 'w') as f:
+        json.dump(element_types, f)
+
     trainer_config = {
         'batch_size': 128,
         'num_epochs': 2,
