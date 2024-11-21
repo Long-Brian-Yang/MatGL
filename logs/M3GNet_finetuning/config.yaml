@@ -1,0 +1,18 @@
+data:
+    batch_size: 128
+    cutoff: 4.0
+    normalize: true
+    split_ratio:
+    - 0.6
+    - 0.1
+    - 0.3
+model:
+    is_intensive: true
+    name: M3GNet-MP-2021.2.8-PES
+    readout_type: set2set
+training:
+    accelerator: cpu
+    checkpoint_monitor: val_loss
+    early_stopping_patience: 10
+    learning_rate: 0.0001
+    num_epochs: 100
