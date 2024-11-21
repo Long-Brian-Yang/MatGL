@@ -1,27 +1,47 @@
 """
-Diffusion coefficient analysis module.
-Handles molecular dynamics simulation and diffusion analysis.
+Complete diffusion analysis module.
+Handles molecular dynamics simulation and diffusion coefficient calculation.
+
+Features:
+- Graph to structure conversion
+- MD simulation management
+- Diffusion coefficient calculation
+- Results visualization and analysis
 """
 
 from __future__ import annotations
 import json
 import warnings
 from pathlib import Path
-from typing import Optional, Dict
+from typing import Optional, Dict, List, Tuple
 
 import torch
 import numpy as np
+from tqdm import tqdm
+import matplotlib.pyplot as plt
 from ase import Atoms, units
-from ase.md.velocitydistribution import MaxwellBoltzmannDistribution
+from ase.io import read, write
+from ase.md.velocitydistribution import MaxwellBoltzmannDistribution, Stationary
+from ase.md.verlet import VelocityVerlet
 from ase.md.langevin import Langevin
+from ase.md.nvtberendsen import NVTBerendsen
+from matgl import load_model
 
 from dataset_process import DataProcessor, get_project_paths
-from finetune import finetune_m3gnet
+from training import BandgapTrainer
 
 warnings.simplefilter("ignore")
 
 class DiffusionAnalyzer:
-    """Analyzer class for diffusion coefficient calculation via MD simulation."""
+    """
+    Analyzer class for diffusion coefficient calculation via MD simulation.
+    
+    Handles:
+    - Structure preparation
+    - MD simulation
+    - Diffusion analysis
+    - Results visualization
+    """
     
     def __init__(
         self, 
@@ -43,280 +63,391 @@ class DiffusionAnalyzer:
         
         # Default MD configuration
         self.config = {
-            'temperature_K': 1000,
-            'timestep': 1.0,
-            'maxtime_ps': 1.0,
-            'friction': 0.01
+            'temperature_K': 300,
+            'timestep_fs': 1.0,
+            'maxtime_ps': 10.0,
+            'friction': 0.002,
+            'thermostat': 'langevin',
+            'equilibration_steps': 1000,
+            'production_steps': 10000,
+            'save_interval': 10,
+            'random_seed': 42
         }
         if config:
             self.config.update(config)
         
         # Initialize directories
-        (self.working_dir / "trajectories").mkdir(exist_ok=True)
-        if self.debug:
-            self.log_dir = self.working_dir / "debug_logs"
-            self.log_dir.mkdir(exist_ok=True)
+        self._setup_directories()
+        
+        # Initialize loggers
+        self.energy_log = []
+        self.temperature_log = []
+        
+    def _setup_directories(self):
+        """Create necessary output directories."""
+        dirs = [
+            'trajectories',
+            'analysis',
+            'debug_logs',
+            'structures'
+        ]
+        for dir_name in dirs:
+            (self.working_dir / dir_name).mkdir(exist_ok=True)
             
-    def print_graph_info(self, graph):
-        """Print graph feature information for debugging."""
-        if not self.debug:
-            return
-            
-        print("\nGraph Information:")
-        print("Node features:", graph.ndata.keys())
-        print("Edge features:", graph.edata.keys())
-        for key in graph.ndata.keys():
-            print(f"Feature '{key}' shape:", graph.ndata[key].shape)
-            
-    def graph_to_atoms(self, graph) -> Atoms:
+    def setup_md_simulation(self, atoms: Atoms) -> None:
         """
-        Convert DGLGraph to ASE Atoms object.
+        Setup molecular dynamics simulation.
         
         Args:
-            graph: DGLGraph containing atomic structure information
-        Returns:
-            ase.Atoms: ASE Atoms object with atomic structure
+            atoms: ASE Atoms object
         """
-        if self.debug:
-            self.print_graph_info(graph)
-            
-        # Get atomic positions
-        position_keys = ['pos', 'coord', 'position', 'coordinates', 'R']
-        positions = None
-        for key in position_keys:
-            if key in graph.ndata:
-                positions = graph.ndata[key].numpy()
-                break
-        if positions is None:
-            raise KeyError(f"Cannot find atomic positions. Available: {graph.ndata.keys()}")
-        
-        # Get atomic numbers
-        type_keys = ['node_type', 'atom_types', 'Z', 'atomic_numbers']
-        atomic_numbers = None
-        for key in type_keys:
-            if key in graph.ndata:
-                atomic_numbers = graph.ndata[key].numpy()
-                break
-        if atomic_numbers is None:
-            raise KeyError(f"Cannot find atomic numbers. Available: {graph.ndata.keys()}")
-        
-        # Get cell and pbc if available
-        cell = None
-        pbc = False
-        cell_keys = ['lattice', 'cell', 'unit_cell']
-        for key in cell_keys:
-            if key in graph.ndata:
-                cell = graph.ndata[key][0].numpy()
-                pbc = [True, True, True]
-                break
-        
-        return Atoms(
-            numbers=atomic_numbers,
-            positions=positions,
-            cell=cell,
-            pbc=pbc
-        )
-        
-    def run_md_simulation(self, graph):
-        """
-        Run molecular dynamics simulation using graph data.
-        
-        Args:
-            graph: DGLGraph object
-        Returns:
-            dict: Trajectory data including positions, energies, forces
-        """
-        # Convert graph to ASE Atoms
-        structure = self.graph_to_atoms(graph)
-        
-        # Setup MD parameters
-        temperature_K = self.config['temperature_K']
-        timestep = self.config['timestep'] * units.fs
-        maxtime_ps = self.config['maxtime_ps']
-        friction = self.config['friction']
+        # Set random seed
+        np.random.seed(self.config['random_seed'])
         
         # Initialize velocities
-        MaxwellBoltzmannDistribution(structure, temperature_K=temperature_K)
+        MaxwellBoltzmannDistribution(
+            atoms, 
+            temperature_K=self.config['temperature_K']
+        )
+        Stationary(atoms)  # Remove COM motion
         
-        # Setup MD simulation
-        trajectory_file = self.working_dir / "trajectories" / "temp.traj"
-        dyn = Langevin(
-            structure,
-            timestep=timestep,
-            temperature_K=temperature_K,
-            friction=friction,
-            trajectory=str(trajectory_file),
-            logfile="md.log",
-            loginterval=1
+        # Save initial structure
+        write(
+            self.working_dir / "structures" / "initial.traj",
+            atoms
         )
         
-        # Run simulation
-        steps = int(maxtime_ps / (timestep * 1e-3))
-        dyn.run(steps=steps)
+    def run_md_simulation(self, atoms: Atoms) -> Dict:
+        """
+        Run molecular dynamics simulation.
         
-        return self._process_trajectory(structure, trajectory_file)
-        
-    def _process_trajectory(self, structure, trajectory_file):
-        """Process MD trajectory and extract data."""
-        positions = []
-        energies = []
-        forces = []
-        
-        timestep = self.config['timestep'] * units.fs
-        time_points = []
-        current_time = 0
-        
-        for atoms in structure:
-            positions.append(atoms.get_positions())
-            energies.append(atoms.get_potential_energy())
-            forces.append(atoms.get_forces())
-            time_points.append(current_time)
-            current_time += timestep
+        Args:
+            atoms: ASE Atoms object
             
+        Returns:
+            Dict containing trajectory data
+        """
+        # Setup simulation
+        self.setup_md_simulation(atoms)
+        
+        # Setup dynamics
+        timestep = self.config['timestep_fs'] * units.fs
+        
+        if self.config['thermostat'] == 'langevin':
+            dyn = Langevin(
+                atoms,
+                timestep=timestep,
+                temperature_K=self.config['temperature_K'],
+                friction=self.config['friction'],
+                logfile=str(self.working_dir / "trajectories" / "md.log")
+            )
+        else:
+            dyn = VelocityVerlet(
+                atoms,
+                timestep=timestep,
+                logfile=str(self.working_dir / "trajectories" / "md.log")
+            )
+            
+        # Run equilibration
+        print("\nRunning equilibration...")
+        for step in tqdm(range(self.config['equilibration_steps']), desc="Equilibration"):
+            dyn.run(1)
+            if step % self.config['save_interval'] == 0:
+                self._log_properties(atoms)
+                
+        # Run production
+        print("\nRunning production...")
+        positions = []
+        times = []
+        current_time = 0.0
+        
+        for step in tqdm(range(self.config['production_steps']), desc="Production"):
+            positions.append(atoms.get_positions())
+            times.append(current_time)
+            
+            dyn.run(1)
+            current_time += self.config['timestep_fs']
+            
+            if step % self.config['save_interval'] == 0:
+                self._log_properties(atoms)
+                
+        # Save final structure
+        write(
+            self.working_dir / "structures" / "final.traj",
+            atoms
+        )
+        
         return {
-            'positions': torch.tensor(positions),
-            'energies': torch.tensor(energies),
-            'forces': torch.tensor(forces),
-            'time': torch.tensor(time_points)
+            'positions': np.array(positions),
+            'times': np.array(times),
+            'energy_log': np.array(self.energy_log),
+            'temperature_log': np.array(self.temperature_log)
         }
         
-    def calculate_msd(self, positions):
-        """Calculate Mean Square Displacement."""
-        disp = positions - positions[0]
-        msd = torch.mean(torch.sum(disp**2, dim=2), dim=1)
+    def _log_properties(self, atoms: Atoms) -> None:
+        """Log system properties during simulation."""
+        self.energy_log.append(atoms.get_total_energy())
+        self.temperature_log.append(atoms.get_temperature())
+        
+    def calculate_msd(self, positions: np.ndarray) -> np.ndarray:
+        """
+        Calculate Mean Square Displacement.
+        
+        Args:
+            positions: Array of positions [timesteps, atoms, 3]
+            
+        Returns:
+            Array of MSD values
+        """
+        reference_pos = positions[0]
+        msd = np.mean(np.sum((positions - reference_pos)**2, axis=2), axis=1)
         return msd
         
-    def calculate_diffusion_coefficient(self, msd, time):
-        """Calculate diffusion coefficient from MSD data."""
-        slope = torch.polyfit(time, msd, 1)[0]
-        D = slope / 6.0  # Einstein relation
-        return D.item() * 1e-16 * 1e12  # Convert to cm²/s
+    def calculate_diffusion_coefficient(
+        self,
+        times: np.ndarray,
+        msd: np.ndarray
+    ) -> float:
+        """
+        Calculate diffusion coefficient from MSD data.
         
-    def analyze_diffusion(self, graph):
+        Args:
+            times: Time points in fs
+            msd: MSD values in Å²
+            
+        Returns:
+            Diffusion coefficient in cm²/s
+        """
+        # Convert times to ps for fitting
+        times_ps = times * 1e-3
+        
+        # Fit line to MSD vs time
+        slope, _ = np.polyfit(times_ps, msd, 1)
+        
+        # Convert to cm²/s (slope is in Å²/ps)
+        D = slope / 6.0 * 1e-4
+        return D
+        
+    def analyze_diffusion(self, atoms: Atoms) -> Tuple[float, Dict]:
         """
         Analyze diffusion for a given structure.
         
         Args:
-            graph: DGLGraph of structure
+            atoms: ASE Atoms object
+            
         Returns:
-            float: Diffusion coefficient
+            Tuple of (diffusion coefficient, analysis data)
         """
         # Run MD simulation
-        traj_data = self.run_md_simulation(graph)
+        traj_data = self.run_md_simulation(atoms)
         
-        # Calculate MSD and diffusion coefficient
+        # Calculate MSD
         msd = self.calculate_msd(traj_data['positions'])
-        D = self.calculate_diffusion_coefficient(msd, traj_data['time'])
         
-        return D
+        # Calculate diffusion coefficient
+        D = self.calculate_diffusion_coefficient(
+            traj_data['times'],
+            msd
+        )
+        
+        # Save analysis data
+        analysis_data = {
+            'diffusion_coefficient': D,
+            'msd': msd.tolist(),
+            'times': traj_data['times'].tolist(),
+            'energy': traj_data['energy_log'].tolist(),
+            'temperature': traj_data['temperature_log'].tolist()
+        }
+        
+        return D, analysis_data
+        
+    def plot_analysis(self, analysis_data: Dict):
+        """
+        Generate analysis plots.
+        
+        Args:
+            analysis_data: Dictionary containing analysis results
+        """
+        # MSD plot
+        times_ps = np.array(analysis_data['times']) * 1e-3
+        msd = np.array(analysis_data['msd'])
+        D = analysis_data['diffusion_coefficient']
+        
+        plt.figure(figsize=(10, 6))
+        plt.plot(times_ps, msd, 'b-', label='MSD')
+        plt.plot(times_ps, 6*D*times_ps*1e4, 'r--', 
+                label=f'Fit (D = {D:.2e} cm²/s)')
+        plt.xlabel('Time (ps)')
+        plt.ylabel('MSD (Å²)')
+        plt.title('Mean Square Displacement')
+        plt.legend()
+        plt.savefig(
+            self.working_dir / "analysis" / "msd.png",
+            dpi=300,
+            bbox_inches='tight'
+        )
+        plt.close()
+        
+        # Energy plot
+        plt.figure(figsize=(10, 6))
+        plt.plot(analysis_data['energy'])
+        plt.xlabel('Step')
+        plt.ylabel('Energy (eV)')
+        plt.title('Energy Evolution')
+        plt.savefig(
+            self.working_dir / "analysis" / "energy.png",
+            dpi=300,
+            bbox_inches='tight'
+        )
+        plt.close()
+        
+        # Temperature plot
+        plt.figure(figsize=(10, 6))
+        plt.plot(analysis_data['temperature'])
+        plt.xlabel('Step')
+        plt.ylabel('Temperature (K)')
+        plt.title('Temperature Evolution')
+        plt.savefig(
+            self.working_dir / "analysis" / "temperature.png",
+            dpi=300,
+            bbox_inches='tight'
+        )
+        plt.close()
 
-def analyze_model_diffusion(trainer, test_loader):
+def analyze_model_diffusion(
+    trainer: BandgapTrainer,
+    test_loader,
+    config: Optional[Dict] = None
+) -> Dict:
     """
-    Analyze diffusion coefficients for model predictions.
+    Analyze diffusion coefficients using trained model.
     
     Args:
         trainer: Trained model trainer
         test_loader: Test data loader
+        config: Optional MD configuration
+        
     Returns:
-        dict: Analysis results
+        Dictionary containing analysis results
     """
     analyzer = DiffusionAnalyzer(
-        working_dir=Path("diffusion_analysis")
+        working_dir="diffusion_analysis",
+        config=config
     )
     
-    predictions = []
-    actual_values = []
+    results = {
+        'predictions': [],
+        'actual_values': [],
+        'structures': []
+    }
     
-    with torch.no_grad():
-        for batch in test_loader:
-            for graph in batch:
-                try:
-                    # Calculate actual diffusion coefficient
-                    D_actual = analyzer.analyze_diffusion(graph)
-                    
-                    # Get model prediction
+    successful_count = 0
+    error_count = 0
+    
+    for batch in test_loader:
+        for graph in batch:
+            try:
+                # Convert graph to atoms
+                atoms = trainer.graph_to_atoms(graph)
+                
+                # Calculate actual diffusion coefficient
+                D_actual, analysis_data = analyzer.analyze_diffusion(atoms)
+                
+                # Get model prediction
+                with torch.no_grad():
                     D_pred = trainer.model(graph)
-                    
-                    predictions.append(D_pred.item())
-                    actual_values.append(D_actual)
-                    
-                except Exception as e:
-                    if analyzer.debug:
-                        print(f"Error analyzing sample: {str(e)}")
-                    continue
+                
+                results['predictions'].append(D_pred.item())
+                results['actual_values'].append(D_actual)
+                results['structures'].append(str(atoms))
+                
+                # Plot analysis for this structure
+                analyzer.plot_analysis(analysis_data)
+                
+                successful_count += 1
+                
+            except Exception as e:
+                print(f"Error analyzing structure: {str(e)}")
+                error_count += 1
+                continue
+    
+    print(f"\nAnalysis Summary:")
+    print(f"Successfully analyzed: {successful_count} structures")
+    print(f"Failed to analyze: {error_count} structures")
+    
+    if successful_count == 0:
+        raise RuntimeError("No structures were successfully analyzed")
     
     # Calculate metrics
-    mae = np.mean(np.abs(np.array(predictions) - np.array(actual_values)))
-    rmse = np.sqrt(np.mean((np.array(predictions) - np.array(actual_values))**2))
+    predictions = np.array(results['predictions'])
+    actual_values = np.array(results['actual_values'])
     
-    return {
-        'test_MAE': mae,
-        'test_RMSE': rmse,
-        'predictions': predictions,
-        'actual_values': actual_values
-    }
+    mae = np.mean(np.abs(predictions - actual_values))
+    rmse = np.sqrt(np.mean((predictions - actual_values)**2))
+    
+    results.update({
+        'mae': mae,
+        'rmse': rmse,
+        'successful_count': successful_count,
+        'error_count': error_count
+    })
+    
+    return results
 
 def main():
     """Main execution function."""
-    paths = get_project_paths()
-    
-    # Data configuration
-    data_config = {
-        'structures_dir': paths['structures_dir'],
-        'file_path': paths['file_path'],
-        'cutoff': 4.0,
-        'batch_size': 128
-    }
-    
-    # Trainer configuration
-    trainer_config = {
-        'batch_size': 128,
-        'num_epochs': 2,
-        'learning_rate': 1e-4,
-        'accelerator': 'cpu'
-    }
-    
-    # MD configuration
-    md_config = {
-        'temperature_K': 1000,
-        'timestep': 1.0,
-        'maxtime_ps': 1.0,
-        'friction': 0.01
-    }
-    
-    # Set working directory
-    working_dir = Path(paths['output_dir']) / "diffusion_analysis"
-    working_dir.mkdir(parents=True, exist_ok=True)
-    
-    # First fine-tune the model
-    trainer = finetune_m3gnet(
-        pretrained_model_name="M3GNet-MP-2021.2.8-PES",
-        data_config=data_config,
-        trainer_config=trainer_config,
-        working_dir=working_dir
-    )
-    
-    # Initialize data processor for test set
-    processor = DataProcessor(data_config)
-    processor.load_data()
-    dataset = processor.create_dataset(normalize=True)
-    _, _, test_loader = processor.create_dataloaders()
-    
-    # Analyze diffusion
-    analyzer = DiffusionAnalyzer(
-        working_dir=str(working_dir / "md_analysis"),
-        config=md_config
-    )
-    
-    # Calculate diffusion coefficients
-    results = analyze_model_diffusion(trainer, test_loader)
-    
-    # Save results
-    results_file = working_dir / 'diffusion_results.json'
-    with open(results_file, 'w') as f:
-        json.dump(results, f, indent=4)
-    
-    print(f"Diffusion analysis results saved to {results_file}")
+    try:
+        paths = get_project_paths()
+        
+        # Data configuration
+        data_config = {
+            'structures_dir': paths['structures_dir'],
+            'file_path': paths['file_path'],
+            'cutoff': 4.0,
+            'batch_size': 32
+        }
+        
+        # MD configuration
+        md_config = {
+            'temperature_K': 300,
+            'timestep_fs': 1.0,
+            'maxtime_ps': 10.0,
+            'friction': 0.002,
+            'thermostat': 'langevin',
+            'equilibration_steps': 1000,
+            'production_steps': 10000
+        }
+        
+        # Initialize data processor
+        processor = DataProcessor(data_config)
+        processor.load_data()
+        dataset = processor.create_dataset(normalize=True)
+        _, _, test_loader = processor.create_dataloaders()
+        
+        # Initialize trainer
+        trainer = BandgapTrainer(
+            working_dir=paths['output_dir'],
+            config={'batch_size': 32}
+        )
+        
+        # Run analysis
+        print("\nStarting diffusion analysis...")
+        results = analyze_model_diffusion(trainer, test_loader, md_config)
+        
+        # Save results
+        output_dir = Path(paths['output_dir']) / "diffusion_analysis"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        with open(output_dir / 'diffusion_results.json', 'w') as f:
+            json.dump(results, f, indent=4)
+            
+        print(f"\nResults saved to {output_dir / 'diffusion_results.json'}")
+        print(f"MAE: {results['mae']:.4f}")
+        print(f"RMSE: {results['rmse']:.4f}")
+        
+    except Exception as e:
+        print(f"\nError in main execution: {str(e)}")
+        raise
 
 if __name__ == "__main__":
     main()

@@ -33,8 +33,8 @@ def get_project_paths():
     root_dir = os.path.dirname(os.path.abspath(__file__))
     
     paths = {
-        'structures_dir': os.path.join(root_dir, 'proccessed_data'),
-        'file_path': os.path.join(root_dir, 'data_list.csv'),
+        'structures_dir': os.path.join(root_dir, './data/structures'),
+        'file_path': os.path.join(root_dir, './data/data_list.csv'),
         'output_dir': os.path.join(root_dir, 'logs'),
         'diffusion_dir': os.path.join(root_dir, 'diffusion'),
         'train_list': os.path.join(root_dir, 'train_bandgap_list.csv'),
