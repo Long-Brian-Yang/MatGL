@@ -234,8 +234,8 @@ def main():
         'file_path': paths['file_path'],
         'output_dir': paths['output_dir'],
         'cutoff': 4.0,
-        'batch_size': 32,
-        'split_ratio': [0.5, 0.1, 0.4],
+        'batch_size': 16,
+        'split_ratio': [0.6, 0.1, 0.3],
         'random_state': 42
     }
     
