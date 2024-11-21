@@ -1,0 +1,849 @@
+2024-11-22 00:39:30,450 - ERROR - 分析轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:39:30,451 - ERROR - 分析轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:39:30,455 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:39:30,455 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:39:30,456 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:39:30,456 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:39:30,456 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:39:30,456 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:39:30,456 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,103 - ERROR - 分析轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,104 - ERROR - 分析轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,105 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,105 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,106 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,106 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,106 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,106 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:44:07,106 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,403 - ERROR - 分析轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,405 - ERROR - 分析轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,405 - ERROR - 分析轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,406 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,407 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,407 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,408 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,408 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:45:39,408 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,439 - ERROR - 加载轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,440 - ERROR - 分析轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,441 - ERROR - 加载轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,441 - ERROR - 加载轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,441 - ERROR - 分析轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,441 - ERROR - 分析轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 加载轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 加载轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 加载轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 加载轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 加载轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 加载轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 加载轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,442 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 加载轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 加载轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 加载轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 加载轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 加载轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:52:58,443 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,863 - ERROR - 加载轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,864 - ERROR - 加载轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,864 - ERROR - 分析轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,864 - ERROR - 分析轨迹文件 md_output/MD_600.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,865 - ERROR - 加载轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,865 - ERROR - 加载轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,865 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,865 - ERROR - 分析轨迹文件 md_output/MD_400.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 加载轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 加载轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 分析轨迹文件 md_output/MD_300.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 加载轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 加载轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 加载轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 00:59:40,866 - ERROR - 分析轨迹文件 md_output/MD_500.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:06:44,939 - ERROR - 加载轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:06:44,940 - ERROR - 分析轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_600.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_600.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_600.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_600.traj
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_400.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_400.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_400.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_400.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_400.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_400.traj
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_300.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_300.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_300.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_300.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_300.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_300.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_300.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_300.traj
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_500.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_500.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_500.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_500.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - WARNING - 无法从轨迹名称 MD_500.traj 中提取温度信息。
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_500.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_500.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_500.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_500.traj
+2024-11-22 01:06:44,941 - ERROR - 无法从文件名中提取温度: md_output/MD_500.traj
+2024-11-22 01:09:15,960 - WARNING - 无法从轨迹名称 MD_600.traj 中提取温度信息。
+2024-11-22 01:09:15,961 - ERROR - 加载轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:09:15,961 - ERROR - 分析轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:09:15,961 - ERROR - 无法从文件名中提取温度: md_output/MD_600.traj
+2024-11-22 01:09:15,962 - WARNING - 无法从轨迹名称 MD_400.traj 中提取温度信息。
+2024-11-22 01:09:15,962 - WARNING - 无法从轨迹名称 MD_400.traj 中提取温度信息。
+2024-11-22 01:09:15,962 - ERROR - 无法从文件名中提取温度: md_output/MD_400.traj
+2024-11-22 01:09:15,962 - ERROR - 无法从文件名中提取温度: md_output/MD_400.traj
+2024-11-22 01:09:15,962 - WARNING - 无法从轨迹名称 MD_300.traj 中提取温度信息。
+2024-11-22 01:09:15,962 - WARNING - 无法从轨迹名称 MD_300.traj 中提取温度信息。
+2024-11-22 01:09:15,962 - ERROR - 无法从文件名中提取温度: md_output/MD_300.traj
+2024-11-22 01:09:15,962 - WARNING - 无法从轨迹名称 MD_500.traj 中提取温度信息。
+2024-11-22 01:09:15,962 - ERROR - 无法从文件名中提取温度: md_output/MD_300.traj
+2024-11-22 01:09:15,962 - ERROR - 无法从文件名中提取温度: md_output/MD_500.traj
+2024-11-22 01:10:47,036 - ERROR - Error loading trajectory file md_output/MD_300K.traj: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:10:47,041 - ERROR - Error analyzing trajectory file md_output/MD_300K.traj: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:10:47,041 - WARNING - Unable to extract temperature information from trajectory name MD_600.traj.
+2024-11-22 01:10:47,041 - WARNING - Unable to extract temperature information from trajectory name MD_600.traj.
+2024-11-22 01:10:47,041 - ERROR - Unable to extract temperature from filename: md_output/MD_600.traj
+2024-11-22 01:10:47,041 - ERROR - Unable to extract temperature from filename: md_output/MD_600.traj
+2024-11-22 01:10:47,041 - WARNING - Unable to extract temperature information from trajectory name MD_300.traj.
+2024-11-22 01:10:47,041 - WARNING - Unable to extract temperature information from trajectory name MD_300.traj.
+2024-11-22 01:10:47,041 - WARNING - Unable to extract temperature information from trajectory name MD_300.traj.
+2024-11-22 01:10:47,042 - ERROR - Unable to extract temperature from filename: md_output/MD_300.traj
+2024-11-22 01:10:47,042 - ERROR - Unable to extract temperature from filename: md_output/MD_300.traj
+2024-11-22 01:10:47,042 - ERROR - Unable to extract temperature from filename: md_output/MD_300.traj
+2024-11-22 01:10:47,042 - WARNING - Unable to extract temperature information from trajectory name MD_400.traj.
+2024-11-22 01:10:47,042 - ERROR - Unable to extract temperature from filename: md_output/MD_400.traj
+2024-11-22 01:10:47,042 - WARNING - Unable to extract temperature information from trajectory name MD_500.traj.
+2024-11-22 01:10:47,042 - WARNING - Unable to extract temperature information from trajectory name MD_500.traj.
+2024-11-22 01:10:47,042 - WARNING - Unable to extract temperature information from trajectory name MD_500.traj.
+2024-11-22 01:10:47,042 - WARNING - Unable to extract temperature information from trajectory name MD_500.traj.
+2024-11-22 01:10:47,042 - ERROR - Unable to extract temperature from filename: md_output/MD_500.traj
+2024-11-22 01:10:47,042 - ERROR - Unable to extract temperature from filename: md_output/MD_500.traj
+2024-11-22 01:10:47,042 - ERROR - Unable to extract temperature from filename: md_output/MD_500.traj
+2024-11-22 01:10:47,042 - ERROR - Unable to extract temperature from filename: md_output/MD_500.traj
+2024-11-22 01:11:25,665 - WARNING - 无法从轨迹名称 MD_600.traj 中提取温度信息。
+2024-11-22 01:11:25,665 - WARNING - 无法从轨迹名称 MD_300.traj 中提取温度信息。
+2024-11-22 01:11:25,666 - WARNING - 无法从轨迹名称 MD_400.traj 中提取温度信息。
+2024-11-22 01:11:25,666 - WARNING - 无法从轨迹名称 MD_500.traj 中提取温度信息。
+2024-11-22 01:11:25,666 - ERROR - 无法从文件名中提取温度: md_output/MD_300.traj
+2024-11-22 01:11:25,666 - ERROR - 无法从文件名中提取温度: md_output/MD_600.traj
+2024-11-22 01:11:25,666 - ERROR - 无法从文件名中提取温度: md_output/MD_500.traj
+2024-11-22 01:11:25,666 - ERROR - 无法从文件名中提取温度: md_output/MD_400.traj
+2024-11-22 01:11:25,666 - ERROR - 加载轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:11:25,666 - ERROR - 分析轨迹文件 md_output/MD_300K.traj 时出错: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:11:39,065 - WARNING - Unable to extract temperature information from trajectory name MD_600.traj.
+2024-11-22 01:11:39,066 - ERROR - Error loading trajectory file md_output/MD_300K.traj: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:11:39,066 - ERROR - Unable to extract temperature from filename: md_output/MD_600.traj
+2024-11-22 01:11:39,066 - ERROR - Error analyzing trajectory file md_output/MD_300K.traj: 'TRAJ' isn't a valid topology format, nor a coordinate format
+   from which a topology can be minimally inferred.
+   You can use 'Universe(topology, ..., topology_format=FORMAT)'
+   to explicitly specify the format and
+   override automatic detection. Known FORMATs are:
+   dict_keys(['PSF', 'TOP', 'PRMTOP', 'PARM7', 'PDB', 'ENT', 'XPDB', 'PQR', 'GRO', 'CRD', 'PDBQT', 'DMS', 'TPR', 'MOL2', 'DATA', 'LAMMPSDUMP', 'XYZ', 'TXYZ', 'ARC', 'GMS', 'CONFIG', 'HISTORY', 'XML', 'MMTF', 'GSD', 'MINIMAL', 'ITP', 'IN', 'FHIAIMS', 'PARMED', 'RDKIT', 'OPENMMTOPOLOGY', 'OPENMMAPP'])
+   See https://docs.mdanalysis.org/documentation_pages/topology/init.html#supported-topology-formats
+   For missing formats, raise an issue at 
+   https://github.com/MDAnalysis/mdanalysis/issues
+2024-11-22 01:11:39,067 - WARNING - Unable to extract temperature information from trajectory name MD_300.traj.
+2024-11-22 01:11:39,067 - WARNING - Unable to extract temperature information from trajectory name MD_300.traj.
+2024-11-22 01:11:39,067 - WARNING - Unable to extract temperature information from trajectory name MD_400.traj.
+2024-11-22 01:11:39,067 - ERROR - Unable to extract temperature from filename: md_output/MD_300.traj
+2024-11-22 01:11:39,067 - ERROR - Unable to extract temperature from filename: md_output/MD_300.traj
+2024-11-22 01:11:39,067 - WARNING - Unable to extract temperature information from trajectory name MD_400.traj.
+2024-11-22 01:11:39,067 - ERROR - Unable to extract temperature from filename: md_output/MD_400.traj
+2024-11-22 01:11:39,067 - ERROR - Unable to extract temperature from filename: md_output/MD_400.traj
+2024-11-22 01:11:39,067 - WARNING - Unable to extract temperature information from trajectory name MD_500.traj.
+2024-11-22 01:11:39,067 - WARNING - Unable to extract temperature information from trajectory name MD_500.traj.
+2024-11-22 01:11:39,067 - WARNING - Unable to extract temperature information from trajectory name MD_500.traj.
+2024-11-22 01:11:39,067 - ERROR - Unable to extract temperature from filename: md_output/MD_500.traj
+2024-11-22 01:11:39,067 - ERROR - Unable to extract temperature from filename: md_output/MD_500.traj
+2024-11-22 01:11:39,067 - ERROR - Unable to extract temperature from filename: md_output/MD_500.traj
