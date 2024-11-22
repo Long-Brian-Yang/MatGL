@@ -1,15 +1,3 @@
-"""
-Training module for bandgap prediction using M3GNet model.
-Handles model training, evaluation, and visualization of results.
-
-Features:
-- Model configuration and training setup
-- Training with validation monitoring
-- Model evaluation and metrics logging
-- Training curve visualization
-- Checkpoint saving and loading
-"""
-
 from __future__ import annotations
 import json
 import warnings
@@ -50,7 +38,7 @@ class BandgapTrainer:
         
         self.config = {
             'batch_size': 128,
-            'num_epochs': 2,
+            'num_epochs': 10,
             'learning_rate': 1e-4,
             'accelerator': 'cpu'
         }
@@ -250,8 +238,8 @@ def main():
 
     trainer_config = {
         'batch_size': 128,
-        'num_epochs': 2,
-        'learning_rate': 0.001,
+        'num_epochs': 10,
+        'learning_rate': 1e-4,
         'accelerator': 'cpu'
     }
     trainer = BandgapTrainer(

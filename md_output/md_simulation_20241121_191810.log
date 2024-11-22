@@ -1,9 +1,0 @@
-2024-11-21 19:18:10,201 - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
-2024-11-21 19:18:10,201 - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
-2024-11-21 19:18:10,201 - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
-2024-11-21 19:18:10,627 - Loaded potential model: M3GNet-MP-2021.2.8-PES
-2024-11-21 19:18:10,636 - Starting MD at 300K
-2024-11-21 19:19:39,238 - Step 1000/10000, Temperature: 440.4K
-2024-11-21 19:21:04,803 - Step 2000/10000, Temperature: 510.2K
-2024-11-21 19:22:33,938 - Step 3000/10000, Temperature: 333.7K
-2024-11-21 19:24:07,788 - Step 4000/10000, Temperature: 330.1K
