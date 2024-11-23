@@ -1,0 +1,15 @@
+2024-11-23 16:11:33,969 - INFO - Configuration saved to /Users/brian/Documents/matgl/logs/finetuning/results/finetune_config.json
+2024-11-23 16:11:33,969 - INFO - Starting fine-tuning process...
+2024-11-23 16:11:33,969 - INFO - Loading previous training weights: /Users/brian/Documents/matgl/logs/checkpoints/base_model.pt
+2024-11-23 16:11:57,762 - INFO - Configuration saved to /Users/brian/Documents/matgl/logs/finetuning/results/training_config.json
+2024-11-23 16:11:57,826 - INFO - Model initialized successfully
+2024-11-23 16:11:57,829 - INFO - Starting training process...
+2024-11-23 16:14:10,985 - INFO - Final model saved to /Users/brian/Documents/matgl/logs/finetuning/checkpoints/base_model.pt
+2024-11-23 16:14:10,986 - INFO - Training completed in 133.16 seconds
+2024-11-23 16:14:10,991 - INFO - Starting model evaluation...
+2024-11-23 16:14:19,146 - INFO - Test MAE: 2.0965
+2024-11-23 16:14:19,146 - INFO - Test RMSE: 2.2236
+2024-11-23 16:14:19,146 - INFO - Evaluation results saved to /Users/brian/Documents/matgl/logs/finetuning/results/evaluation_results.json
+2024-11-23 16:14:19,146 - INFO - Plotting learning curves...
+2024-11-23 16:14:20,374 - INFO - Learning curves saved to /Users/brian/Documents/matgl/logs/finetuning/plots/training_learning_curves.png
+2024-11-23 16:14:20,375 - INFO - Fine-tuning completed in 166.41 seconds
