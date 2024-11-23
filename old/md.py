@@ -95,7 +95,6 @@ def load_config(config_path: str):
     with open(config_path, 'r') as f:
         return json.load(f)
 
-
 def main():
     config = load_config('config.json')
     paths = get_project_paths()
