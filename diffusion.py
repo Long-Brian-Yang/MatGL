@@ -533,24 +533,24 @@ def main():
         'random_state': 42
     }
     
-    # 指定材料的MD轨迹所在目录
+    # Initialize analyzer
     traj_dir = Path("logs/md_trajectories/Ba8Zr8O24_H8")
     
     analyzer = MDAnalysisSystem(
         config=config,
-        structure_name="Ba8Zr8O24_H8",  # 已掺H的结构
-        target_atom='H',               # 分析氢离子扩散
+        structure_name="Ba8Zr8O24_H8",  
+        target_atom='H',               
         time_step=1.0,                # fs
-        shift_time=500,               # 根据需要调整
-        window_size=1000              # 根据需要调整
+        shift_time=500,             
+        window_size=1000            
     )
         # Override working directory
     analyzer.working_dir = traj_dir
     print(f"\nAnalyzing trajectories in: {analyzer.working_dir}")
     
-    # 根据目录结构找到所有温度文件夹
+    # Analyze MD trajectories for a range of temperatures
     temp_dirs = [d for d in traj_dir.glob("T_*K") if d.is_dir()]
-    temperatures = [int(d.name.split('_')[1][:-1]) for d in temp_dirs]  # 提取温度值
+    temperatures = [int(d.name.split('_')[1][:-1]) for d in temp_dirs] 
     print(f"Found temperature directories: {temperatures} K")
     
     try:
