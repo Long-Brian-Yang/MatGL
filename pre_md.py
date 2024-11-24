@@ -1,5 +1,6 @@
 from __future__ import annotations
 import os
+import json
 import logging
 import numpy as np
 from pathlib import Path
@@ -20,7 +21,23 @@ from pymatgen.io.ase import AseAtomsAdaptor
 from dataset_process import get_project_paths, DataProcessor
 
 class MDSystem:
-    """Run molecular dynamics simulations using M3GNet potential."""
+    """
+    Run molecular dynamics simulations using M3GNet potential.
+    
+    Args:
+        config (dict): Configuration containing:
+            - structures_dir: Path to structure files
+            - file_path: Path to data list
+            - cutoff: Cutoff radius for graphs
+            - batch_size: Batch size for loading
+            - split_ratio: Train/val/test split
+            - random_state: Random seed
+        model_name (str): Name of the M3GNet potential model
+        time_step (float): Time step for MD simulation in fs
+        friction (float): Friction coefficient for Langevin dynamics
+        total_steps (int): Total number of MD steps
+        output_interval (int): Interval for saving trajectory frames
+    """
     
     def __init__(
         self,
@@ -91,6 +108,13 @@ class MDSystem:
         """
         Add protons to the structure based on theoretical understanding.
         
+        Args:
+            atoms (Atoms): Initial structure
+            n_protons (int): Number of protons to add
+        
+        Returns:
+            Atoms: Structure with protons added
+
         References:
         1. Kreuer, K. D., Solid State Ionics (1999)
         2. Björketun, M. E., et al., PRB (2005)
@@ -167,7 +191,9 @@ class MDSystem:
         temperature: float,
         traj_file: Optional[Path] = None
     ) -> str:
-        """Run MD simulation for given structure and temperature."""
+        """
+        Run MD simulation for given structure and temperature.
+        """
         # Create output directory for this structure
         struct_name = structure_file.stem
         struct_output_dir = self.md_output_dir / struct_name
@@ -233,7 +259,7 @@ class MDSystem:
             return {}
             
         if temperatures is None:
-            temperatures = [800, 900, 1000]  # default temperatures
+            temperatures = [500, 700, 1000]  # default temperatures
         
         results = {}
         for struct_file in structure_files:
@@ -322,35 +348,39 @@ def main():
     temperatures = [500, 700, 1000]  # K
     
     try:
-        # 1. 读取初始结构
+        # 1. Create material directory
+        n_protons = 8 # Number of protons to add
+        material_dir = md_system.md_output_dir / f"{structure_file.stem}_H{n_protons}"
+        os.makedirs(material_dir, exist_ok=True)
+
+        # 2. Load initial structure
         atoms = read_vasp(str(structure_file))
         print(f"\nLoaded initial structure: {atoms.get_chemical_formula()}")
         
-        # 2. 添加质子
-        n_protons = 8  # 添加8个质子
+        # 3. Add protons
         atoms = md_system.add_protons(atoms, n_protons)
         
-        # 3. 保存掺H结构
+        # 4. Save hydrated structure
         hydrated_file = md_system.md_output_dir / f"{structure_file.stem}_H{n_protons}.vasp"
         write(str(hydrated_file), atoms, format='vasp')
         print(f"Saved hydrated structure to: {hydrated_file}")
         
-        # 4. 运行不同温度的MD模拟
+        # 5. Run MD simulations 
         temperatures = [500, 700, 1000]  # K
         trajectories = {}
         
         for temp in temperatures:
             print(f"\nRunning MD at {temp}K...")
             
-            # 创建特定温度的输出目录
+            # Create temperature directory
             temp_dir = md_system.md_output_dir / f"T_{temp}K"
             os.makedirs(temp_dir, exist_ok=True)
             
-            # 定义轨迹文件路径
+            # Define trajectory file
             traj_file = temp_dir / f"MD_{temp}K.traj"
             
             try:
-                # 运行MD
+                # Run MD simulation
                 traj_path = md_system.run_md(
                     structure_file=hydrated_file,
                     temperature=temp,
@@ -361,7 +391,7 @@ def main():
                 print(f"Completed MD at {temp}K")
                 print(f"Trajectory saved to: {traj_path}")
                 
-                # 保存最后一帧的结构
+                # Save final structure
                 final_structure = temp_dir / f"FINAL_POSCAR_{temp}K"
                 final_atoms = read(traj_path, index=-1)
                 write(str(final_structure), final_atoms, format='vasp')
@@ -370,8 +400,7 @@ def main():
             except Exception as e:
                 print(f"Error running MD at {temp}K: {str(e)}")
                 continue
-        
-        # 5. 打印总结
+
         print("\nMD Simulation Summary:")
         print("-" * 50)
         print(f"Initial structure: {structure_file}")
@@ -386,7 +415,6 @@ def main():
         raise
         
     finally:
-        # 保存配置信息
         config_info = {
             'structure_file': str(structure_file),
             'n_protons': n_protons,
@@ -398,8 +426,7 @@ def main():
                 'output_interval': md_system.output_interval
             }
         }
-        
-        import json
+    
         config_file = md_system.md_output_dir / 'md_config.json'
         with open(config_file, 'w') as f:
             json.dump(config_info, f, indent=4)
