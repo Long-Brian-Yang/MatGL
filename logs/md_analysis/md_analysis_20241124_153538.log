@@ -1,0 +1,30 @@
+2024-11-24 15:35:38,872 - INFO - Analysis initialized for Ba8Zr8O24_H8
+2024-11-24 15:35:38,872 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_analysis
+2024-11-24 15:35:38,872 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-24 15:35:38,879 - INFO - Loaded trajectory with 6 frames
+2024-11-24 15:35:38,880 - INFO - Analyzing trajectory at 500K
+2024-11-24 15:35:38,880 - INFO - Number of H atoms: 8
+2024-11-24 15:35:38,880 - INFO - Position array shape: (6, 8, 3)
+2024-11-24 15:35:38,880 - INFO - Number of analysis windows: -1
+2024-11-24 15:35:38,891 - ERROR - Error in MSD calculation: x and y must have same first dimension, but have shapes (1000,) and (1,)
+2024-11-24 15:35:38,891 - ERROR - Positions shape: (6, 8, 3)
+2024-11-24 15:35:38,891 - ERROR - Time array shape: (1000,)
+2024-11-24 15:35:38,891 - ERROR - Error analyzing 500K: x and y must have same first dimension, but have shapes (1000,) and (1,)
+2024-11-24 15:35:38,896 - INFO - Loaded trajectory with 6 frames
+2024-11-24 15:35:38,896 - INFO - Analyzing trajectory at 700K
+2024-11-24 15:35:38,896 - INFO - Number of H atoms: 8
+2024-11-24 15:35:38,896 - INFO - Position array shape: (6, 8, 3)
+2024-11-24 15:35:38,896 - INFO - Number of analysis windows: -1
+2024-11-24 15:35:38,959 - ERROR - Error in MSD calculation: x and y must have same first dimension, but have shapes (1000,) and (1,)
+2024-11-24 15:35:38,959 - ERROR - Positions shape: (6, 8, 3)
+2024-11-24 15:35:38,959 - ERROR - Time array shape: (1000,)
+2024-11-24 15:35:38,959 - ERROR - Error analyzing 700K: x and y must have same first dimension, but have shapes (1000,) and (1,)
+2024-11-24 15:35:38,963 - INFO - Loaded trajectory with 6 frames
+2024-11-24 15:35:38,964 - INFO - Analyzing trajectory at 1000K
+2024-11-24 15:35:38,964 - INFO - Number of H atoms: 8
+2024-11-24 15:35:38,964 - INFO - Position array shape: (6, 8, 3)
+2024-11-24 15:35:38,964 - INFO - Number of analysis windows: -1
+2024-11-24 15:35:38,968 - ERROR - Error in MSD calculation: x and y must have same first dimension, but have shapes (1000,) and (1,)
+2024-11-24 15:35:38,968 - ERROR - Positions shape: (6, 8, 3)
+2024-11-24 15:35:38,969 - ERROR - Time array shape: (1000,)
+2024-11-24 15:35:38,969 - ERROR - Error analyzing 1000K: x and y must have same first dimension, but have shapes (1000,) and (1,)

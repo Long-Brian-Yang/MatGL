@@ -1,0 +1,12 @@
+2024-11-24 15:31:28,639 - INFO - Analysis initialized for Ba8Zr8O24_H8
+2024-11-24 15:31:28,640 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_analysis
+2024-11-24 15:31:28,640 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-24 15:31:28,647 - INFO - Analyzing trajectory at 500K
+2024-11-24 15:31:28,647 - INFO - Number of H atoms: 8
+2024-11-24 15:31:28,660 - ERROR - Error analyzing 500K: x and y must have same first dimension, but have shapes (1000,) and (1,)
+2024-11-24 15:31:28,665 - INFO - Analyzing trajectory at 700K
+2024-11-24 15:31:28,665 - INFO - Number of H atoms: 8
+2024-11-24 15:31:28,740 - ERROR - Error analyzing 700K: x and y must have same first dimension, but have shapes (1000,) and (1,)
+2024-11-24 15:31:28,745 - INFO - Analyzing trajectory at 1000K
+2024-11-24 15:31:28,745 - INFO - Number of H atoms: 8
+2024-11-24 15:31:28,749 - ERROR - Error analyzing 1000K: x and y must have same first dimension, but have shapes (1000,) and (1,)

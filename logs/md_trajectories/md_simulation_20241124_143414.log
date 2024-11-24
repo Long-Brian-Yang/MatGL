@@ -1,0 +1,11 @@
+2024-11-24 14:34:14,586 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-24 14:34:14,586 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-24 14:34:14,586 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-24 14:34:14,586 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-24 14:34:15,331 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-24 14:34:15,337 - ERROR - Error loading structure from /Users/brian/Documents/matgl/data/structures/POSCAR: [Errno 2] No such file or directory: '/Users/brian/Documents/matgl/data/structures/POSCAR'
+2024-11-24 14:34:15,337 - ERROR - Error running MD at 800K: [Errno 2] No such file or directory: '/Users/brian/Documents/matgl/data/structures/POSCAR'
+2024-11-24 14:34:15,341 - ERROR - Error loading structure from /Users/brian/Documents/matgl/data/structures/POSCAR: [Errno 2] No such file or directory: '/Users/brian/Documents/matgl/data/structures/POSCAR'
+2024-11-24 14:34:15,341 - ERROR - Error running MD at 900K: [Errno 2] No such file or directory: '/Users/brian/Documents/matgl/data/structures/POSCAR'
+2024-11-24 14:34:15,346 - ERROR - Error loading structure from /Users/brian/Documents/matgl/data/structures/POSCAR: [Errno 2] No such file or directory: '/Users/brian/Documents/matgl/data/structures/POSCAR'
+2024-11-24 14:34:15,346 - ERROR - Error running MD at 1000K: [Errno 2] No such file or directory: '/Users/brian/Documents/matgl/data/structures/POSCAR'

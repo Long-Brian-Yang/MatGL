@@ -1,0 +1,5 @@
+2024-11-24 14:32:31,324 - INFO - Analysis initialized for Y-doped BaZrO3H
+2024-11-24 14:32:31,324 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_analysis
+2024-11-24 14:32:31,324 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-24 14:32:31,324 - WARNING - No trajectory files found in /Users/brian/Documents/matgl/logs/md_analysis
+2024-11-24 14:32:31,324 - ERROR - No temperatures to analyze

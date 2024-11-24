@@ -1,0 +1,6 @@
+2024-11-24 15:25:32,106 - INFO - Analysis initialized for Ba8Zr8O24_H8
+2024-11-24 15:25:32,106 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_analysis
+2024-11-24 15:25:32,106 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-24 15:25:32,106 - ERROR - Error analyzing 500K: Trajectory file not found: logs/md_trajectories/Ba8Zr8O24_H8/MD_0500.traj
+2024-11-24 15:25:32,106 - ERROR - Error analyzing 700K: Trajectory file not found: logs/md_trajectories/Ba8Zr8O24_H8/MD_0700.traj
+2024-11-24 15:25:32,106 - ERROR - Error analyzing 1000K: Trajectory file not found: logs/md_trajectories/Ba8Zr8O24_H8/MD_1000.traj

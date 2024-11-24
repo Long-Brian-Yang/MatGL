@@ -1,0 +1,21 @@
+2024-11-24 14:52:32,474 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-24 14:52:32,474 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-24 14:52:32,474 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-24 14:52:32,474 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-24 14:52:32,475 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-24 14:52:33,089 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-24 14:52:33,091 - INFO - Loaded structure from data/Ba8Zr8O24.vasp
+2024-11-24 14:52:33,091 - INFO - Structure composition: Ba8O24Zr8
+2024-11-24 14:52:33,094 - INFO - Starting MD at 500K for Ba8Zr8O24
+2024-11-24 14:52:33,094 - INFO - Total steps: 50, Output interval: 10
+2024-11-24 14:52:37,462 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24/MD_0500.traj
+2024-11-24 14:52:37,463 - INFO - Loaded structure from data/Ba8Zr8O24.vasp
+2024-11-24 14:52:37,463 - INFO - Structure composition: Ba8O24Zr8
+2024-11-24 14:52:37,464 - INFO - Starting MD at 700K for Ba8Zr8O24
+2024-11-24 14:52:37,464 - INFO - Total steps: 50, Output interval: 10
+2024-11-24 14:52:41,116 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24/MD_0700.traj
+2024-11-24 14:52:41,118 - INFO - Loaded structure from data/Ba8Zr8O24.vasp
+2024-11-24 14:52:41,118 - INFO - Structure composition: Ba8O24Zr8
+2024-11-24 14:52:41,119 - INFO - Starting MD at 1000K for Ba8Zr8O24
+2024-11-24 14:52:41,120 - INFO - Total steps: 50, Output interval: 10
+2024-11-24 14:52:45,030 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24/MD_1000.traj

@@ -257,7 +257,7 @@ def main():
     """
 
     paths = get_project_paths()
-    
+
     # Initialize the FineTuner with the working directory and configuration parameters
     trainer = FineTuner(
         working_dir=os.path.join(paths['output_dir']),
@@ -273,4 +273,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

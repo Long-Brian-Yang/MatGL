@@ -1,0 +1,36 @@
+2024-11-24 15:39:49,662 - INFO - Analysis initialized for Ba8Zr8O24_H8
+2024-11-24 15:39:49,662 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_analysis
+2024-11-24 15:39:49,662 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-24 15:39:49,670 - INFO - Loaded trajectory with 6 frames
+2024-11-24 15:39:49,670 - INFO - Adjusted window size: 5
+2024-11-24 15:39:49,670 - INFO - Adjusted shift time: 2
+2024-11-24 15:39:49,671 - INFO - Analyzing trajectory at 500K
+2024-11-24 15:39:49,671 - INFO - Number of H atoms: 8
+2024-11-24 15:39:49,671 - INFO - Position array shape: (6, 8, 3)
+2024-11-24 15:39:49,671 - INFO - Number of analysis windows: -1
+2024-11-24 15:39:49,682 - ERROR - Error in MSD calculation: x and y must have same first dimension, but have shapes (5,) and (1,)
+2024-11-24 15:39:49,682 - ERROR - Positions shape: (6, 8, 3)
+2024-11-24 15:39:49,682 - ERROR - Time array shape: (5,)
+2024-11-24 15:39:49,682 - ERROR - Error analyzing 500K: x and y must have same first dimension, but have shapes (5,) and (1,)
+2024-11-24 15:39:49,688 - INFO - Loaded trajectory with 6 frames
+2024-11-24 15:39:49,688 - INFO - Adjusted window size: 5
+2024-11-24 15:39:49,688 - INFO - Adjusted shift time: 2
+2024-11-24 15:39:49,688 - INFO - Analyzing trajectory at 700K
+2024-11-24 15:39:49,688 - INFO - Number of H atoms: 8
+2024-11-24 15:39:49,688 - INFO - Position array shape: (6, 8, 3)
+2024-11-24 15:39:49,688 - INFO - Number of analysis windows: -1
+2024-11-24 15:39:49,761 - ERROR - Error in MSD calculation: x and y must have same first dimension, but have shapes (5,) and (1,)
+2024-11-24 15:39:49,761 - ERROR - Positions shape: (6, 8, 3)
+2024-11-24 15:39:49,761 - ERROR - Time array shape: (5,)
+2024-11-24 15:39:49,761 - ERROR - Error analyzing 700K: x and y must have same first dimension, but have shapes (5,) and (1,)
+2024-11-24 15:39:49,767 - INFO - Loaded trajectory with 6 frames
+2024-11-24 15:39:49,767 - INFO - Adjusted window size: 5
+2024-11-24 15:39:49,767 - INFO - Adjusted shift time: 2
+2024-11-24 15:39:49,767 - INFO - Analyzing trajectory at 1000K
+2024-11-24 15:39:49,767 - INFO - Number of H atoms: 8
+2024-11-24 15:39:49,767 - INFO - Position array shape: (6, 8, 3)
+2024-11-24 15:39:49,767 - INFO - Number of analysis windows: -1
+2024-11-24 15:39:49,772 - ERROR - Error in MSD calculation: x and y must have same first dimension, but have shapes (5,) and (1,)
+2024-11-24 15:39:49,772 - ERROR - Positions shape: (6, 8, 3)
+2024-11-24 15:39:49,772 - ERROR - Time array shape: (5,)
+2024-11-24 15:39:49,772 - ERROR - Error analyzing 1000K: x and y must have same first dimension, but have shapes (5,) and (1,)
