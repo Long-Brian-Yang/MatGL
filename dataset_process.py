@@ -137,25 +137,25 @@ class DataProcessor:
         
         return train_loader, val_loader, test_loader
 
-def main():
-    """Test data processing pipeline."""
-    paths = get_project_paths()
+# def main():
+#     """Test data processing pipeline."""
+#     paths = get_project_paths()
     
-    config = {
-        'structures_dir': paths['structures_dir'],
-        'file_path': paths['file_path'],
-        'cutoff': 4.0,
-        'batch_size': 16,
-        'split_ratio': [0.5, 0.1, 0.4],
-        'random_state': 42
-    }
+#     config = {
+#         'structures_dir': paths['structures_dir'],
+#         'file_path': paths['file_path'],
+#         'cutoff': 4.0,
+#         'batch_size': 16,
+#         'split_ratio': [0.5, 0.1, 0.4],
+#         'random_state': 42
+#     }
     
-    processor = DataProcessor(config)
-    processor.load_data()
-    dataset = processor.create_dataset()
-    train_loader, val_loader, test_loader = processor.create_dataloaders()
+#     processor = DataProcessor(config)
+#     processor.load_data()
+#     dataset = processor.create_dataset()
+#     train_loader, val_loader, test_loader = processor.create_dataloaders()
     
-    print("Data processing completed successfully!")
+#     print("Data processing completed successfully!")
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
