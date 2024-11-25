@@ -98,7 +98,7 @@ class DataProcessor:
             cutoff=self.cutoff
         )
         
-        # Create dataset - 使用示例代码中的方式
+        # Create dataset
         self.dataset = MGLDataset(
             structures=self.structures,
             converter=converter,
