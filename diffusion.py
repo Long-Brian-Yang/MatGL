@@ -523,6 +523,7 @@ class MDAnalysisSystem:
 # if __name__ == "__main__":
 #     main()
 
+
 def main():
     """Analyze MD simulation results for Y-doped BaZrO3H."""
     # Get project paths
