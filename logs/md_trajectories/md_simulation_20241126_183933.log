@@ -1,0 +1,30 @@
+2024-11-26 18:39:33,261 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-26 18:39:33,262 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-26 18:39:33,262 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-26 18:39:33,262 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-26 18:39:33,262 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-26 18:39:33,782 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-26 18:39:33,784 - INFO - Added proton near O atom 16 at position: [ 2.096  2.096 -0.98 ]
+2024-11-26 18:39:33,784 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 18:39:33,784 - INFO - Added 1 protons forming OH groups
+2024-11-26 18:39:33,784 - INFO - New composition: HBa8O24Zr8
+2024-11-26 18:39:33,785 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-26 18:39:33,785 - INFO - Structure composition: HBa8O24Zr8
+2024-11-26 18:39:33,787 - INFO - Starting MD at 500K for Ba8Zr8O24_H1
+2024-11-26 18:39:33,787 - INFO - Total steps: 200, Output interval: 10
+2024-11-26 18:40:14,777 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_500K/MD_500K.traj
+2024-11-26 18:40:14,811 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-26 18:40:14,811 - INFO - Structure composition: HBa8O24Zr8
+2024-11-26 18:40:14,817 - INFO - Starting MD at 700K for Ba8Zr8O24_H1
+2024-11-26 18:40:14,817 - INFO - Total steps: 200, Output interval: 10
+2024-11-26 18:52:02,912 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_700K/MD_700K.traj
+2024-11-26 18:52:02,959 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-26 18:52:02,960 - INFO - Structure composition: HBa8O24Zr8
+2024-11-26 18:52:02,965 - INFO - Starting MD at 1000K for Ba8Zr8O24_H1
+2024-11-26 18:52:02,966 - INFO - Total steps: 200, Output interval: 10
+2024-11-26 18:54:19,913 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_1000K/MD_1000K.traj
+2024-11-26 18:54:19,950 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-26 18:54:19,951 - INFO - Structure composition: HBa8O24Zr8
+2024-11-26 18:54:19,955 - INFO - Starting MD at 1200K for Ba8Zr8O24_H1
+2024-11-26 18:54:19,955 - INFO - Total steps: 200, Output interval: 10
+2024-11-26 18:54:37,487 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_1200K/MD_1200K.traj

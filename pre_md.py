@@ -45,7 +45,7 @@ class MDSystem:
         model_name: str = "M3GNet-MP-2021.2.8-PES",
         time_step: float = 1.0,  # fs
         friction: float = 0.02,
-        total_steps: int = 100,
+        total_steps: int = 10000,
         output_interval: int = 100
     ):
         # Get paths and setup directories
@@ -120,6 +120,10 @@ class MDSystem:
         2. Björketun, M. E., et al., PRB (2005)
         3. Gomez, M. A., et al., SSI (2010)
         """
+        # Theoretical OH bond length (from Gomez et al.)
+        OH_BOND_LENGTH = 0.98  # Å
+        MAX_NEIGHBOR_DIST = 3.0  # Å for neighbor search
+
         # Find oxygen atoms
         o_indices = [i for i, symbol in enumerate(atoms.get_chemical_symbols())
                     if symbol == 'O']
@@ -128,11 +132,14 @@ class MDSystem:
             self.logger.warning(f"Number of protons ({n_protons}) exceeds number of O atoms ({len(o_indices)})")
             n_protons = len(o_indices)
         
-        # Theoretical OH bond length (from Gomez et al.)
-        OH_BOND_LENGTH = 0.98  # Å
-        
-        # Add protons near selected oxygen atoms
+        # Track used oxygen atoms
         used_oxygens = []
+        
+        # Get cell and PBC
+        cell = atoms.get_cell()
+        pbc = atoms.get_pbc()
+
+        # Add protons near selected oxygen atoms
         for i in range(n_protons):
             # Select oxygen atom that hasn't been used
             available_oxygens = [idx for idx in o_indices if idx not in used_oxygens]
@@ -142,46 +149,74 @@ class MDSystem:
                 
             o_idx = available_oxygens[0]
             used_oxygens.append(o_idx)
-            
             o_pos = atoms.positions[o_idx]
             
+            distances = []
+
             # Find neighboring oxygen atoms to determine optimal proton position
             neighbors = []
             for other_idx in o_indices:
                 if other_idx != o_idx:
-                    dist = atoms.get_distance(o_idx, other_idx)
-                    if dist < 3.0:  # Consider O atoms within 3 Å
-                        neighbors.append(atoms.positions[other_idx])
+                    dist = atoms.get_distance(o_idx, other_idx, mic=True)
+                    if dist < MAX_NEIGHBOR_DIST:
+                        vec = atoms.get_distance(o_idx, other_idx, vector=True, mic=True)
+                        neighbors.append({
+                            'idx': other_idx,
+                            'dist': dist,
+                            'vec': vec
+                        })
             
             # Calculate optimal proton position
+            direction = np.zeros(3)
             if neighbors:
-                # Avoid positioning proton towards other oxygen atoms
-                direction = np.zeros(3)
-                for neighbor in neighbors:
-                    vec = o_pos - neighbor
-                    vec = vec / np.linalg.norm(vec)
-                    direction += vec
-                
-                if np.any(direction):
+                for n in sorted(neighbors, key=lambda x: x['dist'])[:3]:
+                    weight = 1.0 / max(n['dist'], 0.1) 
+                    direction -= n['vec'] * weight 
+                    
+                if np.linalg.norm(direction) > 1e-6:
                     direction = direction / np.linalg.norm(direction)
                 else:
-                    direction = np.array([1, 0, 0])  # Default direction if no clear preference
+                    direction = np.array([0, 0, 1])  
             else:
-                direction = np.array([1, 0, 0])  # Default direction if no neighbors
-                
+                direction = np.array([0, 0, 1])  
+            
             # Calculate proton position
             h_pos = o_pos + direction * OH_BOND_LENGTH
             
+            min_allowed_dist = 0.8  # Å
+            for pos in atoms.positions:
+                dist = atoms.get_distance(-1, len(atoms)-1, mic=True)
+                if dist < min_allowed_dist:
+                    is_valid = False
+                    break
+            if any(pbc):
+                scaled_pos = np.linalg.solve(cell.T, h_pos.T).T
+                scaled_pos = scaled_pos % 1.0
+                h_pos = cell.T @ scaled_pos
+            
+            is_valid = True
+            for pos in atoms.positions:
+                dist = np.linalg.norm(h_pos - pos)
+                if dist < 0.5: 
+                    is_valid = False
+                    break
+
+            if not is_valid:
+                self.logger.warning(f"Invalid proton position near O atom {o_idx}, trying different direction")
+                continue
+
             # Add proton
             atoms.append(Atom('H', position=h_pos))
-            self.logger.info(f"Added proton near O atom {o_idx} at position: {h_pos}")
-            
+
             # Log OH bond length for verification
-            oh_dist = np.linalg.norm(h_pos - o_pos)
-            self.logger.info(f"Created OH bond with length: {oh_dist:.3f} Å")
+            oh_dist = atoms.get_distance(-1, o_idx, mic=True)
+            self.logger.info(f"Added proton {i+1}/{n_protons}:")
+            self.logger.info(f"  Near O atom: {o_idx}")
+            self.logger.info(f"  Position: {h_pos}")
+            self.logger.info(f"  OH distance: {oh_dist:.3f} Å")
         
-        self.logger.info(f"Added {n_protons} protons forming OH groups")
-        self.logger.info(f"New composition: {atoms.get_chemical_formula()}")
+        self.logger.info(f"Successfully added {n_protons} protons")
+        self.logger.info(f"Final composition: {atoms.get_chemical_formula()}")
         
         return atoms
     
@@ -335,7 +370,7 @@ def main():
         config=config,
         time_step=1.0,
         friction=0.02,
-        total_steps=50,  # 50 steps for testing
+        total_steps=100,  # 50 steps for testing
         output_interval=10
     )
     
@@ -344,12 +379,12 @@ def main():
         
     print(f"\nTesting with structure: {structure_file}")
     
-    # Test with single temperature
-    temperatures = [500, 700, 1000]  # K
+    # # Test with single temperature
+    # temperatures = [500, 700, 1000,1200]  # K
     
     try:
         # 1. Create material directory
-        n_protons = 8 # Number of protons to add
+        n_protons = 1 # Number of protons to add
         material_dir = md_system.md_output_dir / f"{structure_file.stem}_H{n_protons}"
         os.makedirs(material_dir, exist_ok=True)
 
@@ -366,25 +401,22 @@ def main():
         print(f"Saved hydrated structure to: {hydrated_file}")
         
         # 5. Run MD simulations 
-        temperatures = [500, 700, 1000]  # K
+        temperatures = [300,500,700,900,1200,1500]  # K
         trajectories = {}
         
         for temp in temperatures:
             print(f"\nRunning MD at {temp}K...")
             
             # Create temperature directory
-            temp_dir = md_system.md_output_dir / f"T_{temp}K"
+            temp_dir = material_dir / f"T_{temp}K"
             os.makedirs(temp_dir, exist_ok=True)
-            
-            # Define trajectory file
-            traj_file = temp_dir / f"MD_{temp}K.traj"
             
             try:
                 # Run MD simulation
                 traj_path = md_system.run_md(
                     structure_file=hydrated_file,
                     temperature=temp,
-                    traj_file=traj_file
+                    traj_file = temp_dir / f"MD_{temp}K.traj"
                 )
                 
                 trajectories[temp] = traj_path

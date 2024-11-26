@@ -118,7 +118,6 @@ class MDAnalysisSystem:
         
         if not traj_file.exists():
             raise FileNotFoundError(f"Trajectory file not found: {traj_file}")
-        
 
         # Read trajectory
         traj_list = read(traj_file, index=":")
@@ -154,11 +153,13 @@ class MDAnalysisSystem:
             
             # Calculate number of complete windows
             n_windows = max(1, (n_frames - adjusted_window_size) // adjusted_shift + 1)
+            
             self.logger.info(f"Number of analysis windows: {n_windows}")
 
             msd_windows = []
             diffusion_coefficients = []
-            time_array = np.arange(adjusted_window_size) * self.time_step
+            # fixed time array(fs->ps)
+            time_array = np.arange(adjusted_window_size) * self.time_step / 1000 
             
             for i in range(n_windows):
                 start_idx = i * adjusted_shift
@@ -170,33 +171,32 @@ class MDAnalysisSystem:
                 # Calculate MSD for this window
                 window_positions = positions[start_idx:end_idx]
                 ref_positions = window_positions[0]
-                displacements = window_positions - ref_positions
+                displacements = window_positions - ref_positions[np.newaxis, :, :]
+
+                squared_displacements = displacements**2
                 
                 # Calculate MSD components
-                msd_x = np.mean(displacements[..., 0]**2, axis=1)
-                msd_y = np.mean(displacements[..., 1]**2, axis=1)
-                msd_z = np.mean(displacements[..., 2]**2, axis=1)
-                msd_total = msd_x + msd_y + msd_z
-                
+                msd_components = {
+                    'x': np.mean(squared_displacements[..., 0], axis=1),
+                    'y': np.mean(squared_displacements[..., 1], axis=1),
+                    'z': np.mean(squared_displacements[..., 2], axis=1)
+                }
+                msd_total = np.mean(np.sum(squared_displacements, axis=2), axis=1)
+            
                 # Store results
                 msd_windows.append(msd_total)
                 
                 # Calculate diffusion coefficient
                 slope, intercept, r_value, p_value, std_err = stats.linregress(time_array, msd_total)
-                D = slope / 6  # Einstein relation
-                D_cm2_s = D * 1e-16 / 1e-12  # Convert to cm²/s
+                D = slope / 6  # Einstein relation in Å²/ps
+                D_cm2_s = D * 1e-4  # Convert to cm²/s (1e-16/1e-12 = 1e-4)
                 diffusion_coefficients.append(D_cm2_s)
                 
                 # Plot first window
                 if i == 0:
-                    msd_data = {
-                        'x': msd_x,
-                        'y': msd_y,
-                        'z': msd_z,
-                        'total': msd_total
-                    }
+                    msd_components['total'] = msd_total
                     self.plot_msd_components(
-                        time_array, msd_data, temperature,
+                        time_array, msd_components, temperature,
                         f"msd_components_{temperature}K.png"
                     )
             
@@ -226,7 +226,7 @@ class MDAnalysisSystem:
                 'log10_conductivity': np.log10(conductivity),
                 'volume_cm3': volume_cm3,
                 'n_carriers': len(atom_indices),
-                'msd_A2ps': avg_D * 6 * 1e16  # Convert back to Å²/ps for reporting
+                'msd_A2ps': avg_D * 6 * 1e4  # Convert back to Å²/ps for reporting
             }
             
             self.logger.info(f"Results for {temperature}K:")
@@ -264,7 +264,7 @@ class MDAnalysisSystem:
         """Calculate diffusion coefficient from MSD data."""
         slope, intercept, r_value, p_value, std_err = stats.linregress(time_array, msd)
         D_A2_ps = slope / 6  # Einstein relation
-        D_cm2_s = D_A2_ps * 1e-16 / 1e-12  # Convert to cm²/s
+        D_cm2_s = D_A2_ps * 1e-4  # Convert to cm²/s (1e-16/1e-12 = 1e-4)
         
         return {
             'D_A2_ps': D_A2_ps,
@@ -278,7 +278,13 @@ class MDAnalysisSystem:
     def calculate_conductivity(self, D_cm2_s: float, temperature: float, 
                              volume_cm3: float, n_carriers: int) -> float:
         """Calculate ionic conductivity using the Nernst-Einstein relation."""
-        sigma = (n_carriers * _e**2 * D_cm2_s) / (volume_cm3 * kB * temperature)
+        # Reference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7761793/
+        # σ = (N*e²*D)/(k_B*T)
+        e = 1.602176634e-19  # Elementary charge (C)
+        kb = 1.38064852e-23    # Boltzmann constant (J/K)
+        N = n_carriers / volume_cm3  # Carrier density (cm⁻³)
+        
+        sigma = (N * e * e * D_cm2_s) / (kb * temperature)  # S/cm
         return sigma
     
     def analyze_temperature_range(self, temperatures: list = None) -> pd.DataFrame:
@@ -373,8 +379,6 @@ class MDAnalysisSystem:
             dpi=300
         )
         plt.close()
-    
-    # ... [previous code remains the same until plot_arrhenius]
 
     def plot_arrhenius(self, df: pd.DataFrame, plot_type: str):
         """Create Arrhenius plot for either diffusion or conductivity."""
@@ -391,8 +395,9 @@ class MDAnalysisSystem:
             title = f'{self.structure_name} Conductivity Arrhenius Plot'
         
         # Calculate activation energy
-        slope, intercept, r_value, _, _ = stats.linregress(df['T_inverse'], y_data)
-        Ea = -slope * 1000 * np.log(10) * kB * 6.242e18  # Convert to eV
+        slope, intercept, r_value, p_value, std_err = stats.linregress(df['T_inverse'], y_data)
+        kb_ev = 8.617333262145e-5  # Boltzmann constant in eV/K
+        Ea = -slope * np.log(10) * kb_ev * 1000  # Convert to eV
         
         # Create main plot
         ax1.scatter(df['T_inverse'], y_data, color='black', s=100)
@@ -534,7 +539,7 @@ def main():
     }
     
     # Initialize analyzer
-    traj_dir = Path("logs/md_trajectories/Ba8Zr8O24_H8")
+    traj_dir = Path("logs/md_trajectories/Ba8Zr8O24_H1")
     
     analyzer = MDAnalysisSystem(
         config=config,

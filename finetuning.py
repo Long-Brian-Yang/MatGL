@@ -56,7 +56,7 @@ class FineTuner:
         # Training configuration with default values
         self.config = {
             'batch_size': kwargs.get('batch_size', 32),
-            'num_epochs': kwargs.get('num_epochs', 2),
+            'num_epochs': kwargs.get('num_epochs', 100),
             'learning_rate': kwargs.get('learning_rate', 1e-4),
             'accelerator': kwargs.get('accelerator', 'cpu'),
             'split_ratio': kwargs.get('split_ratio', [0.6, 0.1, 0.3]),
@@ -261,7 +261,7 @@ def main():
     # Initialize the FineTuner with the working directory and configuration parameters
     trainer = FineTuner(
         working_dir=os.path.join(paths['output_dir']),
-        num_epochs=2,
+        num_epochs=100,
         learning_rate=1e-4,
         batch_size=32,
         split_ratio=[0.6, 0.1, 0.3],

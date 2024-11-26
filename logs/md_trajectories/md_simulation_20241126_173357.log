@@ -1,0 +1,39 @@
+2024-11-26 17:33:57,685 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-26 17:33:57,685 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-26 17:33:57,686 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-26 17:33:57,686 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-26 17:33:57,686 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-26 17:33:58,232 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-26 17:33:58,234 - INFO - Added proton near O atom 16 at position: [ 2.096  2.096 -0.98 ]
+2024-11-26 17:33:58,234 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 17:33:58,235 - INFO - Added proton near O atom 17 at position: [3.076 2.096 4.192]
+2024-11-26 17:33:58,235 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 17:33:58,235 - INFO - Added proton near O atom 18 at position: [ 2.096       6.59790321 -0.92970963]
+2024-11-26 17:33:58,235 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 17:33:58,235 - INFO - Added proton near O atom 19 at position: [2.096 7.268 4.192]
+2024-11-26 17:33:58,236 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 17:33:58,236 - INFO - Added proton near O atom 20 at position: [ 6.59790321  2.096      -0.92970963]
+2024-11-26 17:33:58,236 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 17:33:58,236 - INFO - Added proton near O atom 21 at position: [7.268 2.096 4.192]
+2024-11-26 17:33:58,236 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 17:33:58,237 - INFO - Added proton near O atom 22 at position: [ 6.68808332  6.68808332 -0.80016665]
+2024-11-26 17:33:58,237 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 17:33:58,237 - INFO - Added proton near O atom 23 at position: [6.98096465 6.98096465 4.192     ]
+2024-11-26 17:33:58,237 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 17:33:58,237 - INFO - Added 8 protons forming OH groups
+2024-11-26 17:33:58,237 - INFO - New composition: H8Ba8O24Zr8
+2024-11-26 17:33:58,239 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H8.vasp
+2024-11-26 17:33:58,239 - INFO - Structure composition: H8Ba8O24Zr8
+2024-11-26 17:33:58,241 - INFO - Starting MD at 500K for Ba8Zr8O24_H8
+2024-11-26 17:33:58,241 - INFO - Total steps: 100, Output interval: 10
+2024-11-26 17:34:21,558 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H8/T_500K/MD_500K.traj
+2024-11-26 17:34:21,573 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H8.vasp
+2024-11-26 17:34:21,573 - INFO - Structure composition: H8Ba8O24Zr8
+2024-11-26 17:34:21,574 - INFO - Starting MD at 700K for Ba8Zr8O24_H8
+2024-11-26 17:34:21,574 - INFO - Total steps: 100, Output interval: 10
+2024-11-26 17:34:37,077 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H8/T_700K/MD_700K.traj
+2024-11-26 17:34:37,090 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H8.vasp
+2024-11-26 17:34:37,091 - INFO - Structure composition: H8Ba8O24Zr8
+2024-11-26 17:34:37,092 - INFO - Starting MD at 1000K for Ba8Zr8O24_H8
+2024-11-26 17:34:37,092 - INFO - Total steps: 100, Output interval: 10
+2024-11-26 17:34:58,645 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H8/T_1000K/MD_1000K.traj

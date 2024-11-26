@@ -1,0 +1,14 @@
+2024-11-26 21:29:37,355 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-26 21:29:37,355 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-26 21:29:37,356 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-26 21:29:37,356 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-26 21:29:37,356 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-26 21:29:37,894 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-26 21:29:37,905 - INFO - Added proton near O atom 16 at position: [ 2.096  2.096 -0.98 ]
+2024-11-26 21:29:37,906 - INFO - Created OH bond with length: 0.980 Å
+2024-11-26 21:29:37,906 - INFO - Added 1 protons forming OH groups
+2024-11-26 21:29:37,907 - INFO - New composition: HBa8O24Zr8
+2024-11-26 21:29:37,912 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-26 21:29:37,912 - INFO - Structure composition: HBa8O24Zr8
+2024-11-26 21:29:37,936 - INFO - Starting MD at 700K for Ba8Zr8O24_H1
+2024-11-26 21:29:37,936 - INFO - Total steps: 10000, Output interval: 100
