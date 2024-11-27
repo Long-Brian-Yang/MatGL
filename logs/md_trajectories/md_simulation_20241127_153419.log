@@ -1,0 +1,21 @@
+2024-11-27 15:34:19,110 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-27 15:34:19,110 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-27 15:34:19,110 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-27 15:34:19,110 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-27 15:34:19,110 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-27 15:34:19,944 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-27 15:34:19,954 - INFO - Added proton 1/1:
+2024-11-27 15:34:19,955 - INFO -   Near O atom: 16
+2024-11-27 15:34:19,955 - INFO -   Position: [2.096      2.78896465 7.69103535]
+2024-11-27 15:34:19,955 - INFO -   OH distance: 0.980 Å
+2024-11-27 15:34:19,955 - INFO - Successfully added 1 protons
+2024-11-27 15:34:19,955 - INFO - Final composition: HBa8O24Zr8
+2024-11-27 15:34:19,957 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-27 15:34:19,957 - INFO - Structure composition: HBa8O24Zr8
+2024-11-27 15:34:19,960 - INFO - Starting MD at 400K for Ba8Zr8O24_H1
+2024-11-27 15:34:19,960 - INFO - Total steps: 20000, Output interval: 50
+2024-11-27 15:35:46,722 - INFO - Step 1000/20000, Temperature: 374.3K
+2024-11-27 15:37:17,414 - INFO - Step 2000/20000, Temperature: 370.6K
+2024-11-27 15:38:57,220 - INFO - Step 3000/20000, Temperature: 418.6K
+2024-11-27 15:40:32,241 - INFO - Step 4000/20000, Temperature: 445.0K
+2024-11-27 15:42:10,228 - INFO - Step 5000/20000, Temperature: 313.6K

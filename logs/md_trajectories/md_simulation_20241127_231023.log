@@ -1,0 +1,13 @@
+2024-11-27 23:10:23,745 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-27 23:10:23,746 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-27 23:10:24,238 - INFO - Successfully loaded model
+2024-11-27 23:10:24,245 - INFO - Added proton 1/1:
+2024-11-27 23:10:24,245 - INFO -   Near O atom: 16
+2024-11-27 23:10:24,246 - INFO -   Position: [2.096      2.78896465 7.69103535]
+2024-11-27 23:10:24,246 - INFO -   OH distance: 0.980 Å
+2024-11-27 23:10:24,246 - INFO - Successfully added 1 protons
+2024-11-27 23:10:24,246 - INFO - Final composition: HBa8O24Zr8
+2024-11-27 23:10:24,247 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-27 23:10:24,247 - INFO - Structure composition: HBa8O24Zr8
+2024-11-27 23:10:24,248 - INFO - Starting MD at 800K for Ba8Zr8O24_H1
+2024-11-27 23:10:24,248 - INFO - Total steps: 20000, Output interval: 50

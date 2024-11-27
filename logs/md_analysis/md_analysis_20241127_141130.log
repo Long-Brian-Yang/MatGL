@@ -1,0 +1,38 @@
+2024-11-27 14:11:30,308 - INFO - Analysis initialized for Ba8Zr8O24_H2
+2024-11-27 14:11:30,308 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_analysis
+2024-11-27 14:11:30,309 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-27 14:11:30,389 - INFO - Loaded trajectory with 41 frames
+2024-11-27 14:11:30,389 - INFO - Adjusted window size: 40
+2024-11-27 14:11:30,389 - INFO - Adjusted shift time: 20
+2024-11-27 14:11:30,390 - INFO - Analyzing trajectory at 700K
+2024-11-27 14:11:30,391 - INFO - Number of H atoms: 2
+2024-11-27 14:11:30,391 - INFO - Position array shape: (41, 2, 3)
+2024-11-27 14:11:30,391 - INFO - Number of analysis windows: 1
+2024-11-27 14:11:32,549 - INFO - Results for 700K:
+2024-11-27 14:11:32,550 - INFO - MSD: 88.3176 Å²/ps
+2024-11-27 14:11:32,550 - INFO - Diffusion coefficient: 1.47e-03 ± 0.00e+00 cm²/s
+2024-11-27 14:11:32,550 - INFO - Conductivity: 1.33e+01 S/cm
+2024-11-27 14:11:32,567 - INFO - Loaded trajectory with 41 frames
+2024-11-27 14:11:32,567 - INFO - Adjusted window size: 40
+2024-11-27 14:11:32,567 - INFO - Adjusted shift time: 20
+2024-11-27 14:11:32,568 - INFO - Analyzing trajectory at 1000K
+2024-11-27 14:11:32,568 - INFO - Number of H atoms: 2
+2024-11-27 14:11:32,568 - INFO - Position array shape: (41, 2, 3)
+2024-11-27 14:11:32,568 - INFO - Number of analysis windows: 1
+2024-11-27 14:11:34,652 - INFO - Results for 1000K:
+2024-11-27 14:11:34,653 - INFO - MSD: 1115.9331 Å²/ps
+2024-11-27 14:11:34,653 - INFO - Diffusion coefficient: 1.86e-02 ± 0.00e+00 cm²/s
+2024-11-27 14:11:34,653 - INFO - Conductivity: 1.17e+02 S/cm
+2024-11-27 14:11:34,677 - INFO - Loaded trajectory with 41 frames
+2024-11-27 14:11:34,678 - INFO - Adjusted window size: 40
+2024-11-27 14:11:34,678 - INFO - Adjusted shift time: 20
+2024-11-27 14:11:34,678 - INFO - Analyzing trajectory at 1200K
+2024-11-27 14:11:34,678 - INFO - Number of H atoms: 2
+2024-11-27 14:11:34,679 - INFO - Position array shape: (41, 2, 3)
+2024-11-27 14:11:34,679 - INFO - Number of analysis windows: 1
+2024-11-27 14:11:36,629 - INFO - Results for 1200K:
+2024-11-27 14:11:36,630 - INFO - MSD: 379.8663 Å²/ps
+2024-11-27 14:11:36,630 - INFO - Diffusion coefficient: 6.33e-03 ± 0.00e+00 cm²/s
+2024-11-27 14:11:36,630 - INFO - Conductivity: 3.33e+01 S/cm
+2024-11-27 14:11:36,639 - INFO - Results saved to logs/md_trajectories/Ba8Zr8O24_H2/md_analysis_results.csv
+2024-11-27 14:11:38,772 - INFO - Activation Energy: 1688383186354382848.00 eV

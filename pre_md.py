@@ -45,8 +45,8 @@ class MDSystem:
         model_name: str = "M3GNet-MP-2021.2.8-PES",
         time_step: float = 1.0,  # fs
         friction: float = 0.02,
-        total_steps: int = 10000,
-        output_interval: int = 100
+        total_steps: int = 20000,
+        output_interval: int = 50
     ):
         # Get paths and setup directories
         self.paths = get_project_paths()
@@ -165,7 +165,7 @@ class MDSystem:
                             'dist': dist,
                             'vec': vec
                         })
-            
+
             # Calculate optimal proton position
             direction = np.zeros(3)
             if neighbors:
@@ -179,10 +179,10 @@ class MDSystem:
                     direction = np.array([0, 0, 1])  
             else:
                 direction = np.array([0, 0, 1])  
-            
+
             # Calculate proton position
             h_pos = o_pos + direction * OH_BOND_LENGTH
-            
+
             min_allowed_dist = 0.8  # Å
             for pos in atoms.positions:
                 dist = atoms.get_distance(-1, len(atoms)-1, mic=True)
@@ -193,7 +193,7 @@ class MDSystem:
                 scaled_pos = np.linalg.solve(cell.T, h_pos.T).T
                 scaled_pos = scaled_pos % 1.0
                 h_pos = cell.T @ scaled_pos
-            
+
             is_valid = True
             for pos in atoms.positions:
                 dist = np.linalg.norm(h_pos - pos)
@@ -214,12 +214,12 @@ class MDSystem:
             self.logger.info(f"  Near O atom: {o_idx}")
             self.logger.info(f"  Position: {h_pos}")
             self.logger.info(f"  OH distance: {oh_dist:.3f} Å")
-        
+
         self.logger.info(f"Successfully added {n_protons} protons")
         self.logger.info(f"Final composition: {atoms.get_chemical_formula()}")
-        
+
         return atoms
-    
+
     def run_md(
         self,
         structure_file: Path,
@@ -233,22 +233,22 @@ class MDSystem:
         struct_name = structure_file.stem
         struct_output_dir = self.md_output_dir / struct_name
         os.makedirs(struct_output_dir, exist_ok=True)
-        
+
         # Read structure using ASE's VASP reader
         try:
             atoms = read_vasp(str(structure_file))
             atoms.calc = self.calculator
-            
+
             self.logger.info(f"Loaded structure from {structure_file}")
             self.logger.info(f"Structure composition: {atoms.get_chemical_formula()}")
-            
+
         except Exception as e:
             self.logger.error(f"Error loading structure from {structure_file}: {e}")
             raise
-        
+
         # Initialize velocities
         MaxwellBoltzmannDistribution(atoms, temperature_K=temperature)
-        
+
         # Setup Langevin dynamics
         dyn = Langevin(
             atoms,
@@ -256,30 +256,31 @@ class MDSystem:
             temperature_K=temperature,
             friction=self.friction
         )
-        
+
         # Setup trajectory file
         if traj_file is None:
             traj_file = struct_output_dir / f"MD_{int(temperature):04d}.traj"
         traj = Trajectory(str(traj_file), 'w', atoms)
         dyn.attach(traj.write, interval=self.output_interval)
-        
+
         # Run MD
         self.logger.info(f"Starting MD at {temperature}K for {struct_name}")
         self.logger.info(f"Total steps: {self.total_steps}, Output interval: {self.output_interval}")
-        
+
         for step in range(1, self.total_steps + 1):
             dyn.run(1)
             if step % 1000 == 0:
                 temp = atoms.get_temperature()
                 self.logger.info(f"Step {step}/{self.total_steps}, Temperature: {temp:.1f}K")
-                
+
                 # Save current state as VASP format
                 checkpoint_file = struct_output_dir / f"POSCAR_checkpoint_{step}"
                 write(str(checkpoint_file), atoms, format='vasp')
-        
+
         self.logger.info(f"MD simulation completed. Trajectory saved to {traj_file}")
+
         return str(traj_file)
-    
+
     def run_temperature_range(
         self,
         structure_files: List[Path] = None,
@@ -288,11 +289,11 @@ class MDSystem:
         """Run MD simulations for multiple structures at different temperatures."""
         if structure_files is None:
             structure_files = self.find_vasp_files()
-        
+
         if not structure_files:
             self.logger.error("No structure files found")
             return {}
-            
+   
         if temperatures is None:
             temperatures = [500, 700, 1000]  # default temperatures
         
@@ -307,7 +308,7 @@ class MDSystem:
                     results[struct_name][temp] = traj_file
                 except Exception as e:
                     self.logger.error(f"Error running MD for {struct_name} at {temp}K: {str(e)}")
-        
+
         return results
 
 # def main():
@@ -354,34 +355,34 @@ def main():
     """Test MD simulation with specific structure."""
     # Get project paths
     paths = get_project_paths()
-    
+
     # Setup configuration
     config = {
         'structures_dir': paths['structures_dir'],
         'file_path': paths['file_path'],
         'cutoff': 4.0,
         'batch_size': 16,
-        'split_ratio': [0.5, 0.1, 0.4],
+        'split_ratio': [0.7, 0.1, 0.2],
         'random_state': 42
     }
-    
+
     # Initialize MD system
     md_system = MDSystem(
         config=config,
         time_step=1.0,
         friction=0.02,
-        total_steps=100,  # 50 steps for testing
-        output_interval=10
+        total_steps=20000,  # 50 steps for testing
+        output_interval=50
     )
-    
+
     # Test with specific structure
     structure_file = Path("data/Ba8Zr8O24.vasp")
-        
+
     print(f"\nTesting with structure: {structure_file}")
-    
+
     # # Test with single temperature
     # temperatures = [500, 700, 1000,1200]  # K
-    
+
     try:
         # 1. Create material directory
         n_protons = 1 # Number of protons to add
@@ -391,19 +392,19 @@ def main():
         # 2. Load initial structure
         atoms = read_vasp(str(structure_file))
         print(f"\nLoaded initial structure: {atoms.get_chemical_formula()}")
-        
+
         # 3. Add protons
         atoms = md_system.add_protons(atoms, n_protons)
-        
+
         # 4. Save hydrated structure
         hydrated_file = md_system.md_output_dir / f"{structure_file.stem}_H{n_protons}.vasp"
         write(str(hydrated_file), atoms, format='vasp')
         print(f"Saved hydrated structure to: {hydrated_file}")
-        
+
         # 5. Run MD simulations 
-        temperatures = [300,500,700,900,1200,1500]  # K
+        temperatures = [800]  # K
         trajectories = {}
-        
+
         for temp in temperatures:
             print(f"\nRunning MD at {temp}K...")
             

@@ -1,0 +1,57 @@
+2024-11-27 14:29:03,777 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-27 14:29:03,777 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-27 14:29:03,777 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-27 14:29:03,777 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-27 14:29:03,777 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-27 14:29:04,307 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-27 14:29:04,313 - INFO - Added proton 1/1:
+2024-11-27 14:29:04,313 - INFO -   Near O atom: 16
+2024-11-27 14:29:04,314 - INFO -   Position: [2.096      2.78896465 7.69103535]
+2024-11-27 14:29:04,314 - INFO -   OH distance: 0.980 Å
+2024-11-27 14:29:04,314 - INFO - Successfully added 1 protons
+2024-11-27 14:29:04,314 - INFO - Final composition: HBa8O24Zr8
+2024-11-27 14:29:04,316 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-27 14:29:04,316 - INFO - Structure composition: HBa8O24Zr8
+2024-11-27 14:29:04,317 - INFO - Starting MD at 700K for Ba8Zr8O24_H1
+2024-11-27 14:29:04,317 - INFO - Total steps: 10000, Output interval: 50
+2024-11-27 14:30:30,349 - INFO - Step 1000/10000, Temperature: 685.6K
+2024-11-27 14:32:06,812 - INFO - Step 2000/10000, Temperature: 677.7K
+2024-11-27 14:34:08,781 - INFO - Step 3000/10000, Temperature: 769.4K
+2024-11-27 14:35:43,979 - INFO - Step 4000/10000, Temperature: 767.8K
+2024-11-27 14:37:10,237 - INFO - Step 5000/10000, Temperature: 672.9K
+2024-11-27 14:38:34,517 - INFO - Step 6000/10000, Temperature: 540.0K
+2024-11-27 14:40:10,094 - INFO - Step 7000/10000, Temperature: 781.7K
+2024-11-27 14:41:42,075 - INFO - Step 8000/10000, Temperature: 780.2K
+2024-11-27 14:43:06,457 - INFO - Step 9000/10000, Temperature: 745.5K
+2024-11-27 14:44:30,033 - INFO - Step 10000/10000, Temperature: 652.0K
+2024-11-27 14:44:30,038 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_700K/MD_700K.traj
+2024-11-27 14:44:30,059 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-27 14:44:30,059 - INFO - Structure composition: HBa8O24Zr8
+2024-11-27 14:44:30,060 - INFO - Starting MD at 1000K for Ba8Zr8O24_H1
+2024-11-27 14:44:30,060 - INFO - Total steps: 10000, Output interval: 50
+2024-11-27 14:46:05,254 - INFO - Step 1000/10000, Temperature: 1046.3K
+2024-11-27 14:47:56,310 - INFO - Step 2000/10000, Temperature: 1043.0K
+2024-11-27 14:49:37,698 - INFO - Step 3000/10000, Temperature: 1222.0K
+2024-11-27 14:51:13,472 - INFO - Step 4000/10000, Temperature: 860.1K
+2024-11-27 14:52:48,396 - INFO - Step 5000/10000, Temperature: 1019.6K
+2024-11-27 14:54:35,795 - INFO - Step 6000/10000, Temperature: 1188.2K
+2024-11-27 14:56:16,842 - INFO - Step 7000/10000, Temperature: 1183.6K
+2024-11-27 14:57:56,001 - INFO - Step 8000/10000, Temperature: 927.7K
+2024-11-27 14:59:38,369 - INFO - Step 9000/10000, Temperature: 1116.2K
+2024-11-27 15:01:23,610 - INFO - Step 10000/10000, Temperature: 997.4K
+2024-11-27 15:01:23,616 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_1000K/MD_1000K.traj
+2024-11-27 15:01:23,644 - INFO - Loaded structure from /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1.vasp
+2024-11-27 15:01:23,645 - INFO - Structure composition: HBa8O24Zr8
+2024-11-27 15:01:23,648 - INFO - Starting MD at 1300K for Ba8Zr8O24_H1
+2024-11-27 15:01:23,648 - INFO - Total steps: 10000, Output interval: 50
+2024-11-27 15:03:03,101 - INFO - Step 1000/10000, Temperature: 1313.9K
+2024-11-27 15:04:46,016 - INFO - Step 2000/10000, Temperature: 1282.3K
+2024-11-27 15:06:16,145 - INFO - Step 3000/10000, Temperature: 1274.5K
+2024-11-27 15:07:45,171 - INFO - Step 4000/10000, Temperature: 1497.6K
+2024-11-27 15:09:28,578 - INFO - Step 5000/10000, Temperature: 1449.8K
+2024-11-27 15:11:19,192 - INFO - Step 6000/10000, Temperature: 1225.0K
+2024-11-27 15:13:08,730 - INFO - Step 7000/10000, Temperature: 1167.6K
+2024-11-27 15:14:55,280 - INFO - Step 8000/10000, Temperature: 1483.4K
+2024-11-27 15:16:29,083 - INFO - Step 9000/10000, Temperature: 1494.6K
+2024-11-27 15:17:56,096 - INFO - Step 10000/10000, Temperature: 1364.0K
+2024-11-27 15:17:56,100 - INFO - MD simulation completed. Trajectory saved to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_1300K/MD_1300K.traj
