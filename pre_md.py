@@ -5,7 +5,7 @@ import logging
 import numpy as np
 from pathlib import Path
 from datetime import datetime
-from typing import Optional, List, Dict
+from typing import List, Dict
 from ase import Atoms
 from ase.io import read, write, Trajectory
 from ase.io.vasp import read_vasp
@@ -15,30 +15,11 @@ from ase.units import fs
 from ase import Atom
 import matgl
 from matgl.ext.ase import PESCalculator
-from pymatgen.core import Structure
-from pymatgen.io.vasp import Poscar
 from pymatgen.io.ase import AseAtomsAdaptor
 from dataset_process import get_project_paths, DataProcessor
 
+
 class MDSystem:
-    """
-    Run molecular dynamics simulations using M3GNet potential.
-    
-    Args:
-        config (dict): Configuration containing:
-            - structures_dir: Path to structure files
-            - file_path: Path to data list
-            - cutoff: Cutoff radius for graphs
-            - batch_size: Batch size for loading
-            - split_ratio: Train/val/test split
-            - random_state: Random seed
-        model_name (str): Name of the M3GNet potential model
-        time_step (float): Time step for MD simulation in fs
-        friction (float): Friction coefficient for Langevin dynamics
-        total_steps (int): Total number of MD steps
-        output_interval (int): Interval for saving trajectory frames
-    """
-    
     def __init__(
         self,
         config: dict,
@@ -53,34 +34,35 @@ class MDSystem:
         self.structures_dir = Path(self.paths['structures_dir'])
         self.output_dir = Path(self.paths['output_dir'])
         self.md_output_dir = self.output_dir / 'md_trajectories'
-        
+
         # Configuration
         self.config = config
         self.time_step = time_step
         self.friction = friction
         self.total_steps = total_steps
         self.output_interval = output_interval
-        
+
         # Setup environment and logging
         self.setup_environment()
-        
+
         # Initialize potential and calculator
         self.potential = matgl.load_model(model_name)
         self.calculator = PESCalculator(self.potential)
         self.logger.info(f"Loaded potential model: {model_name}")
-        
+
         # Initialize data processor
         self.data_processor = DataProcessor(config)
-        
+
         # Structure handlers
         self.atoms_adaptor = AseAtomsAdaptor()
-    
+
     def setup_environment(self):
         """Setup logging and directories."""
         os.makedirs(self.md_output_dir, exist_ok=True)
-        
+
         # Setup logging
-        log_file = self.md_output_dir / f"md_simulation_{datetime.now():%Y%m%d_%H%M%S}.log"
+        log_file = self.md_output_dir / \
+            f"md_simulation_{datetime.now():%Y%m%d_%H%M%S}.log"
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(message)s',
@@ -92,33 +74,25 @@ class MDSystem:
         self.logger = logging.getLogger("main")
         self.logger.info(f"Working directory: {self.md_output_dir}")
         self.logger.info(f"Structures directory: {self.structures_dir}")
-    
+
     def find_vasp_files(self) -> List[Path]:
         """Find all .vasp files in structures directory."""
         vasp_files = list(self.structures_dir.glob("**/*.vasp"))
-        if not vasp_files:
-            self.logger.warning(f"No .vasp files found in {self.structures_dir}")
-        else:
-            self.logger.info(f"Found {len(vasp_files)} .vasp files")
-            for f in vasp_files:
-                self.logger.info(f"Found structure file: {f}")
+        self.logger.info(f"Found {len(vasp_files)} .vasp files")
+        for f in vasp_files:
+            self.logger.info(f"Found structure file: {f}")
         return vasp_files
-    
+
     def add_protons(self, atoms: Atoms, n_protons: int) -> Atoms:
         """
-        Add protons to the structure based on theoretical understanding.
-        
+        Add protons to the structure near oxygen atoms.
+
         Args:
-            atoms (Atoms): Initial structure
+            atoms (Atoms): Input structure
             n_protons (int): Number of protons to add
-        
+
         Returns:
             Atoms: Structure with protons added
-
-        References:
-        1. Kreuer, K. D., Solid State Ionics (1999)
-        2. Björketun, M. E., et al., PRB (2005)
-        3. Gomez, M. A., et al., SSI (2010)
         """
         # Theoretical OH bond length (from Gomez et al.)
         OH_BOND_LENGTH = 0.98  # Å
@@ -126,15 +100,16 @@ class MDSystem:
 
         # Find oxygen atoms
         o_indices = [i for i, symbol in enumerate(atoms.get_chemical_symbols())
-                    if symbol == 'O']
-        
+                     if symbol == 'O']
+
         if len(o_indices) < n_protons:
-            self.logger.warning(f"Number of protons ({n_protons}) exceeds number of O atoms ({len(o_indices)})")
+            self.logger.warning(
+                f"Number of protons ({n_protons}) exceeds number of O atoms ({len(o_indices)})")
             n_protons = len(o_indices)
-        
+
         # Track used oxygen atoms
         used_oxygens = []
-        
+
         # Get cell and PBC
         cell = atoms.get_cell()
         pbc = atoms.get_pbc()
@@ -142,24 +117,25 @@ class MDSystem:
         # Add protons near selected oxygen atoms
         for i in range(n_protons):
             # Select oxygen atom that hasn't been used
-            available_oxygens = [idx for idx in o_indices if idx not in used_oxygens]
+            available_oxygens = [
+                idx for idx in o_indices if idx not in used_oxygens]
             if not available_oxygens:
-                self.logger.warning("No more available oxygen atoms for proton incorporation")
+                self.logger.warning(
+                    "No more available oxygen atoms for proton incorporation")
                 break
-                
+
             o_idx = available_oxygens[0]
             used_oxygens.append(o_idx)
             o_pos = atoms.positions[o_idx]
-            
-            distances = []
 
-            # Find neighboring oxygen atoms to determine optimal proton position
+            # Find neighboring oxygen atoms to determine optimal proton
             neighbors = []
             for other_idx in o_indices:
                 if other_idx != o_idx:
                     dist = atoms.get_distance(o_idx, other_idx, mic=True)
                     if dist < MAX_NEIGHBOR_DIST:
-                        vec = atoms.get_distance(o_idx, other_idx, vector=True, mic=True)
+                        vec = atoms.get_distance(
+                            o_idx, other_idx, vector=True, mic=True)
                         neighbors.append({
                             'idx': other_idx,
                             'dist': dist,
@@ -170,22 +146,22 @@ class MDSystem:
             direction = np.zeros(3)
             if neighbors:
                 for n in sorted(neighbors, key=lambda x: x['dist'])[:3]:
-                    weight = 1.0 / max(n['dist'], 0.1) 
-                    direction -= n['vec'] * weight 
-                    
+                    weight = 1.0 / max(n['dist'], 0.1)
+                    direction -= n['vec'] * weight
+
                 if np.linalg.norm(direction) > 1e-6:
                     direction = direction / np.linalg.norm(direction)
                 else:
-                    direction = np.array([0, 0, 1])  
+                    direction = np.array([0, 0, 1])
             else:
-                direction = np.array([0, 0, 1])  
+                direction = np.array([0, 0, 1])
 
             # Calculate proton position
             h_pos = o_pos + direction * OH_BOND_LENGTH
 
             min_allowed_dist = 0.8  # Å
             for pos in atoms.positions:
-                dist = atoms.get_distance(-1, len(atoms)-1, mic=True)
+                dist = atoms.get_distance(-1, len(atoms) - 1, mic=True)
                 if dist < min_allowed_dist:
                     is_valid = False
                     break
@@ -197,12 +173,13 @@ class MDSystem:
             is_valid = True
             for pos in atoms.positions:
                 dist = np.linalg.norm(h_pos - pos)
-                if dist < 0.5: 
+                if dist < 0.5:
                     is_valid = False
                     break
 
             if not is_valid:
-                self.logger.warning(f"Invalid proton position near O atom {o_idx}, trying different direction")
+                self.logger.warning(
+                    f"Invalid proton position near O atom {o_idx}, trying different direction")
                 continue
 
             # Add proton
@@ -223,247 +200,157 @@ class MDSystem:
     def run_md(
         self,
         structure_file: Path,
-        temperature: float,
-        traj_file: Optional[Path] = None
-    ) -> str:
+        n_protons: int,
+        temperatures: List[float]
+    ) -> Dict[float, str]:
         """
-        Run MD simulation for given structure and temperature.
+        Run molecular dynamics simulation for a structure with protons at multiple temperatures.
+
+        Args:
+            structure_file (Path): Path to the structure file
+            n_protons (int): Number of protons to add
+            temperatures (List[float]): List of temperatures (K) for simulation
+
+        Returns:
+            Dict[float, str]: Dictionary mapping temperatures to trajectory file paths
         """
-        # Create output directory for this structure
-        struct_name = structure_file.stem
-        struct_output_dir = self.md_output_dir / struct_name
-        os.makedirs(struct_output_dir, exist_ok=True)
-
-        # Read structure using ASE's VASP reader
-        try:
-            atoms = read_vasp(str(structure_file))
-            atoms.calc = self.calculator
-
-            self.logger.info(f"Loaded structure from {structure_file}")
-            self.logger.info(f"Structure composition: {atoms.get_chemical_formula()}")
-
-        except Exception as e:
-            self.logger.error(f"Error loading structure from {structure_file}: {e}")
-            raise
-
-        # Initialize velocities
-        MaxwellBoltzmannDistribution(atoms, temperature_K=temperature)
-
-        # Setup Langevin dynamics
-        dyn = Langevin(
-            atoms,
-            timestep=self.time_step * fs,
-            temperature_K=temperature,
-            friction=self.friction
-        )
-
-        # Setup trajectory file
-        if traj_file is None:
-            traj_file = struct_output_dir / f"MD_{int(temperature):04d}.traj"
-        traj = Trajectory(str(traj_file), 'w', atoms)
-        dyn.attach(traj.write, interval=self.output_interval)
-
-        # Run MD
-        self.logger.info(f"Starting MD at {temperature}K for {struct_name}")
-        self.logger.info(f"Total steps: {self.total_steps}, Output interval: {self.output_interval}")
-
-        for step in range(1, self.total_steps + 1):
-            dyn.run(1)
-            if step % 1000 == 0:
-                temp = atoms.get_temperature()
-                self.logger.info(f"Step {step}/{self.total_steps}, Temperature: {temp:.1f}K")
-
-                # Save current state as VASP format
-                checkpoint_file = struct_output_dir / f"POSCAR_checkpoint_{step}"
-                write(str(checkpoint_file), atoms, format='vasp')
-
-        self.logger.info(f"MD simulation completed. Trajectory saved to {traj_file}")
-
-        return str(traj_file)
-
-    def run_temperature_range(
-        self,
-        structure_files: List[Path] = None,
-        temperatures: List[float] = None
-    ) -> Dict[str, Dict[float, str]]:
-        """Run MD simulations for multiple structures at different temperatures."""
-        if structure_files is None:
-            structure_files = self.find_vasp_files()
-
-        if not structure_files:
-            self.logger.error("No structure files found")
-            return {}
-   
-        if temperatures is None:
-            temperatures = [500, 700, 1000]  # default temperatures
-        
-        results = {}
-        for struct_file in structure_files:
-            struct_name = struct_file.stem
-            results[struct_name] = {}
-            
-            for temp in temperatures:
-                try:
-                    traj_file = self.run_md(struct_file, temp)
-                    results[struct_name][temp] = traj_file
-                except Exception as e:
-                    self.logger.error(f"Error running MD for {struct_name} at {temp}K: {str(e)}")
-
-        return results
-
-# def main():
-#     """Main function to run MD simulations."""
-#     # Get project paths
-#     paths = get_project_paths()
-    
-#     # Setup configuration
-#     config = {
-#         'structures_dir': paths['structures_dir'],
-#         'file_path': paths['file_path'],
-#         'cutoff': 4.0,
-#         'batch_size': 16,
-#         'split_ratio': [0.5, 0.1, 0.4],
-#         'random_state': 42
-#     }
-    
-#     # Initialize MD system
-#     md_system = MDSystem(
-#         config=config,
-#         time_step=1.0,
-#         friction=0.02,
-#         total_steps=20000,
-#         output_interval=100
-#     )
-    
-#     # Define temperatures
-#     temperatures = [800, 900, 1000]  # K
-    
-#     # Run MD simulations for all .vasp files
-#     print("\nRunning MD simulations...")
-#     results = md_system.run_temperature_range(temperatures=temperatures)
-    
-#     print("\nCompleted MD simulations:")
-#     for struct_name, temp_dict in results.items():
-#         print(f"\nStructure: {struct_name}")
-#         for temp, traj_file in temp_dict.items():
-#             print(f"  {temp}K: {traj_file}")
-
-# if __name__ == "__main__":
-#     main()
-
-def main():
-    """Test MD simulation with specific structure."""
-    # Get project paths
-    paths = get_project_paths()
-
-    # Setup configuration
-    config = {
-        'structures_dir': paths['structures_dir'],
-        'file_path': paths['file_path'],
-        'cutoff': 4.0,
-        'batch_size': 16,
-        'split_ratio': [0.7, 0.1, 0.2],
-        'random_state': 42
-    }
-
-    # Initialize MD system
-    md_system = MDSystem(
-        config=config,
-        time_step=1.0,
-        friction=0.02,
-        total_steps=20000,  # 50 steps for testing
-        output_interval=50
-    )
-
-    # Test with specific structure
-    structure_file = Path("data/Ba8Zr8O24.vasp")
-
-    print(f"\nTesting with structure: {structure_file}")
-
-    # # Test with single temperature
-    # temperatures = [500, 700, 1000,1200]  # K
-
-    try:
-        # 1. Create material directory
-        n_protons = 1 # Number of protons to add
-        material_dir = md_system.md_output_dir / f"{structure_file.stem}_H{n_protons}"
+        # Create output directory for this material
+        material_dir = self.md_output_dir / \
+            f"{structure_file.stem}_H{n_protons}"
         os.makedirs(material_dir, exist_ok=True)
 
-        # 2. Load initial structure
-        atoms = read_vasp(str(structure_file))
-        print(f"\nLoaded initial structure: {atoms.get_chemical_formula()}")
+        try:
+            # Prepare hydrated structure
+            atoms = read_vasp(str(structure_file))
+            atoms = self.add_protons(atoms, n_protons)
+            hydrated_file = material_dir / \
+                f"{structure_file.stem}_H{n_protons}.vasp"
+            write(str(hydrated_file), atoms, format='vasp')
+            self.logger.info(
+                f"Prepared hydrated structure: {atoms.get_chemical_formula()}")
 
-        # 3. Add protons
-        atoms = md_system.add_protons(atoms, n_protons)
+            # Add calculator
+            atoms.calc = self.calculator
 
-        # 4. Save hydrated structure
-        hydrated_file = md_system.md_output_dir / f"{structure_file.stem}_H{n_protons}.vasp"
-        write(str(hydrated_file), atoms, format='vasp')
-        print(f"Saved hydrated structure to: {hydrated_file}")
+            # Run MD at each temperature
+            trajectories = {}
+            for temp in temperatures:
+                temp_dir = material_dir / f"T_{temp}K"
+                os.makedirs(temp_dir, exist_ok=True)
 
-        # 5. Run MD simulations 
-        temperatures = [800]  # K
-        trajectories = {}
+                try:
+                    # Setup trajectory file
+                    traj_file = temp_dir / f"MD_{int(temp)}K.traj"
+                    traj = Trajectory(str(traj_file), 'w', atoms)
 
-        for temp in temperatures:
-            print(f"\nRunning MD at {temp}K...")
-            
-            # Create temperature directory
-            temp_dir = material_dir / f"T_{temp}K"
-            os.makedirs(temp_dir, exist_ok=True)
-            
-            try:
-                # Run MD simulation
-                traj_path = md_system.run_md(
-                    structure_file=hydrated_file,
-                    temperature=temp,
-                    traj_file = temp_dir / f"MD_{temp}K.traj"
-                )
-                
-                trajectories[temp] = traj_path
-                print(f"Completed MD at {temp}K")
-                print(f"Trajectory saved to: {traj_path}")
-                
-                # Save final structure
-                final_structure = temp_dir / f"FINAL_POSCAR_{temp}K"
-                final_atoms = read(traj_path, index=-1)
-                write(str(final_structure), final_atoms, format='vasp')
-                print(f"Final structure saved to: {final_structure}")
-                
-            except Exception as e:
-                print(f"Error running MD at {temp}K: {str(e)}")
-                continue
+                    # Initialize velocities for this temperature
+                    MaxwellBoltzmannDistribution(atoms, temperature_K=temp)
 
-        print("\nMD Simulation Summary:")
-        print("-" * 50)
-        print(f"Initial structure: {structure_file}")
-        print(f"Protons added: {n_protons}")
-        print(f"Temperatures simulated: {temperatures} K")
-        print("\nTrajectory files:")
-        for temp, traj in trajectories.items():
-            print(f"  {temp}K: {traj}")
-        
+                    # Setup Langevin dynamics
+                    dyn = Langevin(
+                        atoms,
+                        timestep=self.time_step * fs,
+                        temperature_K=temp,
+                        friction=self.friction
+                    )
+                    dyn.attach(traj.write, interval=self.output_interval)
+
+                    # Run MD
+                    self.logger.info(f"Starting MD at {temp}K")
+                    self.logger.info(
+                        f"Total steps: {self.total_steps}, Output interval: {self.output_interval}")
+
+                    for step in range(1, self.total_steps + 1):
+                        dyn.run(1)
+                        if step % 1000 == 0:
+                            current_temp = atoms.get_temperature()
+                            self.logger.info(
+                                f"Step {step}/{self.total_steps}, Temperature: {current_temp:.1f}K")
+
+                            # Save checkpoint
+                            checkpoint_file = temp_dir / \
+                                f"POSCAR_checkpoint_{step}"
+                            write(str(checkpoint_file), atoms, format='vasp')
+
+                    # Save final structure
+                    final_structure = temp_dir / f"FINAL_POSCAR_{int(temp)}K"
+                    write(str(final_structure), atoms, format='vasp')
+
+                    trajectories[temp] = str(traj_file)
+                    self.logger.info(
+                        f"Completed MD at {temp}K, saved final structure to {final_structure}")
+
+                except Exception as e:
+                    self.logger.error(f"Error running MD at {temp}K: {str(e)}")
+                    continue
+
+            return trajectories
+
+        except Exception as e:
+            self.logger.error(f"Error in MD simulation setup: {str(e)}")
+            raise
+
+
+def main():
+    """Main function to run MD simulation."""
+    try:
+        # Setup parameters
+        paths = get_project_paths()
+        simulation_params = {
+            'data_config': {
+                'structures_dir': paths['structures_dir'],
+                'file_path': paths['file_path'],
+                'cutoff': 4.0,
+                'batch_size': 16,
+                'split_ratio': [0.7, 0.1, 0.2],
+                'random_state': 42
+            },
+            'md_params': {
+                'model_name': "M3GNet-MP-2021.2.8-PES",
+                'time_step': 1.0,
+                'friction': 0.02,
+                'total_steps': 10000,
+                'output_interval': 50
+            },
+            'simulation': {
+                'structure_file': "data/Ba8Zr8O24.vasp",
+                'n_protons': 2,
+                'temperatures': [600]  # K
+            }
+        }
+
+        # Initialize MD system
+        md_system = MDSystem(
+            config=simulation_params['data_config'],
+            **simulation_params['md_params']
+        )
+
+        # Get simulation parameters
+        structure_file = Path(
+            simulation_params['simulation']['structure_file'])
+        n_protons = simulation_params['simulation']['n_protons']
+        temperatures = simulation_params['simulation']['temperatures']
+
+        # Run simulation using the class method
+        trajectories = md_system.run_md(
+            structure_file, n_protons, temperatures)
+
+        # Save configuration
+        simulation_params['results'] = {
+            'structure_file': str(structure_file),
+            'trajectories': trajectories
+        }
+        config_file = md_system.md_output_dir / 'md_config.json'
+        with open(config_file, 'w') as f:
+            json.dump(simulation_params, f, indent=4)
+
+        print("\nSimulation completed successfully!")
+        print(f"Results saved to: {config_file}")
+
     except Exception as e:
         print(f"\nError in MD simulation: {str(e)}")
         raise
-        
-    finally:
-        config_info = {
-            'structure_file': str(structure_file),
-            'n_protons': n_protons,
-            'temperatures': temperatures,
-            'md_parameters': {
-                'time_step': md_system.time_step,
-                'friction': md_system.friction,
-                'total_steps': md_system.total_steps,
-                'output_interval': md_system.output_interval
-            }
-        }
-    
-        config_file = md_system.md_output_dir / 'md_config.json'
-        with open(config_file, 'w') as f:
-            json.dump(config_info, f, indent=4)
-        print(f"\nConfiguration saved to: {config_file}")
+
 
 if __name__ == "__main__":
     main()

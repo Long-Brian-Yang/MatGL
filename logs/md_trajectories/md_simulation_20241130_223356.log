@@ -1,0 +1,3 @@
+2024-11-30 22:33:56,792 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-30 22:33:56,792 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-30 22:33:57,327 - ERROR - Error loading fine-tuned model: 'M3GNet' object has no attribute 'calc_stresses'

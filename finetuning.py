@@ -6,11 +6,12 @@ import logging
 import warnings
 from pathlib import Path
 from typing import Dict
-
+import torch
 import pandas as pd
 import matplotlib.pyplot as plt
 import lightning as pl
 from pytorch_lightning.loggers import CSVLogger
+import matgl
 from matgl.models import M3GNet
 from matgl.utils.training import ModelLightningModule
 
@@ -24,6 +25,8 @@ class FineTuner:
     def __init__(
         self,
         working_dir: str,
+        pretrained_checkpoint: str,
+        freeze_base_layers: bool = True,
         debug: bool = False,
         **kwargs
     ):
@@ -35,9 +38,10 @@ class FineTuner:
             debug: If True, sets logging level to DEBUG. Defaults to False.
             **kwargs: Additional keyword arguments for training configuration.
         """
-
         self.working_dir = Path(working_dir)
         self.debug = debug
+        self.pretrained_checkpoint = pretrained_checkpoint
+        self.freeze_base_layers = freeze_base_layers
 
         # Define directories for checkpoints, logs, and results
         self.checkpoints_dir = self.working_dir / "checkpoints"
@@ -45,7 +49,10 @@ class FineTuner:
         self.results_dir = self.working_dir / "results"
 
         # Create directories if they do not exist
-        for dir_path in [self.checkpoints_dir, self.logs_dir, self.results_dir]:
+        for dir_path in [
+                self.checkpoints_dir,
+                self.logs_dir,
+                self.results_dir]:
             dir_path.mkdir(parents=True, exist_ok=True)
 
         self.model = None
@@ -57,6 +64,7 @@ class FineTuner:
             'batch_size': kwargs.get('batch_size', 32),
             'num_epochs': kwargs.get('num_epochs', 10),
             'learning_rate': kwargs.get('learning_rate', 1e-4),
+            'fine_tune_lr': kwargs.get('fine_tune_lr', 1e-5),
             'accelerator': kwargs.get('accelerator', 'cpu'),
             'split_ratio': kwargs.get('split_ratio', [0.7, 0.1, 0.2]),
             'random_state': kwargs.get('random_state', 42),
@@ -64,10 +72,10 @@ class FineTuner:
         }
 
         # Setup logging and save configuration
-        self._setup_logging()
-        self._save_config()
+        self.setup_logging()
+        self.save_config()
 
-    def _setup_logging(self) -> None:
+    def setup_logging(self) -> None:
         """
         Setup logging configuration for the training process.
         """
@@ -83,7 +91,7 @@ class FineTuner:
         )
         self.logger = logging.getLogger(__name__)
 
-    def _save_config(self) -> None:
+    def save_config(self) -> None:
         """
         Save the training configuration to a JSON file for future reference.
         """
@@ -100,24 +108,57 @@ class FineTuner:
         """
         try:
             self.logger.info("Setting up M3GNet model...")
+            # 1. Load the pretrained model
+            pretrained_model = matgl.load_model(self.pretrained_checkpoint)
 
-            # Initialize the M3GNet model with specified elements
+            # 2. Create a new M3GNet model with the same element types
             self.model = M3GNet(
                 element_types=element_list,
                 is_intensive=True,
                 readout_type="set2set"
             )
 
-            # Wrap the model in a PyTorch Lightning module
-            self.lit_module = ModelLightningModule(
-                model=self.model
-            )
+            # 3. Transfer the pretrained weights to the new model
+            self.model.load_state_dict(
+                pretrained_model.state_dict(), strict=False)
+            self.logger.info("Transferred pretrained weights to new model")
 
-            # Initialize CSVLogger to log training metrics
+            # 4. Freeze base layers if required
+            if self.freeze_base_layers:
+                for name, param in self.model.named_parameters():
+                    if "readout" not in name:
+                        param.requires_grad = False
+                    self.logger.info("Froze base layers")
+
+            # # 5. Define optimizer with different learning rates
+            # self.lit_module = ModelLightningModule(
+            #     model=self.model,
+            #     learning_rate=self.config['learning_rate']
+            # )
+            # 5. Define optimizer with different learning rates
+            optimizer = torch.optim.Adam([
+                {"params": [p for n, p in self.model.named_parameters() if "readout" not in n],
+                 "lr": self.config['fine_tune_lr']},
+                {"params": [p for n, p in self.model.named_parameters() if "readout" in n],
+                 "lr": self.config['learning_rate']}
+            ])
+
+            self.lit_module = ModelLightningModule(model=self.model)
+
+            def configure_optimizers(self):
+                return self.optimizer
+
+            def on_train_epoch_end(self):
+                pass
+            self.lit_module.configure_optimizers = configure_optimizers.__get__(
+                self.lit_module)
+            self.lit_module.on_train_epoch_end = on_train_epoch_end.__get__(
+                self.lit_module)
+            self.lit_module.optimizer = optimizer
             logger = CSVLogger(
                 save_dir=str(self.logs_dir),
-                name="", 
-                version="" 
+                name="",
+                version=""
             )
 
             # Initialize the PyTorch Lightning Trainer
@@ -126,10 +167,10 @@ class FineTuner:
                 accelerator=self.config['accelerator'],
                 logger=logger,
                 inference_mode=False,
-                log_every_n_steps=1 
+                log_every_n_steps=1
             )
 
-            self.logger.info("Model setup completed successfully")
+            self.logger.info("Model setup completed")
 
         except Exception as e:
             self.logger.error(f"Error in model setup: {str(e)}")
@@ -163,7 +204,6 @@ class FineTuner:
             processor = DataProcessor(data_config)
             processor.load_data()
             dataset = processor.create_dataset(normalize=True)
-
             train_loader, val_loader, test_loader = processor.create_dataloaders()
 
             # 3. Setup model with element list from data processor
@@ -208,7 +248,7 @@ class FineTuner:
         finally:
             # 10. Cleanup temporary files if they exist
             for fn in ("dgl_graph.bin", "lattice.pt", "dgl_line_graph.bin",
-                      "state_attr.pt", "labels.json"):
+                       "state_attr.pt", "labels.json"):
                 try:
                     os.remove(fn)
                 except FileNotFoundError:
@@ -260,11 +300,12 @@ def main():
     # Initialize the FineTuner with custom configuration
     trainer = FineTuner(
         working_dir=os.path.join(paths['output_dir']),
-        num_epochs=10,
+        pretrained_checkpoint="M3GNet-MP-2021.2.8-PES",
+        freeze_base_layers=True,
+        num_epochs=1000,
         learning_rate=1e-4,
-        batch_size=32,
-        split_ratio=[0.7, 0.1, 0.2],
-        random_state=42
+        fine_tune_lr=1e-5,
+        batch_size=32
     )
 
     results = trainer.run_training(paths)

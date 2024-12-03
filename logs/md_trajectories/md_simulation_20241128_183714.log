@@ -1,0 +1,22 @@
+2024-11-28 18:37:14,353 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-28 18:37:14,353 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-28 18:37:14,354 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-28 18:37:14,354 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-28 18:37:14,354 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-28 18:37:14,884 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-28 18:37:14,891 - INFO - Added proton 1/2:
+2024-11-28 18:37:14,891 - INFO -   Near O atom: 16
+2024-11-28 18:37:14,892 - INFO -   Position: [2.096      2.78896465 7.69103535]
+2024-11-28 18:37:14,892 - INFO -   OH distance: 0.980 Å
+2024-11-28 18:37:14,895 - INFO - Added proton 2/2:
+2024-11-28 18:37:14,895 - INFO -   Near O atom: 17
+2024-11-28 18:37:14,896 - INFO -   Position: [2.096      2.78896465 4.88496465]
+2024-11-28 18:37:14,896 - INFO -   OH distance: 0.980 Å
+2024-11-28 18:37:14,896 - INFO - Successfully added 2 protons
+2024-11-28 18:37:14,896 - INFO - Final composition: H2Ba8O24Zr8
+2024-11-28 18:37:14,896 - INFO - Prepared hydrated structure: H2Ba8O24Zr8
+2024-11-28 18:37:14,897 - INFO - Starting MD at 500K
+2024-11-28 18:37:14,897 - INFO - Total steps: 2000, Output interval: 10
+2024-11-28 18:38:37,112 - INFO - Step 1000/2000, Temperature: 601.0K
+2024-11-28 18:39:58,753 - INFO - Step 2000/2000, Temperature: 601.7K
+2024-11-28 18:39:58,761 - INFO - Completed MD at 500K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H2/T_500K/FINAL_POSCAR_500K

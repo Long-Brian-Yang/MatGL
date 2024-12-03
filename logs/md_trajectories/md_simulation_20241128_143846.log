@@ -1,0 +1,43 @@
+2024-11-28 14:38:46,951 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-28 14:38:46,955 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-28 14:38:46,955 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-28 14:38:46,955 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-28 14:38:46,955 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-28 14:38:47,852 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-28 14:38:47,863 - INFO - Added proton 1/1:
+2024-11-28 14:38:47,863 - INFO -   Near O atom: 16
+2024-11-28 14:38:47,864 - INFO -   Position: [2.096      2.78896465 7.69103535]
+2024-11-28 14:38:47,864 - INFO -   OH distance: 0.980 Å
+2024-11-28 14:38:47,864 - INFO - Successfully added 1 protons
+2024-11-28 14:38:47,864 - INFO - Final composition: HBa8O24Zr8
+2024-11-28 14:38:47,865 - INFO - Prepared hydrated structure: HBa8O24Zr8
+2024-11-28 14:38:47,871 - INFO - Starting MD at 500K
+2024-11-28 14:38:47,871 - INFO - Total steps: 2000, Output interval: 10
+2024-11-28 14:40:05,317 - INFO - Step 1000/2000, Temperature: 534.8K
+2024-11-28 14:41:32,009 - INFO - Step 2000/2000, Temperature: 524.2K
+2024-11-28 14:41:32,017 - INFO - Completed MD at 500K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_500K/FINAL_POSCAR_500K
+2024-11-28 14:41:32,023 - INFO - Starting MD at 600K
+2024-11-28 14:41:32,023 - INFO - Total steps: 2000, Output interval: 10
+2024-11-28 14:42:51,575 - INFO - Step 1000/2000, Temperature: 696.8K
+2024-11-28 14:44:18,496 - INFO - Step 2000/2000, Temperature: 616.7K
+2024-11-28 14:44:18,502 - INFO - Completed MD at 600K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_600K/FINAL_POSCAR_600K
+2024-11-28 14:44:18,505 - INFO - Starting MD at 700K
+2024-11-28 14:44:18,505 - INFO - Total steps: 2000, Output interval: 10
+2024-11-28 14:45:41,299 - INFO - Step 1000/2000, Temperature: 762.5K
+2024-11-28 14:47:03,963 - INFO - Step 2000/2000, Temperature: 571.2K
+2024-11-28 14:47:03,973 - INFO - Completed MD at 700K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_700K/FINAL_POSCAR_700K
+2024-11-28 14:47:03,985 - INFO - Starting MD at 800K
+2024-11-28 14:47:03,985 - INFO - Total steps: 2000, Output interval: 10
+2024-11-28 14:48:25,305 - INFO - Step 1000/2000, Temperature: 840.0K
+2024-11-28 14:49:46,716 - INFO - Step 2000/2000, Temperature: 786.3K
+2024-11-28 14:49:46,720 - INFO - Completed MD at 800K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_800K/FINAL_POSCAR_800K
+2024-11-28 14:49:46,726 - INFO - Starting MD at 900K
+2024-11-28 14:49:46,726 - INFO - Total steps: 2000, Output interval: 10
+2024-11-28 14:51:10,521 - INFO - Step 1000/2000, Temperature: 905.5K
+2024-11-28 14:52:38,946 - INFO - Step 2000/2000, Temperature: 809.3K
+2024-11-28 14:52:38,956 - INFO - Completed MD at 900K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_900K/FINAL_POSCAR_900K
+2024-11-28 14:52:38,963 - INFO - Starting MD at 1000K
+2024-11-28 14:52:38,963 - INFO - Total steps: 2000, Output interval: 10
+2024-11-28 14:54:06,005 - INFO - Step 1000/2000, Temperature: 846.2K
+2024-11-28 14:55:36,228 - INFO - Step 2000/2000, Temperature: 1054.1K
+2024-11-28 14:55:36,238 - INFO - Completed MD at 1000K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_1000K/FINAL_POSCAR_1000K

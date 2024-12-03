@@ -1,0 +1,4 @@
+2024-11-30 22:36:25,871 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-30 22:36:25,871 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-30 22:36:25,871 - INFO - Downloading from remote location...
+2024-11-30 22:36:26,386 - ERROR - Error loading fine-tuned model: No valid model found in pre-trained_models at https://github.com/materialsvirtuallab/matgl/raw/main/pretrained_models/.

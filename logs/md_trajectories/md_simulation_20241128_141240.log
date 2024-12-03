@@ -1,0 +1,31 @@
+2024-11-28 14:12:40,571 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-28 14:12:40,571 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-28 14:12:40,571 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-28 14:12:40,571 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-28 14:12:40,571 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-28 14:12:41,075 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-28 14:12:41,082 - INFO - Added proton 1/1:
+2024-11-28 14:12:41,082 - INFO -   Near O atom: 16
+2024-11-28 14:12:41,082 - INFO -   Position: [2.096      2.78896465 7.69103535]
+2024-11-28 14:12:41,082 - INFO -   OH distance: 0.980 Å
+2024-11-28 14:12:41,082 - INFO - Successfully added 1 protons
+2024-11-28 14:12:41,082 - INFO - Final composition: HBa8O24Zr8
+2024-11-28 14:12:41,084 - INFO - Prepared hydrated structure: HBa8O24Zr8
+2024-11-28 14:12:41,085 - INFO - Starting MD at 500K
+2024-11-28 14:12:41,085 - INFO - Total steps: 200, Output interval: 10
+2024-11-28 14:12:56,856 - INFO - Completed MD at 500K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_500K/FINAL_POSCAR_500K
+2024-11-28 14:12:56,858 - INFO - Starting MD at 600K
+2024-11-28 14:12:56,858 - INFO - Total steps: 200, Output interval: 10
+2024-11-28 14:13:11,775 - INFO - Completed MD at 600K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_600K/FINAL_POSCAR_600K
+2024-11-28 14:13:11,776 - INFO - Starting MD at 700K
+2024-11-28 14:13:11,776 - INFO - Total steps: 200, Output interval: 10
+2024-11-28 14:13:27,165 - INFO - Completed MD at 700K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_700K/FINAL_POSCAR_700K
+2024-11-28 14:13:27,167 - INFO - Starting MD at 800K
+2024-11-28 14:13:27,167 - INFO - Total steps: 200, Output interval: 10
+2024-11-28 14:13:43,078 - INFO - Completed MD at 800K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_800K/FINAL_POSCAR_800K
+2024-11-28 14:13:43,079 - INFO - Starting MD at 900K
+2024-11-28 14:13:43,079 - INFO - Total steps: 200, Output interval: 10
+2024-11-28 14:13:59,473 - INFO - Completed MD at 900K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_900K/FINAL_POSCAR_900K
+2024-11-28 14:13:59,475 - INFO - Starting MD at 1000K
+2024-11-28 14:13:59,475 - INFO - Total steps: 200, Output interval: 10
+2024-11-28 14:14:15,510 - INFO - Completed MD at 1000K, saved final structure to /Users/brian/Documents/matgl/logs/md_trajectories/Ba8Zr8O24_H1/T_1000K/FINAL_POSCAR_1000K

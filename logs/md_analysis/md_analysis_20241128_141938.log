@@ -1,0 +1,66 @@
+2024-11-28 14:19:38,708 - INFO - Analyzing trajectory at 500K
+2024-11-28 14:19:38,708 - INFO - Number of H atoms: 1
+2024-11-28 14:19:38,708 - INFO - Position array shape: (21, 1, 3)
+2024-11-28 14:19:38,708 - INFO - Number of analysis windows: 1
+2024-11-28 14:19:40,921 - INFO - Results for 500K:
+2024-11-28 14:19:40,921 - INFO - MSD: 112.1076 Å²/ps
+2024-11-28 14:19:40,921 - INFO - Diffusion coefficient: 1.87e-03 ± 0.00e+00 cm²/s
+2024-11-28 14:19:40,921 - INFO - Conductivity: 1.18e+01 S/cm
+2024-11-28 14:19:40,936 - INFO - Analyzing trajectory at 600K
+2024-11-28 14:19:40,936 - INFO - Number of H atoms: 1
+2024-11-28 14:19:40,936 - INFO - Position array shape: (21, 1, 3)
+2024-11-28 14:19:40,936 - INFO - Number of analysis windows: 1
+2024-11-28 14:19:42,885 - INFO - Results for 600K:
+2024-11-28 14:19:42,885 - INFO - MSD: 39.5262 Å²/ps
+2024-11-28 14:19:42,885 - INFO - Diffusion coefficient: 6.59e-04 ± 0.00e+00 cm²/s
+2024-11-28 14:19:42,885 - INFO - Conductivity: 3.46e+00 S/cm
+2024-11-28 14:19:42,898 - INFO - Analyzing trajectory at 700K
+2024-11-28 14:19:42,898 - INFO - Number of H atoms: 1
+2024-11-28 14:19:42,898 - INFO - Position array shape: (21, 1, 3)
+2024-11-28 14:19:42,899 - INFO - Number of analysis windows: 1
+2024-11-28 14:19:45,072 - INFO - Results for 700K:
+2024-11-28 14:19:45,072 - INFO - MSD: 13.3308 Å²/ps
+2024-11-28 14:19:45,072 - INFO - Diffusion coefficient: 2.22e-04 ± 0.00e+00 cm²/s
+2024-11-28 14:19:45,073 - INFO - Conductivity: 1.00e+00 S/cm
+2024-11-28 14:19:45,092 - INFO - Analyzing trajectory at 800K
+2024-11-28 14:19:45,092 - INFO - Number of H atoms: 1
+2024-11-28 14:19:45,093 - INFO - Position array shape: (21, 1, 3)
+2024-11-28 14:19:45,093 - INFO - Number of analysis windows: 1
+2024-11-28 14:19:47,042 - INFO - Results for 800K:
+2024-11-28 14:19:47,042 - INFO - MSD: 14.3765 Å²/ps
+2024-11-28 14:19:47,042 - INFO - Diffusion coefficient: 2.40e-04 ± 0.00e+00 cm²/s
+2024-11-28 14:19:47,042 - INFO - Conductivity: 9.45e-01 S/cm
+2024-11-28 14:19:47,056 - INFO - Analyzing trajectory at 900K
+2024-11-28 14:19:47,056 - INFO - Number of H atoms: 1
+2024-11-28 14:19:47,056 - INFO - Position array shape: (21, 1, 3)
+2024-11-28 14:19:47,056 - INFO - Number of analysis windows: 1
+2024-11-28 14:19:48,954 - INFO - Results for 900K:
+2024-11-28 14:19:48,954 - INFO - MSD: 179.5330 Å²/ps
+2024-11-28 14:19:48,954 - INFO - Diffusion coefficient: 2.99e-03 ± 0.00e+00 cm²/s
+2024-11-28 14:19:48,954 - INFO - Conductivity: 1.05e+01 S/cm
+2024-11-28 14:19:48,968 - INFO - Analyzing trajectory at 1000K
+2024-11-28 14:19:48,968 - INFO - Number of H atoms: 1
+2024-11-28 14:19:48,968 - INFO - Position array shape: (21, 1, 3)
+2024-11-28 14:19:48,968 - INFO - Number of analysis windows: 1
+2024-11-28 14:19:50,896 - INFO - Results for 1000K:
+2024-11-28 14:19:50,896 - INFO - MSD: 34.1895 Å²/ps
+2024-11-28 14:19:50,896 - INFO - Diffusion coefficient: 5.70e-04 ± 0.00e+00 cm²/s
+2024-11-28 14:19:50,896 - INFO - Conductivity: 1.80e+00 S/cm
+2024-11-28 14:19:50,972 - INFO - Analyzing trajectory at 1200K
+2024-11-28 14:19:50,972 - INFO - Number of H atoms: 1
+2024-11-28 14:19:50,973 - INFO - Position array shape: (401, 1, 3)
+2024-11-28 14:19:50,973 - INFO - Number of analysis windows: 7
+2024-11-28 14:19:52,835 - INFO - Results for 1200K:
+2024-11-28 14:19:52,835 - INFO - MSD: 364.4264 Å²/ps
+2024-11-28 14:19:52,835 - INFO - Diffusion coefficient: 6.07e-03 ± 4.43e-03 cm²/s
+2024-11-28 14:19:52,835 - INFO - Conductivity: 1.60e+01 S/cm
+2024-11-28 14:19:52,878 - INFO - Analyzing trajectory at 1300K
+2024-11-28 14:19:52,879 - INFO - Number of H atoms: 1
+2024-11-28 14:19:52,879 - INFO - Position array shape: (201, 1, 3)
+2024-11-28 14:19:52,879 - INFO - Number of analysis windows: 3
+2024-11-28 14:19:54,771 - INFO - Results for 1300K:
+2024-11-28 14:19:54,772 - INFO - MSD: 542.7928 Å²/ps
+2024-11-28 14:19:54,772 - INFO - Diffusion coefficient: 9.05e-03 ± 2.76e-03 cm²/s
+2024-11-28 14:19:54,772 - INFO - Conductivity: 2.20e+01 S/cm
+2024-11-28 14:19:54,789 - INFO - Results saved to logs/md_trajectories/Ba8Zr8O24_H1/md_analysis_results.csv
+2024-11-28 14:19:57,101 - INFO - Activation Energy: 0.12 eV

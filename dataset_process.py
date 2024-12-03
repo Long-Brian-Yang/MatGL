@@ -4,7 +4,7 @@ import warnings
 import pandas as pd
 from typing import List, Tuple, Optional
 from pathlib import Path
-from pymatgen.core import Structure 
+from pymatgen.core import Structure
 from pymatgen.io.vasp import Poscar
 from matgl.ext.pymatgen import Structure2Graph, get_element_list
 from matgl.graph.data import MGLDataset, MGLDataLoader
@@ -34,6 +34,7 @@ def get_project_paths():
 
 class DataProcessor:
     """Process crystal structure data for M3GNet."""
+
     def __init__(self, config: dict):
         """
         Initialize data processor.
@@ -125,15 +126,13 @@ class DataProcessor:
             random_state=self.random_state
         )
 
-        # num_workers = 1
-
         # Create data loaders using MGLDataLoader
         train_loader, val_loader, test_loader = MGLDataLoader(
             train_data=train_data,
             val_data=val_data,
             test_data=test_data,
             batch_size=self.batch_size,
-            num_workers=2,
+            num_workers=1,
             persistent_workers=True
         )
 

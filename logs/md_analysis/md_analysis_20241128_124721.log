@@ -1,0 +1,50 @@
+2024-11-28 12:47:21,952 - INFO - Analyzing trajectory at 400K
+2024-11-28 12:47:21,952 - INFO - Number of H atoms: 1
+2024-11-28 12:47:21,953 - INFO - Position array shape: (111, 1, 3)
+2024-11-28 12:47:21,953 - INFO - Number of analysis windows: 1
+2024-11-28 12:47:24,021 - INFO - Results for 400K:
+2024-11-28 12:47:24,021 - INFO - MSD: 64.4054 Å²/ps
+2024-11-28 12:47:24,021 - INFO - Diffusion coefficient: 1.07e-03 ± 0.00e+00 cm²/s
+2024-11-28 12:47:24,021 - INFO - Conductivity: 8.47e+00 S/cm
+2024-11-28 12:47:24,070 - INFO - Analyzing trajectory at 700K
+2024-11-28 12:47:24,070 - INFO - Number of H atoms: 1
+2024-11-28 12:47:24,070 - INFO - Position array shape: (201, 1, 3)
+2024-11-28 12:47:24,070 - INFO - Number of analysis windows: 3
+2024-11-28 12:47:25,958 - INFO - Results for 700K:
+2024-11-28 12:47:25,958 - INFO - MSD: 674.9487 Å²/ps
+2024-11-28 12:47:25,958 - INFO - Diffusion coefficient: 1.12e-02 ± 1.39e-03 cm²/s
+2024-11-28 12:47:25,958 - INFO - Conductivity: 5.07e+01 S/cm
+2024-11-28 12:47:25,971 - INFO - Analyzing trajectory at 800K
+2024-11-28 12:47:25,971 - INFO - Number of H atoms: 1
+2024-11-28 12:47:25,971 - INFO - Position array shape: (23, 1, 3)
+2024-11-28 12:47:25,971 - INFO - Number of analysis windows: 1
+2024-11-28 12:47:27,979 - INFO - Results for 800K:
+2024-11-28 12:47:27,979 - INFO - MSD: 25.8714 Å²/ps
+2024-11-28 12:47:27,979 - INFO - Diffusion coefficient: 4.31e-04 ± 0.00e+00 cm²/s
+2024-11-28 12:47:27,979 - INFO - Conductivity: 1.70e+00 S/cm
+2024-11-28 12:47:28,066 - INFO - Analyzing trajectory at 1000K
+2024-11-28 12:47:28,067 - INFO - Number of H atoms: 1
+2024-11-28 12:47:28,067 - INFO - Position array shape: (401, 1, 3)
+2024-11-28 12:47:28,068 - INFO - Number of analysis windows: 7
+2024-11-28 12:47:29,964 - INFO - Results for 1000K:
+2024-11-28 12:47:29,964 - INFO - MSD: 760.0312 Å²/ps
+2024-11-28 12:47:29,964 - INFO - Diffusion coefficient: 1.27e-02 ± 7.76e-03 cm²/s
+2024-11-28 12:47:29,964 - INFO - Conductivity: 4.00e+01 S/cm
+2024-11-28 12:47:30,042 - INFO - Analyzing trajectory at 1200K
+2024-11-28 12:47:30,042 - INFO - Number of H atoms: 1
+2024-11-28 12:47:30,043 - INFO - Position array shape: (401, 1, 3)
+2024-11-28 12:47:30,043 - INFO - Number of analysis windows: 7
+2024-11-28 12:47:31,913 - INFO - Results for 1200K:
+2024-11-28 12:47:31,913 - INFO - MSD: 364.4264 Å²/ps
+2024-11-28 12:47:31,913 - INFO - Diffusion coefficient: 6.07e-03 ± 4.43e-03 cm²/s
+2024-11-28 12:47:31,913 - INFO - Conductivity: 1.60e+01 S/cm
+2024-11-28 12:47:31,957 - INFO - Analyzing trajectory at 1300K
+2024-11-28 12:47:31,957 - INFO - Number of H atoms: 1
+2024-11-28 12:47:31,958 - INFO - Position array shape: (201, 1, 3)
+2024-11-28 12:47:31,958 - INFO - Number of analysis windows: 3
+2024-11-28 12:47:33,823 - INFO - Results for 1300K:
+2024-11-28 12:47:33,823 - INFO - MSD: 542.7928 Å²/ps
+2024-11-28 12:47:33,823 - INFO - Diffusion coefficient: 9.05e-03 ± 2.76e-03 cm²/s
+2024-11-28 12:47:33,823 - INFO - Conductivity: 2.20e+01 S/cm
+2024-11-28 12:47:33,834 - INFO - Results saved to logs/md_trajectories/Ba8Zr8O24_H1/md_analysis_results.csv
+2024-11-28 12:47:36,013 - INFO - Activation Energy: 0.10 eV

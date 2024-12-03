@@ -1,0 +1,23 @@
+2024-11-28 14:00:44,042 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-11-28 14:00:44,042 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-11-28 14:00:44,042 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-11-28 14:00:44,043 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-11-28 14:00:44,043 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-11-28 14:00:44,502 - INFO - Loaded potential model: M3GNet-MP-2021.2.8-PES
+2024-11-28 14:00:44,508 - INFO - Added proton 1/1:
+2024-11-28 14:00:44,508 - INFO -   Near O atom: 16
+2024-11-28 14:00:44,509 - INFO -   Position: [2.096      2.78896465 7.69103535]
+2024-11-28 14:00:44,509 - INFO -   OH distance: 0.980 Å
+2024-11-28 14:00:44,509 - INFO - Successfully added 1 protons
+2024-11-28 14:00:44,509 - INFO - Final composition: HBa8O24Zr8
+2024-11-28 14:00:44,509 - INFO - Prepared hydrated structure: HBa8O24Zr8
+2024-11-28 14:00:44,510 - INFO - Starting MD at 400K
+2024-11-28 14:00:44,510 - INFO - Total steps: 20000, Output interval: 50
+2024-11-28 14:02:00,369 - INFO - Step 1000/20000, Temperature: 422.0K
+2024-11-28 14:03:20,739 - INFO - Step 2000/20000, Temperature: 351.1K
+2024-11-28 14:04:42,054 - INFO - Step 3000/20000, Temperature: 331.5K
+2024-11-28 14:05:56,281 - INFO - Step 4000/20000, Temperature: 398.6K
+2024-11-28 14:07:12,654 - INFO - Step 5000/20000, Temperature: 375.8K
+2024-11-28 14:08:39,172 - INFO - Step 6000/20000, Temperature: 403.4K
+2024-11-28 14:10:03,525 - INFO - Step 7000/20000, Temperature: 351.4K
+2024-11-28 14:11:32,782 - INFO - Step 8000/20000, Temperature: 487.7K

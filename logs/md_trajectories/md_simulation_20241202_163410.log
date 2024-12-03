@@ -1,0 +1,17 @@
+2024-12-02 16:34:10,606 - INFO - Working directory: /Users/brian/Documents/matgl/logs/md_trajectories
+2024-12-02 16:34:10,607 - INFO - Structures directory: /Users/brian/Documents/matgl/data/structures
+2024-12-02 16:34:10,607 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.pt...
+2024-12-02 16:34:10,607 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/state.pt...
+2024-12-02 16:34:10,607 - INFO - Using cached local file at /Users/brian/.cache/matgl/M3GNet-MP-2021.2.8-PES/model.json...
+2024-12-02 16:34:10,718 - INFO - Successfully loaded fine-tuned weights from: /Users/brian/Documents/matgl/logs/checkpoints/model.pt
+2024-12-02 16:34:10,729 - INFO - Added proton 1/1:
+2024-12-02 16:34:10,730 - INFO -   Near O atom: 16
+2024-12-02 16:34:10,730 - INFO -   Position: [2.096      2.78896465 7.69103535]
+2024-12-02 16:34:10,730 - INFO -   OH distance: 0.980 Å
+2024-12-02 16:34:10,730 - INFO - Successfully added 1 protons
+2024-12-02 16:34:10,730 - INFO - Final composition: HBa8O24Zr8
+2024-12-02 16:34:10,732 - INFO - Initial positions shape: (41, 3)
+2024-12-02 16:34:10,761 - ERROR - Error in initial calculation: 'pos'
+2024-12-02 16:34:10,761 - ERROR - Calculator state: <__main__.MDSystem.load_finetuned_model.<locals>.CustomPESCalculator object at 0x13c3e0c90>
+2024-12-02 16:34:10,761 - ERROR - Error in structure handling: 'pos'
+2024-12-02 16:34:10,761 - ERROR - Error in MD simulation: 'pos'

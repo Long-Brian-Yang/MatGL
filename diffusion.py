@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import os
 import numpy as np
 import pandas as pd
@@ -10,7 +11,6 @@ from datetime import datetime
 from scipy import stats
 from ase.io import read
 from ase.units import kB
-from pymatgen.io.vasp import Poscar
 from pymatgen.io.ase import AseAtomsAdaptor
 import matplotlib
 from dataset_process import get_project_paths
@@ -19,6 +19,7 @@ import warnings
 warnings.simplefilter("ignore")
 
 matplotlib.use('Agg')
+
 
 class MDAnalysisSystem:
     """
@@ -61,7 +62,8 @@ class MDAnalysisSystem:
         os.makedirs(self.plot_dir, exist_ok=True)
 
         # Setup logging
-        log_file = self.working_dir / f"md_analysis_{datetime.now():%Y%m%d_%H%M%S}.log"
+        log_file = self.working_dir / \
+            f"md_analysis_{datetime.now():%Y%m%d_%H%M%S}.log"
         logging.basicConfig(
             level=logging.INFO,
             format='%(asctime)s - %(levelname)s - %(message)s',
@@ -71,9 +73,6 @@ class MDAnalysisSystem:
             ]
         )
         self.logger = logging.getLogger("main")
-        self.logger.info(f"Analysis initialized for {self.structure_name}")
-        self.logger.info(f"Working directory: {self.working_dir}")
-        self.logger.info(f"Structures directory: {self.structures_dir}")
 
     def setup_plot_parameters(self):
         """Setup matplotlib parameters."""
@@ -91,28 +90,6 @@ class MDAnalysisSystem:
         }
         plt.rcParams.update(params)
 
-    def load_structure(self, poscar_file: str):
-        """Load initial structure from POSCAR file."""
-        try:
-            poscar = Poscar.from_file(poscar_file)
-            self.structure = poscar.structure
-            self.logger.info(f"Loaded initial structure from {poscar_file}")
-            return self.structure
-        except Exception as e:
-            self.logger.error(f"Error loading structure from {poscar_file}: {e}")
-            raise
-
-    def find_trajectory_files(self) -> list:
-        """Find all trajectory files in working directory."""
-        traj_files = list(self.working_dir.glob("MD_*K.traj"))
-        if not traj_files:
-            self.logger.warning(f"No trajectory files found in {self.working_dir}")
-        else:
-            self.logger.info(f"Found {len(traj_files)} trajectory files")
-            for f in traj_files:
-                self.logger.info(f"Found trajectory file: {f}")
-        return traj_files
-
     def analyze_single_trajectory(self, temperature: int) -> dict:
         """Analyze a single MD trajectory."""
         # Find trajectory file in temperature directory
@@ -125,27 +102,26 @@ class MDAnalysisSystem:
         # Read trajectory
         traj_list = read(traj_file, index=":")
         n_frames = len(traj_list)
-        self.logger.info(f"Loaded trajectory with {n_frames} frames")
 
         # Adjust window size based on available frames
-        adjusted_window_size = min(self.window_size, n_frames - 1)  # Leave at least 1 frame
+        adjusted_window_size = min(self.window_size, n_frames - 1)
         adjusted_shift = min(self.shift_time, adjusted_window_size // 2)
 
-        if adjusted_window_size < 3:  # Need at least 3 points for meaningful analysis
+        if adjusted_window_size < 3:  # Need at least 3 frames for MSD
             self.logger.warning(f"Not enough frames ({n_frames}) for analysis")
             return None
 
-        self.logger.info(f"Adjusted window size: {adjusted_window_size}")
-        self.logger.info(f"Adjusted shift time: {adjusted_shift}")
-
         # Get target atom indices and volume
-        atom_indices = [i for i, x in enumerate(traj_list[0].get_chemical_symbols())
-                    if x == self.target_atom]
+        atom_indices = [
+            i for i, x in enumerate(
+                traj_list[0].get_chemical_symbols()) if x == self.target_atom]
+
         volume = np.mean([atoms.get_volume() for atoms in traj_list])
         volume_cm3 = volume * 1e-24  # Convert to cm³
 
         self.logger.info(f"Analyzing trajectory at {temperature}K")
-        self.logger.info(f"Number of {self.target_atom} atoms: {len(atom_indices)}")
+        self.logger.info(
+            f"Number of {self.target_atom} atoms: {len(atom_indices)}")
 
         try:
             # Extract positions for target atoms
@@ -153,28 +129,31 @@ class MDAnalysisSystem:
             positions = positions[:, atom_indices]
 
             self.logger.info(f"Position array shape: {positions.shape}")
- 
+
             # Calculate number of complete windows
-            n_windows = max(1, (n_frames - adjusted_window_size) // adjusted_shift + 1)
- 
+            n_windows = max(
+                1, (n_frames - adjusted_window_size) // adjusted_shift + 1)
+
             self.logger.info(f"Number of analysis windows: {n_windows}")
 
             msd_windows = []
             diffusion_coefficients = []
             # fixed time array(fs->ps)
-            time_array = np.arange(adjusted_window_size) * self.time_step / 1000 
-   
+            time_array = np.arange(adjusted_window_size) * \
+                self.time_step / 1000
+
             for i in range(n_windows):
                 start_idx = i * adjusted_shift
                 end_idx = start_idx + adjusted_window_size
-       
+
                 if end_idx > len(positions):
                     break
-         
+
                 # Calculate MSD for this window
                 window_positions = positions[start_idx:end_idx]
                 ref_positions = window_positions[0]
-                displacements = window_positions - ref_positions[np.newaxis, :, :]
+                displacements = window_positions - \
+                    ref_positions[np.newaxis, :, :]
 
                 squared_displacements = displacements**2
 
@@ -184,17 +163,22 @@ class MDAnalysisSystem:
                     'y': np.mean(squared_displacements[..., 1], axis=1),
                     'z': np.mean(squared_displacements[..., 2], axis=1)
                 }
-                msd_total = np.mean(np.sum(squared_displacements, axis=2), axis=1)
+                msd_total = np.mean(
+                    np.sum(
+                        squared_displacements,
+                        axis=2),
+                    axis=1)
 
                 # Store results
                 msd_windows.append(msd_total)
 
                 # Calculate diffusion coefficient
-                slope, intercept, r_value, p_value, std_err = stats.linregress(time_array, msd_total)
+                slope, intercept, r_value, p_value, std_err = stats.linregress(
+                    time_array, msd_total)
                 D = slope / 6  # Einstein relation in Å²/ps
                 D_cm2_s = D * 1e-4  # Convert to cm²/s (1e-16/1e-12 = 1e-4)
                 diffusion_coefficients.append(D_cm2_s)
-     
+
                 # Plot first window
                 if i == 0:
                     msd_components['total'] = msd_total
@@ -221,7 +205,7 @@ class MDAnalysisSystem:
 
             results = {
                 'temperature': temperature,
-                'T_inverse': 1000/temperature,
+                'T_inverse': 1000 / temperature,
                 'D_cm2_s': avg_D,
                 'D_std': std_D,
                 'log10_D': np.log10(avg_D),
@@ -234,7 +218,8 @@ class MDAnalysisSystem:
 
             self.logger.info(f"Results for {temperature}K:")
             self.logger.info(f"MSD: {results['msd_A2ps']:.4f} Å²/ps")
-            self.logger.info(f"Diffusion coefficient: {avg_D:.2e} ± {std_D:.2e} cm²/s")
+            self.logger.info(
+                f"Diffusion coefficient: {avg_D:.2e} ± {std_D:.2e} cm²/s")
             self.logger.info(f"Conductivity: {conductivity:.2e} S/cm")
 
             return results
@@ -245,41 +230,8 @@ class MDAnalysisSystem:
             self.logger.error(f"Time array shape: {time_array.shape}")
             raise
 
-    def calculate_msd(self, positions: np.ndarray, start_idx: int) -> dict:
-        """Calculate MSD for all components and total."""
-        window_positions = positions[start_idx:start_idx + self.window_size]
-        if len(window_positions) != self.window_size:
-            return None
-
-        ref_positions = window_positions[0]
-        displacements = window_positions - ref_positions
-
-        msd_components = {
-            'x': np.mean(displacements[..., 0]**2, axis=1),
-            'y': np.mean(displacements[..., 1]**2, axis=1),
-            'z': np.mean(displacements[..., 2]**2, axis=1)
-        }
-        msd_components['total'] = np.mean(np.sum(displacements**2, axis=2), axis=1)
-
-        return msd_components
-
-    def calculate_diffusion_coefficient(self, msd: np.ndarray, time_array: np.ndarray) -> dict:
-        """Calculate diffusion coefficient from MSD data."""
-        slope, intercept, r_value, p_value, std_err = stats.linregress(time_array, msd)
-        D_A2_ps = slope / 6  # Einstein relation
-        D_cm2_s = D_A2_ps * 1e-4  # Convert to cm²/s (1e-16/1e-12 = 1e-4)
-
-        return {
-            'D_A2_ps': D_A2_ps,
-            'D_cm2_s': D_cm2_s,
-            'slope': slope,
-            'intercept': intercept,
-            'r_value': r_value,
-            'std_err': std_err
-        }
-
-    def calculate_conductivity(self, D_cm2_s: float, temperature: float, 
-                             volume_cm3: float, n_carriers: int) -> float:
+    def calculate_conductivity(self, D_cm2_s: float, temperature: float,
+                               volume_cm3: float, n_carriers: int) -> float:
         """Calculate ionic conductivity using the Nernst-Einstein relation."""
         # Reference: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7761793/
         # σ = (N*e²*D)/(k_B*T)
@@ -290,7 +242,8 @@ class MDAnalysisSystem:
         sigma = (N * e * e * D_cm2_s) / (kb * temperature)  # S/cm
         return sigma
 
-    def analyze_temperature_range(self, temperatures: list = None) -> pd.DataFrame:
+    def analyze_temperature_range(
+            self, temperatures: list = None) -> pd.DataFrame:
         """Analyze MD trajectories for a range of temperatures."""
         if temperatures is None:
             # Find all trajectory files
@@ -301,7 +254,8 @@ class MDAnalysisSystem:
                     temp = int(f.stem.split('_')[-1])
                     temperatures.append(temp)
                 except ValueError:
-                    self.logger.warning(f"Could not extract temperature from {f}")
+                    self.logger.warning(
+                        f"Could not extract temperature from {f}")
 
         if not temperatures:
             self.logger.error("No temperatures to analyze")
@@ -332,7 +286,8 @@ class MDAnalysisSystem:
             self.plot_arrhenius(df, "conductivity")
 
             # Calculate activation energy
-            slope, _, _, _, _ = stats.linregress(df['T_inverse'], df['log10_D'])
+            slope, _, _, _, _ = stats.linregress(
+                df['T_inverse'], df['log10_D'])
             # Ea = -slope * 1000 * np.log(10) * kB * 6.242e18  # Convert to eV
             Ea = -slope * 1000 * np.log(10) * kB
             self.logger.info(f"Activation Energy: {Ea:.2f} eV")
@@ -358,17 +313,23 @@ class MDAnalysisSystem:
         )
         plt.close()
 
-    def plot_average_msd(self, time_array, avg_msd, D_cm2_s, temperature, filename):
+    def plot_average_msd(
+            self,
+            time_array,
+            avg_msd,
+            D_cm2_s,
+            temperature,
+            filename):
         """Plot average MSD with fit line."""
         fig, ax = plt.subplots()
 
         # Plot MSD data
-        ax.plot(time_array, avg_msd, 
+        ax.plot(time_array, avg_msd,
                 label=f'MSD (D = {D_cm2_s:.2e} cm²/s)')
 
         # Plot fit line
         slope, intercept = np.polyfit(time_array, avg_msd, 1)
-        ax.plot(time_array, slope * time_array + intercept, 
+        ax.plot(time_array, slope * time_array + intercept,
                 '--', label='Linear fit')
 
         ax.set_xlabel('Time (ps)')
@@ -399,14 +360,15 @@ class MDAnalysisSystem:
             title = f'{self.structure_name} Conductivity Arrhenius Plot'
 
         # Calculate activation energy
-        slope, intercept, r_value, p_value, std_err = stats.linregress(df['T_inverse'], y_data)
+        slope, intercept, r_value, p_value, std_err = stats.linregress(
+            df['T_inverse'], y_data)
         kb_ev = 8.617333262145e-5  # Boltzmann constant in eV/K
         Ea = -slope * np.log(10) * kb_ev * 1000  # Convert to eV
 
         # Create main plot
         ax1.scatter(df['T_inverse'], y_data, color='black', s=100)
-        ax1.plot(df['T_inverse'], slope * df['T_inverse'] + intercept, 
-                '--', color='black', linewidth=2)
+        ax1.plot(df['T_inverse'], slope * df['T_inverse'] + intercept,
+                 '--', color='black', linewidth=2)
 
         ax1.set_xlabel('1000/T (K⁻¹)')
         ax1.set_ylabel(y_label)
@@ -414,15 +376,15 @@ class MDAnalysisSystem:
         # Add top x-axis with temperature
         ax2 = ax1.twiny()
         ax2.set_xlim(ax1.get_xlim())
-        temp_ticks = [1000/x for x in ax1.get_xticks()]
+        temp_ticks = [1000 / x for x in ax1.get_xticks()]
         ax2.set_xticks(ax1.get_xticks())
         ax2.set_xticklabels([f'{int(t)}' for t in temp_ticks])
         ax2.set_xlabel('Temperature (K)')
 
         # Add activation energy text
         text = f'Ea = {Ea:.2f} eV\nR² = {r_value**2:.3f}'
-        ax1.text(0.05, 0.95, text, transform=ax1.transAxes, 
-                bbox=dict(facecolor='white', alpha=0.8))
+        ax1.text(0.05, 0.95, text, transform=ax1.transAxes,
+                 bbox=dict(facecolor='white', alpha=0.8))
 
         plt.title(title)
         plt.grid(True)
@@ -450,14 +412,17 @@ class MDAnalysisSystem:
             f.write(f"Target atom: {self.target_atom}\n\n")
 
             f.write("Temperature Range Analysis:\n")
-            f.write(f"Temperature range: {df['temperature'].min()}-{df['temperature'].max()} K\n")
+            f.write(
+                f"Temperature range: {df['temperature'].min()}-{df['temperature'].max()} K\n")
             f.write(f"Number of temperature points: {len(df)}\n\n")
 
             f.write("Diffusion Analysis:\n")
-            f.write(f"Average D: {df['D_cm2_s'].mean():.2e} ± {df['D_std'].mean():.2e} cm²/s\n")
+            f.write(
+                f"Average D: {df['D_cm2_s'].mean():.2e} ± {df['D_std'].mean():.2e} cm²/s\n")
 
             if len(df) > 1:
-                slope, _, _, _, _ = stats.linregress(df['T_inverse'], df['log10_D'])
+                slope, _, _, _, _ = stats.linregress(
+                    df['T_inverse'], df['log10_D'])
                 # Ea = -slope * 1000 * np.log(10) * kB * 6.242e18
                 Ea = -slope * 1000 * np.log(10) * kB
                 f.write(f"Activation Energy: {Ea:.2f} eV\n\n")
@@ -476,142 +441,89 @@ class MDAnalysisSystem:
 
         return str(summary_file)
 
-# def main():
-#     """Main function to run MD analysis."""
-#     # Get project paths
-#     paths = get_project_paths()
 
-#     # Setup configuration
-#     config = {
-#         'structures_dir': paths['structures_dir'],
-#         'file_path': paths['file_path'],
-#         'cutoff': 4.0,
-#         'batch_size': 16,
-#         'split_ratio': [0.5, 0.1, 0.4],
-#         'random_state': 42
-#     }
+def run_analysis(analyzer: MDAnalysisSystem, temperatures: list) -> None:
+    """Run diffusion analysis and save results."""
+    results_df = analyzer.analyze_temperature_range(temperatures)
+    if results_df.empty:
+        print("\nNo results to analyze")
+        return
 
-#     # Initialize analyzer
-#     analyzer = MDAnalysisSystem(
-#         config=config,
-#         structure_name="Y-doped BaZrO3H",
-#         target_atom='H',
-#         time_step=1.0,
-#         shift_time=500,
-#         window_size=1000
-#     )
+    # Save analysis summary
+    summary_file = analyzer.export_summary(results_df)
+    print(f"\nAnalysis summary saved to: {summary_file}")
 
-#     # Look for MD trajectories in the structures directory
-#     print("\nAnalyzing MD trajectories...")
-#     results_df = analyzer.analyze_temperature_range()
+    # Print and save results
+    print_results(results_df)
+    if len(results_df) > 1:
+        save_activation_energy(results_df, analyzer.structure_name)
 
-#     if results_df.empty:
-#         print("\nNo results to analyze")
-#         return
 
-#     # Generate and save summary
-#     summary_file = analyzer.export_summary(results_df)
-#     print(f"\nAnalysis summary saved to: {summary_file}")
+def print_results(results_df: pd.DataFrame) -> None:
+    """Print diffusion analysis results."""
+    print("\nProton Diffusion Analysis Results:")
+    print("-" * 50)
+    for _, row in results_df.iterrows():
+        print(f"\nTemperature: {row['temperature']} K")
+        print(f"H+ Diffusion coefficient: {row['D_cm2_s']:.2e} cm²/s")
+        print(f"Proton conductivity: {row['conductivity']:.2e} S/cm")
 
-#     # Print key results
-#     print("\nKey Results:")
-#     print("-" * 50)
-#     print(f"Temperature Range: {results_df['temperature'].min()}-{results_df['temperature'].max()} K")
-#     print(f"Average Diffusion Coefficient: {results_df['D_cm2_s'].mean():.2e} cm²/s")
-#     print(f"Average Conductivity: {results_df['conductivity'].mean():.2e} S/cm")
-    
-#     if len(results_df) > 1:
-#         slope, _, _, _, _ = stats.linregress(results_df['T_inverse'], results_df['log10_D'])
-#         # Ea = -slope * 1000 * np.log(10) * kB * 6.242e18
-#         Ea = -slope * 1000 * np.log(10) * kB
-#         print(f"Activation Energy: {Ea:.2f} eV")
 
-# if __name__ == "__main__":
-#     main()
+def save_activation_energy(
+        results_df: pd.DataFrame,
+        structure_name: str) -> None:
+    """Calculate and save activation energy results."""
+    slope, _, r_value, _, _ = stats.linregress(
+        results_df['T_inverse'],
+        results_df['log10_D']
+    )
+    Ea = -slope * 1000 * np.log(10) * kB
+
+    results_dir = Path("logs/md_analysis")
+    results_dir.mkdir(exist_ok=True)
+
+    diffusion_results = {
+        'structure': structure_name,
+        'temperatures': results_df['temperature'].tolist(),
+        'diffusion_coefficients': results_df['D_cm2_s'].tolist(),
+        'conductivities': results_df['conductivity'].tolist(),
+        'activation_energy_eV': float(Ea),
+        'R_squared': float(r_value**2)
+    }
+
+    with open(results_dir / 'proton_diffusion_results.json', 'w') as f:
+        json.dump(diffusion_results, f, indent=4)
 
 
 def main():
-    """Analyze MD simulation results for Y-doped BaZrO3H."""
-    # Get project paths
-    paths = get_project_paths()
-
-    # Setup configuration
-    config = {
-        'structures_dir': paths['structures_dir'],
-        'file_path': paths['file_path'],
-        'cutoff': 4.0,
-        'batch_size': 16,
-        'split_ratio': [0.5, 0.1, 0.4],
-        'random_state': 42
+    """Analyze MD simulation results for proton diffusion."""
+    # Setup analysis parameters
+    analysis_params = {
+        'config': {
+            'structures_dir': get_project_paths()['structures_dir'],
+            'file_path': get_project_paths()['file_path'],
+            'cutoff': 4.0,
+            'batch_size': 16,
+            'split_ratio': [0.7, 0.1, 0.2],
+            'random_state': 42
+        },
+        'structure_name': "Ba8Zr8O24_H1",
+        'target_atom': 'H',
+        'time_step': 1.0,
+        'shift_time': 50,
+        'window_size': 100
     }
 
-    # Initialize analyzer
-    traj_dir = Path("logs/md_trajectories/Ba8Zr8O24_H1")
-
-    analyzer = MDAnalysisSystem(
-        config=config,
-        structure_name="Ba8Zr8O24_H1",  
-        target_atom='H',               
-        time_step=1.0,                # fs
-        shift_time=50,             
-        window_size=100         
-    )
-
-    # Override working directory
-    analyzer.working_dir = traj_dir
-    print(f"\nAnalyzing trajectories in: {analyzer.working_dir}")
-
-    # Analyze MD trajectories for a range of temperatures
-    temp_dirs = [d for d in traj_dir.glob("T_*K") if d.is_dir()]
-    temperatures = [int(d.name.split('_')[1][:-1]) for d in temp_dirs] 
-    print(f"Found temperature directories: {temperatures} K")
-
     try:
-        results_df = analyzer.analyze_temperature_range(temperatures)
+        # Initialize analyzer and run analysis
+        analyzer = MDAnalysisSystem(**analysis_params)
+        analyzer.working_dir = Path("logs/md_trajectories/Ba8Zr8O24_H2")
 
-        if results_df.empty:
-            print("\nNo results to analyze")
-            return
+        temp_dirs = [
+            d for d in analyzer.working_dir.glob("T_*K") if d.is_dir()]
+        temperatures = [int(d.name.split('_')[1][:-1]) for d in temp_dirs]
 
-        # Generate and save summary
-        summary_file = analyzer.export_summary(results_df)
-        print(f"\nAnalysis summary saved to: {summary_file}")
-
-        # Print key results
-        print("\nProton Diffusion Analysis Results:")
-        print("-" * 50)
-        for _, row in results_df.iterrows():
-            temp = row['temperature']
-            D = row['D_cm2_s']
-            sigma = row['conductivity']
-            print(f"\nTemperature: {temp} K")
-            print(f"H+ Diffusion coefficient: {D:.2e} cm²/s")
-            print(f"Proton conductivity: {sigma:.2e} S/cm")
-
-        if len(results_df) > 1:
-            slope, _, r_value, _, _ = stats.linregress(results_df['T_inverse'], results_df['log10_D'])
-            # Ea = -slope * 1000 * np.log(10) * kB * 6.242e18
-            Ea = -slope * 1000 * np.log(10) * kB
-            print(f"\nProton Diffusion Activation Energy: {Ea:.2f} eV")
-            print(f"R²: {r_value**2:.3f}")
-
-            # Save results
-            analysis_dir = Path("logs/md_analysis")
-            analysis_dir.mkdir(exist_ok=True)
-
-            results_file = analysis_dir / 'proton_diffusion_results.json'
-            diffusion_results = {
-                'structure': "Ba8Zr8O24_H1",
-                'temperatures': results_df['temperature'].tolist(),
-                'diffusion_coefficients': results_df['D_cm2_s'].tolist(),
-                'conductivities': results_df['conductivity'].tolist(),
-                'activation_energy_eV': float(Ea),
-                'R_squared': float(r_value**2)
-            }
-
-            with open(results_file, 'w') as f:
-                json.dump(diffusion_results, f, indent=4)
-            print(f"\nResults saved to: {results_file}")
+        run_analysis(analyzer, temperatures)
 
     except Exception as e:
         print(f"Error during analysis: {str(e)}")

@@ -1,0 +1,49 @@
+data_mean: 0.0
+data_std: 1.0
+decay_alpha: 0.01
+decay_steps: 1000
+include_line_graph: false
+loss: mse_loss
+loss_params: null
+lr: 0.001
+optimizer: !!python/object:torch.optim.adam.Adam
+  defaults:
+    amsgrad: false
+    betas: &id001 !!python/tuple
+    - 0.9
+    - 0.999
+    capturable: false
+    differentiable: false
+    eps: 1.0e-08
+    foreach: null
+    fused: null
+    lr: 0.001
+    maximize: false
+    weight_decay: 1.0e-05
+  param_groups:
+  - amsgrad: false
+    betas: *id001
+    capturable: false
+    differentiable: false
+    eps: 1.0e-08
+    foreach: null
+    fused: null
+    lr: 1.0e-05
+    maximize: false
+    params: []
+    weight_decay: 1.0e-05
+  - amsgrad: false
+    betas: *id001
+    capturable: false
+    differentiable: false
+    eps: 1.0e-08
+    foreach: null
+    fused: null
+    lr: 0.0001
+    maximize: false
+    params: []
+    weight_decay: 1.0e-05
+  state: !!python/object/apply:collections.defaultdict
+  - !!python/name:builtins.dict ''
+scheduler: null
+sync_dist: false
